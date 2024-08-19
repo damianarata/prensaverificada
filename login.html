@@ -49,12 +49,12 @@
 
                 <!-- Botón de Iniciar Sesión -->
                 <div class="mb-4">
-                    <button type="submit" class="w-full bg-black text-white py-2 rounded">Iniciar sesión</button>
+                    <button id="login-btn" type="submit" class="w-full bg-black text-white py-2 rounded">Iniciar sesión</button>
                 </div>
 
                 <!-- Redes Sociales -->
                 <div class="text-center mb-4">
-                    <button type="button" class="w-full border border-gray-300 py-2 rounded text-gray-700">Redes sociales</button>
+                    <button id="login-redes-btn" type="button" class="w-full border border-gray-300 py-2 rounded text-gray-700">Redes sociales</button>
                 </div>
             </form>
 
@@ -89,6 +89,14 @@
                     if (!isClickInside) {
                         userMenu.classList.add('hidden');
                     }
+                });
+
+                document.getElementById('login-btn').addEventListener('click', function() {
+                    window.location.href = './login.html';
+                });
+
+                document.getElementById('login-redes-btn').addEventListener('click', function() {
+                    window.location.href = './login-social.html';
                 });
             });
 

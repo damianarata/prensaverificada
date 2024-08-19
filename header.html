@@ -38,21 +38,23 @@
             <!-- Navegación -->
             <nav class="space-x-4">
                 <a href="./index.html" class="text-gray-700 hover:text-blue-500">Principal</a>
-                <a href="#" class="text-gray-700 hover:text-blue-500">Favoritos</a>
-                <a href="#" class="text-gray-700 hover:text-blue-500">Publicaciones</a>
+                <a href="./favoritos.html" class="text-gray-700 hover:text-blue-500">Favoritos</a>
+                <a href="./publicaciones.html" class="text-gray-700 hover:text-blue-500">Publicaciones</a>
                 <a href="./categorias.html" class="text-gray-700 hover:text-blue-500">Categorías</a>
                 <a href="./autores.html" class="text-gray-700 hover:text-blue-500">Autores</a>
-                <a href="./contacto.html" class="text-gray-700 hover:text-blue-500">Contacto</a>
+                <button id="login-btn" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Iniciar sesion</button>
             </nav>
 
             <!-- Buscador -->
             <div class="relative">
-                <input type="text" id="search" placeholder="Buscar..." class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <button href="busqueda.html" id="advanced-search-button" class="ml-2 px-4 py-2 text-gray-700 hover:text-blue-500">Búsqueda avanzada</button>
-                
+                <input type="text" id="search" placeholder="Buscar..." class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">                
                 <!-- Lista de Sugerencias -->
                 <ul id="suggestions" class="hidden"></ul>
             </div>
+
+            <nav class="space-x-4">
+                <a href="./busqueda.html" class="text-gray-700 hover:text-blue-500">Búsqueda avanzada</a>
+            </nav>
     
             <!-- Perfil del Usuario con Dropdown -->
             <div class="relative">
@@ -70,9 +72,9 @@
                     <a href="./editor.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Crear publicación</a>
                     <a href="./mis-publicaciones.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mis publicaciones</a>
                     <a href="./bitacora.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Bitacora</a>
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Reclamos</a>
+                    <a href="./reclamos.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Reclamos</a>
                     <a href="./contacto.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Ayuda</a>
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cerrar sesión</a>
+                    <a href="./home.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cerrar sesión</a>
                 </div>
             </div>
         </div>
@@ -138,6 +140,10 @@
             if (!isClickInside) {
                 document.getElementById('user-menu').classList.add('hidden');
             }
+        });
+
+        document.getElementById('login-btn').addEventListener('click', function() {
+            window.location.href = './login';
         });
     </script>
 </body>

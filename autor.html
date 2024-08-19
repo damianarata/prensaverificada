@@ -123,17 +123,21 @@
                   userMenu.classList.toggle('hidden');
               });
 
-              document.addEventListener('click', function (event) {
-                  var isClickInside = userMenuButton.contains(event.target);
+                              document.addEventListener('click', function (event) {
+                    var isClickInside = userMenuButton.contains(event.target);
 
-                  if (!isClickInside) {
-                      userMenu.classList.add('hidden');
-                  }
-              });
-          });
+                    if (!isClickInside) {
+                        userMenu.classList.add('hidden');
+                    }
+                });
 
-      // Cargar el Footer
-      fetch('footer.html')
+                document.getElementById('login-btn').addEventListener('click', function() {
+                    window.location.href = './login.html';
+                });
+            });
+
+        // Cargar el Footer
+        fetch('footer.html')
           .then(response => response.text())
           .then(data => {
               document.getElementById('footer').innerHTML = data;

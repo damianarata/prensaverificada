@@ -53,19 +53,19 @@
         <!-- Resultados de búsqueda -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-white p-4 rounded-lg shadow-md">
-                <img src="https://via.placeholder.com/400x200" alt="Imagen 1" class="rounded mb-4">
+                <img src="img/mbappe.webp" alt="Imagen 1" class="rounded h-48 w-full mb-4">
                 <span class="block text-blue-600 mb-2">Deportes</span>
                 <h3 class="text-xl font-semibold mb-2">El contrato de Mbappé en el Real Madrid es impresionante</h3>
                 <p class="text-gray-500">Ernie Smith &bull; 4 de junio de 2024</p>
             </div>
             <div class="bg-white p-4 rounded-lg shadow-md">
-                <img src="https://via.placeholder.com/400x200" alt="Imagen 2" class="rounded mb-4">
+                <img src="img/netflix-peliculas-7jpg.webp" alt="Imagen 2" class="rounded h-48 w-full mb-4">
                 <span class="block text-blue-600 mb-2">Streaming</span>
                 <h3 class="text-xl font-semibold mb-2">Está en Netflix, tiene a Brad Pitt y está basada en un best seller</h3>
                 <p class="text-gray-500">Eric Smith &bull; 4 de junio de 2024</p>
             </div>
             <div class="bg-white p-4 rounded-lg shadow-md">
-                <img src="https://via.placeholder.com/400x200" alt="Imagen 3" class="rounded mb-4">
+                <img src="./img/dolar.webp" alt="Imagen 3" class="rounded h-48 w-full mb-4">
                 <span class="block text-blue-600 mb-2">Economía</span>
                 <h3 class="text-xl font-semibold mb-2">Fuerte suba del dólar blue de los financieros y se amplía la brecha con el oficial</h3>
                 <p class="text-gray-500">Tracey Wilson &bull; 4 de junio de 2024</p>
@@ -74,15 +74,13 @@
 
         <!-- Botón de retorno -->
         <div class="flex justify-center mt-8">
-            <button class="bg-gray-200 text-gray-600 px-6 py-2 rounded">Parece que no hay más, volver a inicio</button>
+            <button id="principal-btn" class="bg-gray-200 text-gray-600 px-6 py-2 rounded">Parece que no hay más, volver a inicio</button>
         </div>
     </section>
 
     <!-- Contenedor para el Footer -->
     <div id="footer" class="mt-8"></div>
 
-    <!-- Iconos de redes sociales -->
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script>
         // Cargar el Header
         fetch('header.html')
@@ -100,13 +98,21 @@
   
                 document.addEventListener('click', function (event) {
                     var isClickInside = userMenuButton.contains(event.target);
-  
+
                     if (!isClickInside) {
                         userMenu.classList.add('hidden');
                     }
                 });
+
+                document.getElementById('login-btn').addEventListener('click', function() {
+                    window.location.href = './login.html';
+                });
+
+                document.getElementById('principal-btn').addEventListener('click', function() {
+                    window.location.href = './index.html';
+                });
             });
-  
+
         // Cargar el Footer
         fetch('footer.html')
             .then(response => response.text())

@@ -74,7 +74,38 @@
 
       <!-- Botón para eliminar cuenta -->
       <div class="mt-8">
-        <button type="button" class="w-full py-3 bg-red-500 text-white rounded-lg text-lg font-semibold hover:bg-red-700 focus:ring-4 focus:ring-red-300">Eliminar cuenta</button>
+        <button id="open-modal" type="button" class="w-full py-3 bg-red-500 text-white rounded-lg text-lg font-semibold hover:bg-red-700 focus:ring-4 focus:ring-red-300">Eliminar cuenta</button>
+        <div class="bg-white rounded-lg p-6 w-full max-w-sm relative">
+          <!-- Cerrar Modal -->
+          <button id="close-modal" class="hidden absolute top-2 right-2 text-gray-600 hover:text-gray-800 focus:outline-none">
+              &times;
+          </button>
+          
+          <!-- Contenido del Modal -->
+          <div class="text-center">
+              <div class="mb-4 text-blue-500">
+                  <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m4 0h-1v-4h-1m-5 8V7h8v9m5 4H5a2 2 0 01-2-2V7a2 2 0 012-2h2.5l1-2h7l1 2H19a2 2 0 012 2v11a2 2 0 01-2 2z"></path>
+                  </svg>
+              </div>
+              <h2 class="text-lg font-semibold text-gray-800">Estamos verificando unas cosas</h2>
+              <p class="text-sm text-gray-600 mt-2">Para eliminar tu cuenta te pedimos que ingreses la contraseña y realices el captcha.</p>
+
+              <!-- Formulario -->
+              <div class="mt-4">
+                  <input type="password" placeholder="Contraseña" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <div class="mt-4">
+                      <div class="g-recaptcha" data-sitekey="your-site-key"></div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="mt-6 flex justify-between">
+              <button id="cancel" class="text-gray-600 hover:text-gray-800">Cancelar</button>
+              <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Eliminar cuenta</button>
+          </div>
+      </div>
       </div>
     </div>
   </div>
@@ -97,21 +128,43 @@
                   userMenu.classList.toggle('hidden');
               });
 
-              document.addEventListener('click', function (event) {
-                  var isClickInside = userMenuButton.contains(event.target);
+                              document.addEventListener('click', function (event) {
+                    var isClickInside = userMenuButton.contains(event.target);
 
-                  if (!isClickInside) {
-                      userMenu.classList.add('hidden');
-                  }
-              });
-          });
+                    if (!isClickInside) {
+                        userMenu.classList.add('hidden');
+                    }
+                });
 
-      // Cargar el Footer
-      fetch('footer.html')
+                document.getElementById('login-btn').addEventListener('click', function() {
+                    window.location.href = './login.html';
+                });
+            });
+
+        // Cargar el Footer
+        fetch('footer.html')
           .then(response => response.text())
           .then(data => {
               document.getElementById('footer').innerHTML = data;
           });
+        document.getElementById('open-modal').addEventListener('click', function() {
+            document.getElementById('delete-account-modal').classList.remove('hidden');
+        });
+
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('delete-account-modal').classList.add('hidden');
+        });
+
+        document.getElementById('cancel').addEventListener('click', function() {
+            document.getElementById('delete-account-modal').classList.add('hidden');
+        });
+
+        document.addEventListener('click', function(event) {
+            var modal = document.getElementById('delete-account-modal');
+            if (event.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
   </script>
 
 </body>

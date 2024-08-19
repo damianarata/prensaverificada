@@ -45,7 +45,7 @@
                 <textarea id="motivo" class="w-full border border-gray-300 p-2 rounded" rows="4" placeholder="Escribí acá.."></textarea>
             </div>
             <div class="flex items-center justify-between">
-                <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded">Preguntas frecuentes</button>
+                <button id="faq-btn" type="button" class="bg-blue-500 text-white px-4 py-2 rounded">Preguntas frecuentes</button>
                 <button type="submit" class="bg-gray-300 text-gray-700 px-4 py-2 rounded">Enviar</button>
             </div>
         </form>
@@ -75,6 +75,14 @@
                     if (!isClickInside) {
                         userMenu.classList.add('hidden');
                     }
+                });
+
+                document.getElementById('login-btn').addEventListener('click', function() {
+                    window.location.href = './login.html';
+                });
+
+                document.getElementById('faq-btn').addEventListener('click', function() {
+                    window.location.href = './faq.html';
                 });
             });
 

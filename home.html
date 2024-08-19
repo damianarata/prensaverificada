@@ -104,8 +104,24 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header').innerHTML = data;
+  
+                // Dropdown Menu Logic
+                var userMenuButton = document.getElementById('user-menu-button');
+                var userMenu = document.getElementById('user-menu');
+  
+                userMenuButton.addEventListener('click', function () {
+                    userMenu.classList.toggle('hidden');
+                });
+  
+                document.addEventListener('click', function (event) {
+                    var isClickInside = userMenuButton.contains(event.target);
+  
+                    if (!isClickInside) {
+                        userMenu.classList.add('hidden');
+                    }
+                });
             });
-
+  
         // Cargar el Footer
         fetch('footer.html')
             .then(response => response.text())
