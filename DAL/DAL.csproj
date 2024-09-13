@@ -42,7 +42,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="accesos.cs" />
+    <Compile Include="Autor.cs" />
+    <Compile Include="Bitacora.cs" />
+    <Compile Include="Categoria.cs" />
+    <Compile Include="DAOs\AccesoDatos.cs" />
+    <Compile Include="DAOs\Autor.cs" />
+    <Compile Include="DAOs\Bitacora.cs" />
+    <Compile Include="DAOs\Categoria.cs" />
+    <Compile Include="DAOs\Favorito.cs" />
+    <Compile Include="DAOs\Publicacion.cs" />
+    <Compile Include="DAOs\Reclamo.cs" />
+    <Compile Include="DAOs\Usuario.cs" />
+    <Compile Include="Favorito.cs" />
+    <Compile Include="MAPPER\Autor.cs" />
+    <Compile Include="MAPPER\Bitacora.cs" />
+    <Compile Include="MAPPER\Categoria.cs" />
+    <Compile Include="MAPPER\Favorito.cs" />
+    <Compile Include="MAPPER\Publicacion.cs" />
+    <Compile Include="MAPPER\Reclamo.cs" />
+    <Compile Include="MAPPER\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Publicacion.cs" />
+    <Compile Include="Reclamo.cs" />
+    <Compile Include="Usuario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
