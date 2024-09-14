@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Perfil.aspx.vb" Inherits="Assets_Prefil" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Prefil.aspx.cs" Inherits="Assets_Prefil" %>
 
 <!DOCTYPE html>
 

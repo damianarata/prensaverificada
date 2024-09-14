@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="RecoverPass.aspx.vb" Inherits="Assets_RecoverPass" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="RecoverPass.aspx.cs" Inherits="Assets_RecoverPass" %>
 
 <!DOCTYPE html>
 

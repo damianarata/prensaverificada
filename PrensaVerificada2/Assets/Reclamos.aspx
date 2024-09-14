@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Reclamos.aspx.vb" Inherits="Assets_Reclamos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Reclamos.aspx.cs" Inherits="Assets_Reclamos" %>
 
 <!DOCTYPE html>
 

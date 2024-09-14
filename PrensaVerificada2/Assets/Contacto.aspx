@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Contacto.aspx.vb" Inherits="Assets_Contacto" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Contacto.aspx.cs" Inherits="Assets_Contacto" %>
 
 <!DOCTYPE html>
 

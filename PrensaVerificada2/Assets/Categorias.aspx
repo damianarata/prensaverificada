@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Categorias.aspx.vb" Inherits="Assets_Categorias" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Categorias.aspx.cs" Inherits="Assets_Categorias" %>
 
 <!DOCTYPE html>
 

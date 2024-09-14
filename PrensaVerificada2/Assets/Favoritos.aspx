@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Favoritos.aspx.vb" Inherits="Assets_Favoritos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Favoritos.aspx.cs" Inherits="Assets_Favoritos" %>
 
 <!DOCTYPE html>
 

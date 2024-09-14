@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Footer.aspx.vb" Inherits="Assets_Footer" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Footer.aspx.cs" Inherits="Assets_Footer" %>
 
 <!DOCTYPE html>
 

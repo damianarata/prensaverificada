@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="MisPublicaciones.aspx.vb" Inherits="Assets_MisPublicaciones" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="MisPublicaciones.aspx.cs" Inherits="Assets_MisPublicaciones" %>
 
 <!DOCTYPE html>
 

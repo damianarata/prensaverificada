@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="NewPass.aspx.vb" Inherits="Assets_NewPass" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="NewPass.aspx.cs" Inherits="Assets_NewPass" %>
 
 <!DOCTYPE html>
 

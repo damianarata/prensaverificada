@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Autores.aspx.vb" Inherits="Assets_Autores" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Autores.aspx.cs" Inherits="Assets_Autores" %>
 
 <!DOCTYPE html>
 

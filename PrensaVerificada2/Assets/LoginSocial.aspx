@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="LoginSocial.aspx.vb" Inherits="Assets_LoginSocial" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="LoginSocial.aspx.cs" Inherits="Assets_LoginSocial" %>
 
 <!DOCTYPE html>
 

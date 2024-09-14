@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Editor.aspx.vb" Inherits="Assets_Editor" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Editor.aspx.cs" Inherits="Assets_Editor" %>
 
 <!DOCTYPE html>
 
