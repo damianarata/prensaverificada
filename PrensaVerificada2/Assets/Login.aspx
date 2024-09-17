@@ -46,7 +46,7 @@
 
                 <!-- Olvidaste la contraseña -->
                 <div class="text-right mb-4">
-                    <a href="./recover-pass.html" class="text-purple-600 hover:underline">¿Olvidaste la contraseña?</a>
+                    <a href="./RecoverPass.aspx" class="text-purple-600 hover:underline">¿Olvidaste la contraseña?</a>
                 </div>
 
                 <!-- Botón de Iniciar Sesión (deberia ser type=submit) -->
@@ -62,7 +62,7 @@
 
             <!-- Crear Cuenta -->
             <div class="text-center">
-                <p class="text-gray-600">¿Sos nuevo? <a href="./register.html" class="text-purple-600 hover:underline">Create una cuenta</a></p>
+                <p class="text-gray-600">¿Sos nuevo? <a href="./Register.aspx" class="text-purple-600 hover:underline">Create una cuenta</a></p>
             </div>
         </div>
     </div>
@@ -94,11 +94,11 @@
                 });
 
                 document.getElementById('login-btn').addEventListener('click', function() {
-                    window.location.href = './login.html';
+                    window.location.href = './Login.aspx';
                 });
 
                 document.getElementById('login-redes-btn').addEventListener('click', function() {
-                    window.location.href = './login-social.html';
+                    window.location.href = './LoginSocial.aspx';
                 });
             });
 
@@ -110,7 +110,7 @@
             });
         
         document.getElementById('local-login-btn').addEventListener('click', function() {
-                    window.location.href = './index.html';
+                    window.location.href = './Index.aspx';
                 });
     </script>
 
