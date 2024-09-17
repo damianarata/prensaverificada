@@ -66,5 +66,11 @@
     <Compile Include="Reclamo.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BE\BE.csproj">
+      <Project>{8ec67460-dd4e-49a3-9794-5b34c0f05db8}</Project>
+      <Name>BE</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

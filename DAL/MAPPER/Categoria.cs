@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using BE;
 
 namespace DAL.MAPPER
 {

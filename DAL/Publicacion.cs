@@ -10,7 +10,7 @@ namespace DAL
 
         public static Publicacion _instancia;
 
-        public static Publicacion Getinstancia()
+        public static Publicacion GetInstancia()
         {
             if (_instancia == null)
             {

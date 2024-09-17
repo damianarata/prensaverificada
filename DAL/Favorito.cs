@@ -10,7 +10,7 @@ namespace DAL
 
         public static Favorito _instancia;
 
-        public static Favorito Getinstancia()
+        public static Favorito GetInstancia()
         {
             if (_instancia == null)
             {

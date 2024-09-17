@@ -267,11 +267,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\source\repos\prensaverificada\BE\BE.csproj">
+    <ProjectReference Include="..\BE\BE.csproj">
       <Project>{8ec67460-dd4e-49a3-9794-5b34c0f05db8}</Project>
       <Name>BE</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\source\repos\prensaverificada\BLL\BLL.csproj">
+    <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{72afdffb-7e69-4d6d-ada9-fa049157455a}</Project>
       <Name>BLL</Name>
     </ProjectReference>

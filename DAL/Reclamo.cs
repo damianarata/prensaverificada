@@ -10,7 +10,7 @@ namespace DAL
 
         public static Reclamo _instancia;
 
-        public static Reclamo Getinstancia()
+        public static Reclamo GetInstancia()
         {
             if (_instancia == null)
             {

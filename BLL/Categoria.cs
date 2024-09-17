@@ -61,7 +61,7 @@ namespace BLL
 
         public List<BE.Categoria> RetreiveAll()
         {
-            throw new NotImplementedException();
+            return DAL.Categoria.GetInstancia().RetreiveAll();
         }
 
         public bool Update(BE.Categoria Categoria)

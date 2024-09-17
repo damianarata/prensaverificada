@@ -25,7 +25,7 @@ namespace DAL.MAPPER
             usuario.UsuarioID = Convert.ToInt32(row["usuarioid"]);
             usuario.Nombre = row["nombre"].ToString();
             usuario.Email = row["email"].ToString();
-            usuario.Contraseña = row["contrasena"].ToString();
+            usuario.Contrasena = row["contrasena"].ToString();
             usuario.FechaRegistro = Convert.ToDateTime(row["fecharegistro"]);
             return usuario;
         }
