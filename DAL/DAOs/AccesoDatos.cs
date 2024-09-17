@@ -31,14 +31,14 @@ namespace DAL.DAOs
 
         #endregion
 
-        SqlConnection SQLconn = new SqlConnection(@"Data Source=.;Initial Catalog=PrensaVerificada;Integrated Security=True");
+        SqlConnection SQLconn = new SqlConnection(@"Data Source=DESKTOP-ERQ371J\SQLEXPRESS;Initial Catalog=PrensaVerificada;Integrated Security=True");
 
 
         #region ExecuteQuery
         public bool TestCon()
         {
             bool result = false;
-            this.SQLconn = new SqlConnection(@"Data Source=.;Initial Catalog=PrensaVerificada;Integrated Security=True");
+            this.SQLconn = new SqlConnection(@"Data Source=DESKTOP-ERQ371J\SQLEXPRESS;Initial Catalog=PrensaVerificada;Integrated Security=True");
             try
             {
                 SqlCommand comm = new SqlCommand();

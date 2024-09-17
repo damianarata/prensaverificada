@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BE;
+using DAL;
 
 namespace BLL
 {
@@ -57,7 +58,7 @@ namespace BLL
         public bool Login(BE.Usuario User, string EncryptedPass)
         {
             bool status = false;
-            if (EncryptedPass == User.contrasena)
+            if (EncryptedPass == User.Contrasena)
             {
                 status = true;
             }
@@ -65,7 +66,8 @@ namespace BLL
         }
         public BE.Usuario RetrieveUser(BE.Usuario User)
         {
-            return DAL.Usuario.Getinstancia().Login(User);
+            //return DAL.Usuario.GetInstancia().Login(User);
+            throw new NotImplementedException();
         }
         public void Logout()
         {
@@ -81,23 +83,31 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
-        public bool UsuariosExistentes(string User)
-        {
-            return DAL.Usuario.Getinstancia().UsuariosExistentes(User);
-        }
-        public bool EmailExistentes(string Email)
-        {
-            return DAL.Usuario.Getinstancia().EmailExistentes(Email);
-        }
         public bool ActualizarUsuario(BE.Usuario User)
         {
-            return DAL.Usuario.Getinstancia().Update(User);
+            return DAL.Usuario.GetInstancia().Update(User);
         }
+
+        public static BE.Usuario Verificar_Usuario(string email, string contrasena)
+        {
+            // Crear un objeto Usuario con los datos ingresados
+            BE.Usuario DBUser = DAL.Usuario.Login(new BE.Usuario { Email = email, Contrasena = contrasena });
+
+            // Validar si la contraseña ingresada coincide con la contraseña en la base de datos
+            if (DBUser != null && DBUser.Contrasena == contrasena)
+            {
+                return DBUser; // Si las contraseñas coinciden, devolver el usuario encontrado
+            }
+
+            // Si no coincide la contraseña, devolver un usuario con UsuarioID = 0
+            return new BE.Usuario { UsuarioID = 0 };
+        }
+
         #endregion
         #region Icrud
         public bool Create(BE.Usuario User)
         {
-            return DAL.Usuario.Getinstancia().Create(User);
+            return DAL.Usuario.GetInstancia().Create(User);
         }
 
         public bool Delete(BE.Usuario User)
@@ -107,7 +117,7 @@ namespace BLL
 
         public List<BE.Usuario> RetreiveAll()
         {
-            return DAL.Usuario.Getinstancia().RetreiveAll();
+            return DAL.Usuario.GetInstancia().RetreiveAll();
         }
 
         public bool Update(BE.Usuario User)

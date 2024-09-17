@@ -23,7 +23,7 @@ namespace DAL.DAOs
         public bool Create(BE.Usuario usuario)
         {
             string query = string.Format("INSERT INTO usuarios (nombre, email, contrasena, fecharegistro) VALUES ('{0}', '{1}', '{2}', '{3}');",
-                usuario.Nombre, usuario.Email, usuario.Contraseña, usuario.FechaRegistro.ToString("yyyy-MM-dd"));
+                usuario.Nombre, usuario.Email, usuario.Contrasena, usuario.FechaRegistro.ToString("yyyy-MM-dd"));
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
 
@@ -44,7 +44,7 @@ namespace DAL.DAOs
         public bool Update(BE.Usuario usuario)
         {
             string query = string.Format("UPDATE usuarios SET nombre = '{0}', email = '{1}', contrasena = '{2}', fecharegistro = '{3}' WHERE usuarioid = {4}",
-                usuario.Nombre, usuario.Email, usuario.Contraseña, usuario.FechaRegistro.ToString("yyyy-MM-dd"), usuario.UsuarioID);
+                usuario.Nombre, usuario.Email, usuario.Contrasena, usuario.FechaRegistro.ToString("yyyy-MM-dd"), usuario.UsuarioID);
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
 
@@ -53,5 +53,19 @@ namespace DAL.DAOs
             string query = string.Format("DELETE FROM usuarios WHERE usuarioid = {0}", usuario.UsuarioID);
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
+
+        public BE.Usuario Login(BE.Usuario Usuario)
+        {
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(string.Format("SELECT * FROM PrensaVerificada.dbo.usuarios WHERE email = '{0}'", Usuario.Email));
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    Usuario = MAPPER.Usuario.GetInstancia().Map(row);
+                }
+            }
+            return Usuario;
+        }
+
     }
 }

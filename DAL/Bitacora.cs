@@ -16,7 +16,7 @@ namespace DAL
 
         public static Bitacora _instancia;
 
-        public static Bitacora Getinstancia()
+        public static Bitacora GetInstancia()
         {
             if (_instancia == null)
             {
@@ -28,23 +28,23 @@ namespace DAL
 
         public bool Create(BE.Bitacora Bitacora)
         {
-            return DAOs.Bitacora.Getinstancia().Create(Bitacora);
+            return DAOs.Bitacora.GetInstancia().Create(Bitacora);
         }
 
         public List<BE.Bitacora> RetreiveAll()
         {
-            return DAOs.Bitacora.Getinstancia().RetreiveAll();
+            return DAOs.Bitacora.GetInstancia().RetreiveAll();
         }
 
         public bool Update(BE.Bitacora Bitacora)
         {
 
-            return DAOs.Bitacora.Getinstancia().Update(Bitacora);
+            return DAOs.Bitacora.GetInstancia().Update(Bitacora);
         }
 
         public bool Delete(BE.Bitacora Bitacora)
         {
-            return DAOs.Bitacora.Getinstancia().Delete(Bitacora);
+            return DAOs.Bitacora.GetInstancia().Delete(Bitacora);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace DAL
 
         public static Usuario _instancia;
 
-        public static Usuario Getinstancia()
+        public static Usuario GetInstancia()
         {
             if (_instancia == null)
             {
@@ -38,6 +38,10 @@ namespace DAL
         public bool Delete(BE.Usuario usuario)
         {
             return DAOs.Usuario.GetInstancia().Delete(usuario);
+        }
+        public static BE.Usuario Login(BE.Usuario usuario)
+        {
+            return DAOs.Usuario.GetInstancia().Login(usuario);
         }
     }
 }
