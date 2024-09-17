@@ -34,16 +34,16 @@
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <!-- Logo / Título -->
             <div>
-                <a href="./home.html" class="text-2xl font-bold text-gray-800">Prensa Verificada AR</a>
+                <a href="./Home.aspx" class="text-2xl font-bold text-gray-800">Prensa Verificada AR</a>
             </div>
     
             <!-- Navegación -->
             <nav class="space-x-4">
-                <a href="./index.html" class="text-gray-700 hover:text-blue-500">Principal</a>
-                <a href="./favoritos.html" class="text-gray-700 hover:text-blue-500">Favoritos</a>
-                <a href="./publicaciones.html" class="text-gray-700 hover:text-blue-500">Publicaciones</a>
-                <a href="./categorias.html" class="text-gray-700 hover:text-blue-500">Categorías</a>
-                <a href="./autores.html" class="text-gray-700 hover:text-blue-500">Autores</a>
+                <a href="./Index.aspx" class="text-gray-700 hover:text-blue-500">Principal</a>
+                <a href="./Favoritos.aspx" class="text-gray-700 hover:text-blue-500">Favoritos</a>
+                <a href="./Publicaciones.aspx" class="text-gray-700 hover:text-blue-500">Publicaciones</a>
+                <a href="./Categorias.aspx" class="text-gray-700 hover:text-blue-500">Categorías</a>
+                <a href="./Autores.aspx" class="text-gray-700 hover:text-blue-500">Autores</a>
                 <button id="login-btn" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Iniciar sesion</button>
             </nav>
 
@@ -55,7 +55,7 @@
             </div>
 
             <nav class="space-x-4">
-                <a href="./busqueda.html" class="text-gray-700 hover:text-blue-500">Búsqueda avanzada</a>
+                <a href="./Busqueda.aspx" class="text-gray-700 hover:text-blue-500">Búsqueda avanzada</a>
             </nav>
     
             <!-- Perfil del Usuario con Dropdown -->
@@ -70,13 +70,13 @@
     
                 <!-- Dropdown Menu -->
                 <div id="user-menu" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-                    <a href="./perfil.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi perfil</a>
-                    <a href="./editor.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Crear publicación</a>
-                    <a href="./mis-publicaciones.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mis publicaciones</a>
-                    <a href="./bitacora.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Bitacora</a>
-                    <a href="./reclamos.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Reclamos</a>
-                    <a href="./contacto.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Ayuda</a>
-                    <a href="./home.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cerrar sesión</a>
+                    <a href="./Perfil.aspx" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi perfil</a>
+                    <a href="./Editor.aspx" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Crear publicación</a>
+                    <a href="./MisPublicaciones.aspx" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mis publicaciones</a>
+                    <a href="./Bitacora.aspx" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Bitacora</a>
+                    <a href="./Reclamos.aspx" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Reclamos</a>
+                    <a href="./Contacto.aspx" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Ayuda</a>
+                    <a href="./Home.aspx" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cerrar sesión</a>
                 </div>
             </div>
         </div>
