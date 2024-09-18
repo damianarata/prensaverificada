@@ -20,7 +20,7 @@
         <article class="bg-white p-8 rounded-lg shadow-md">
             <h1 class="text-3xl font-bold mb-4">Diputados se suben el sueldo y pasarán a cobrar más de $2,2 millones</h1>
             <p class="text-gray-600 mb-4">Fernando Brovelli - 4 de Junio 2024</p>
-            <img src="img/diputados.webp" alt="Sesión en la Cámara de Diputados" class="w-11/12 h-1/6 rounded-none mb-6">
+            <img src="img/diputados.jpg" alt="Sesión en la Cámara de Diputados" class="w-11/12 h-1/6 rounded-none mb-6">
             <p class="text-gray-700 leading-7 mb-4">
                 La <a href="#" class="text-blue-500 hover:underline">Cámara de Diputados</a> tendrá un ajuste que rondará el 80% en sus dietas, confirmaron fuentes parlamentarias a Ámbito. La suba será en tres cuotas desde los próximos meses y sería la primera desde noviembre. El acuerdo se realizó una semana después del incremento que percibieron en las dietas los miembros del <a href="#" class="text-blue-500 hover:underline">Senado de la Nación</a> y se oficializaría en una sesión que prevé discutir un nuevo sistema jubilatorio y la emergencia presupuestaria de universidades.
             </p>
@@ -30,7 +30,7 @@
             <p class="text-gray-700 leading-7 mb-4">
                 Si bien desde Casa Rosada insisten en el congelamiento de los haberes del cuerpo parlamentario, y en la gestualidad proponen iniciativas para retrotraer los aumentos que finalmente no se abordan en el ámbito legislativo, la falta de una reglamentación que establezca parámetros para los incrementos salariales termina habilitando las partidas discrecionales acordadas por los diputados y que Martín Menem, presidente de esa Cámara, autorizaría por resolución para evitar una votación en el recinto.
             </p>
-            <img src="img/martin-menem-diputados.webp" alt="Diputado hablando con la prensa" class="w-11/12 h-1/6 rounded-none mb-6">
+            <img src="img/martin-menem-diputados.jpg" alt="Diputado hablando con la prensa" class="w-11/12 h-1/6 rounded-none mb-6">
             <button id="volverButton" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">Volver</button>
         </article>
     </main>

@@ -55,19 +55,19 @@
         <!-- Resultados de búsqueda -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-white p-4 rounded-lg shadow-md">
-                <img src="img/mbappe.webp" alt="Imagen 1" class="rounded h-48 w-full mb-4">
+                <img src="img/mbappe.jpg" alt="Imagen 1" class="rounded h-48 w-full mb-4">
                 <span class="block text-blue-600 mb-2">Deportes</span>
                 <h3 class="text-xl font-semibold mb-2">El contrato de Mbappé en el Real Madrid es impresionante</h3>
                 <p class="text-gray-500">Ernie Smith &bull; 4 de junio de 2024</p>
             </div>
             <div class="bg-white p-4 rounded-lg shadow-md">
-                <img src="img/netflix-peliculas-7jpg.webp" alt="Imagen 2" class="rounded h-48 w-full mb-4">
+                <img src="img/netflix-peliculas-7jpg.jpg" alt="Imagen 2" class="rounded h-48 w-full mb-4">
                 <span class="block text-blue-600 mb-2">Streaming</span>
                 <h3 class="text-xl font-semibold mb-2">Está en Netflix, tiene a Brad Pitt y está basada en un best seller</h3>
                 <p class="text-gray-500">Eric Smith &bull; 4 de junio de 2024</p>
             </div>
             <div class="bg-white p-4 rounded-lg shadow-md">
-                <img src="./img/dolar.webp" alt="Imagen 3" class="rounded h-48 w-full mb-4">
+                <img src="./img/dolar.jpg" alt="Imagen 3" class="rounded h-48 w-full mb-4">
                 <span class="block text-blue-600 mb-2">Economía</span>
                 <h3 class="text-xl font-semibold mb-2">Fuerte suba del dólar blue de los financieros y se amplía la brecha con el oficial</h3>
                 <p class="text-gray-500">Tracey Wilson &bull; 4 de junio de 2024</p>

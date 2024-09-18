@@ -26,7 +26,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Autor 1 -->
             <div class="bg-white p-4 rounded-lg shadow-md" onclick="window.location.href='./Autor.aspx'">
-                <img src="img/alconada.webp" alt="Autor 1" class="rounded-lg h-48 w-full">
+                <img src="img/alconada.jpg" alt="Autor 1" class="rounded-lg h-48 w-full">
                 <h3 class="text-lg font-bold mt-4">Hugo Alconda Mon</h3>
                 <p class="text-sm text-gray-500">La Nacion</p>
                 <p class="text-sm text-gray-700 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</p>
@@ -38,7 +38,7 @@
 
             <!-- Autor 2 -->
             <div class="bg-white p-4 rounded-lg shadow-md" onclick="window.location.href='./Autor.aspx'">
-                <img src="img/Soledad-Larghi-Revista-GENTE-10.jpg.webp" alt="Autor 2" class="rounded-lg h-48 w-full ">
+                <img src="img/Soledad-Larghi-Revista-GENTE-10.jpg.jpg" alt="Autor 2" class="rounded-lg h-48 w-full ">
                 <h3 class="text-lg font-bold mt-4">Soledad Larghi</h3>
                 <p class="text-sm text-gray-500">America Noticias</p>
                 <p class="text-sm text-gray-700 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</p>
@@ -52,7 +52,7 @@
 
             <!-- Autor 3 -->
             <div class="bg-white p-4 rounded-lg shadow-md" onclick="window.location.href='./Autor.aspx'">
-                <img src="img/tenembaum.webp" alt="Autor 3" class="rounded-lg h-48 w-full">
+                <img src="img/tenembaum.jpg" alt="Autor 3" class="rounded-lg h-48 w-full">
                 <h3 class="text-lg font-bold mt-4">Ernesto Tenembaum</h3>
                 <p class="text-sm text-gray-500">Infobae</p>
                 <p class="text-sm text-gray-700 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</p>

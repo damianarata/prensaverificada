@@ -20,7 +20,7 @@
     <!-- Sección de perfil del autor -->
     <div class="w-full max-w-5xl mx-auto bg-white shadow-md rounded-lg overflow-hidden mt-8 p-8">
       <div class="flex items-center">
-        <img src="img/alconada.webp" alt="Imagen del Autor" class="w-24 h-24 rounded-full object-cover">
+        <img src="img/alconada.jpg" alt="Imagen del Autor" class="w-24 h-24 rounded-full object-cover">
         <div class="ml-6">
           <h1 class="text-3xl font-semibold text-gray-800">Hugo Alconada Mon</h1>
           <p class="text-gray-600 italic">LA NACIÓN</p>
@@ -43,7 +43,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
         <!-- Nota 1 -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden" onclick="window.location.href='./Publicacion.aspx'">
-          <img src="img/chocolate.webp" alt="Imagen Nota 1" class="w-full h-48 object-cover">
+          <img src="img/chocolate.jpg" alt="Imagen Nota 1" class="w-full h-48 object-cover">
           <div class="p-4">
             <span class="text-sm text-blue-600">Política</span>
             <h3 class="mt-2 text-lg font-semibold text-gray-800">Caso Chocolate: ordenaron la inhibición general de todo el patrimonio de los Albini</h3>
@@ -53,7 +53,7 @@
 
         <!-- Nota 2 -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden" onclick="window.location.href='./Publicacion.aspx'">
-          <img src="img/javier-karina.webp" alt="Imagen Nota 2" class="w-full h-48 object-cover">
+          <img src="img/javier-karina.jpg" alt="Imagen Nota 2" class="w-full h-48 object-cover">
           <div class="p-4">
             <span class="text-sm text-blue-600">Política</span>
             <h3 class="mt-2 text-lg font-semibold text-gray-800">Resiliencia, dureza y tarot, el alma del ángel protector del Presidente</h3>
@@ -63,7 +63,7 @@
 
         <!-- Nota 3 -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden" onclick="window.location.href='./Publicacion.aspx'">
-          <img src="img/cristobal.webp" alt="Imagen Nota 3" class="w-full h-48 object-cover">
+          <img src="img/cristobal.jpg" alt="Imagen Nota 3" class="w-full h-48 object-cover">
           <div class="p-4">
             <span class="text-sm text-blue-600">Política</span>
             <h3 class="mt-2 text-lg font-semibold text-gray-800">Empresarios que jugaban en offside a sabiendas de que el VAR los protegía</h3>
@@ -73,7 +73,7 @@
 
         <!-- Nota 4 -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden" onclick="window.location.href='./Publicacion.aspx'">
-          <img src="img/karina-milei.webp" alt="Imagen Nota 4" class="w-full h-48 object-cover">
+          <img src="img/karina-milei.jpg" alt="Imagen Nota 4" class="w-full h-48 object-cover">
           <div class="p-4">
             <span class="text-sm text-blue-600">Política</span>
             <h3 class="mt-2 text-lg font-semibold text-gray-800">Karina Milei manejó una sociedad en Miami que compró cuatro propiedades por unos US$2,7 millones</h3>
@@ -83,7 +83,7 @@
 
         <!-- Nota 5 -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden" onclick="window.location.href='./Publicacion.aspx'">
-          <img src="img/srtabaco.webp" alt="Imagen Nota 5" class="w-full h-48 object-cover">
+          <img src="img/srtabaco.jpg" alt="Imagen Nota 5" class="w-full h-48 object-cover">
           <div class="p-4">
             <span class="text-sm text-blue-600">Política</span>
             <h3 class="mt-2 text-lg font-semibold text-gray-800">Un duro informe de la UIF alertó sobre el crecimiento exponencial de la fortuna del “Señor del Tabaco”</h3>
@@ -93,7 +93,7 @@
 
         <!-- Nota 6 -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden" onclick="window.location.href='./Publicacion.aspx'">
-          <img src="img/psa.webp" alt="Imagen Nota 6" class="w-full h-48 object-cover">
+          <img src="img/psa.jpg" alt="Imagen Nota 6" class="w-full h-48 object-cover">
           <div class="p-4">
             <span class="text-sm text-blue-600">Política</span>
             <h3 class="mt-2 text-lg font-semibold text-gray-800">Corrupción, narcotráfico y trata. La trama delictiva detrás del auto que usó Lijo, candidato de Milei a la Corte</h3>

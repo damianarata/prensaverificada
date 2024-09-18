@@ -28,7 +28,7 @@
       
       <!-- Tecnologia -->
       <div class="bg-white rounded-lg shadow-md">
-        <img src="img/robot.webp" alt="Tecnología" class="w-full h-48 object-cover rounded-t-lg">
+        <img src="img/robot.jpg" alt="Tecnología" class="w-full h-48 object-cover rounded-t-lg">
         <div class="p-4">
           <h3 class="text-xl font-semibold">Tecnología</h3>
         </div>
@@ -52,7 +52,7 @@
 
       <!-- Economia -->
       <div class="bg-white rounded-lg shadow-md">
-        <img src="img/dolar2.webp" alt="Economia" class="w-full h-48 object-cover rounded-t-lg">
+        <img src="img/dolar2.jpg" alt="Economia" class="w-full h-48 object-cover rounded-t-lg">
         <div class="p-4">
           <h3 class="text-xl font-semibold">Economía</h3>
         </div>
@@ -60,7 +60,7 @@
 
       <!-- Deportes -->
       <div class="bg-white rounded-lg shadow-md">
-        <img src="img/messi.webp" alt="Deportes" class="w-full h-48 object-cover rounded-t-lg">
+        <img src="img/messi.jpg" alt="Deportes" class="w-full h-48 object-cover rounded-t-lg">
         <div class="p-4">
           <h3 class="text-xl font-semibold">Deportes</h3>
         </div>
