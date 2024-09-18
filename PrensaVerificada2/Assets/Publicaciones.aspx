@@ -26,11 +26,11 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-4">Publicaciones más leídas</h2>
                 <ul class="space-y-4">
                     <li class="flex items-center space-x-4" onclick="window.location.href='./Publicacion.aspx'">
-                        <img src="img/diputados.webp" alt="Publicación 1" class="w-16 h-16 rounded-md object-cover">
+                        <img src="img/diputados.jpg" alt="Publicación 1" class="w-16 h-16 rounded-md object-cover">
                         <a href="#" class="text-blue-500 hover:underline">Diputados se suben el sueldo y pasarán a cobrar más de $2,2 millones</a>
                     </li>
                     <li class="flex items-center space-x-4">
-                        <img src="img/cristobal.webp" alt="Publicación 2" class="w-16 h-16 rounded-md object-cover">
+                        <img src="img/cristobal.jpg" alt="Publicación 2" class="w-16 h-16 rounded-md object-cover">
                         <a href="#" class="text-blue-500 hover:underline">Empresarios que jugaban en offside a sabiendas de que el VAR los protegía</a>
                     </li>
                 </ul>
@@ -45,11 +45,11 @@
                         <a href="#" class="text-blue-500 hover:underline">Estas son las playas paradisíacas y los destinos invernales que corren riesgo de desaparición por el cambio climático</a>
                     </li>
                     <li class="flex items-center space-x-4">
-                        <img src="img/dolar.webp" alt="Última publicación 2" class="w-16 h-16 rounded-md object-cover">
+                        <img src="img/dolar.jpg" alt="Última publicación 2" class="w-16 h-16 rounded-md object-cover">
                         <a href="#" class="text-blue-500 hover:underline">Fuerte suba del dólar blue de los financieros y se amplía la brecha con el oficial</a>
                     </li>
                     <li class="flex items-center space-x-4">
-                        <img src="img/chocolate.webp" alt="Última publicación 3" class="w-16 h-16 rounded-md object-cover">
+                        <img src="img/chocolate.jpg" alt="Última publicación 3" class="w-16 h-16 rounded-md object-cover">
                         <a href="#" class="text-blue-500 hover:underline">Caso Chocolate: ordenaron la inhibición general de todo el patrimonio de los Albini</a>
                     </li>
                 </ul>
@@ -60,15 +60,15 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-4">Autores más leídos</h2>
                 <ul class="space-y-4">
                     <li class="flex items-center space-x-4" onclick="window.location.href='./Autor.aspx'">
-                        <img src="./img/alconada.webp" alt="Autor 1" class="w-16 h-16 rounded-full object-cover">
+                        <img src="./img/alconada.jpg" alt="Autor 1" class="w-16 h-16 rounded-full object-cover">
                         <a href="#" class="text-blue-500 hover:underline">Hugo Alconda Mon</a>
                     </li>
                     <li class="flex items-center space-x-4" onclick="window.location.href='./Autor.aspx'">
-                        <img src="img/Soledad-Larghi-Revista-GENTE-10.jpg.webp" alt="Autor 2" class="w-16 h-16 rounded-full object-cover">
+                        <img src="img/Soledad-Larghi-Revista-GENTE-10.jpg.jpg" alt="Autor 2" class="w-16 h-16 rounded-full object-cover">
                         <a href="#" class="text-blue-500 hover:underline">Soledad Larghi</a>
                     </li>
                     <li class="flex items-center space-x-4" onclick="window.location.href='./Autor.aspx'">
-                        <img src="img/tenembaum.webp" alt="Autor 3" class="w-16 h-16 rounded-full object-cover">
+                        <img src="img/tenembaum.jpg" alt="Autor 3" class="w-16 h-16 rounded-full object-cover">
                         <a href="#" class="text-blue-500 hover:underline">Ernesto Tenembaum</a>
                     </li>
                     <li class="flex items-center space-x-4" onclick="window.location.href='./Autor.aspx'">
@@ -83,11 +83,11 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-4">Tendencias</h2>
                 <ul class="space-y-4">
                     <li class="flex items-center space-x-4" onclick="window.location.href='./Publicacion.aspx'">
-                        <img src="img/diputados.webp" alt="Publicación 1" class="w-16 h-16 rounded-md object-cover">
+                        <img src="img/diputados.jpg" alt="Publicación 1" class="w-16 h-16 rounded-md object-cover">
                         <a href="#" class="text-blue-500 hover:underline">Diputados se suben el sueldo y pasarán a cobrar más de $2,2 millones</a>
                     </li>
                     <li class="flex items-center space-x-4" onclick="window.location.href='./Publicacion.aspx'">
-                        <img src="img/sele-arg.webp" alt="Tendencia 2" class="w-16 h-16 rounded-md object-cover">
+                        <img src="img/sele-arg.jpg" alt="Tendencia 2" class="w-16 h-16 rounded-md object-cover">
                         <a href="#" class="text-blue-500 hover:underline">Copa América 2024: La Selección argentina, con Lionel Messi, tuvo su primer entrenamiento en Estados Unidos</a>
                     </li>
                 </ul>
@@ -98,11 +98,11 @@
                 <h2 class="text-xl font-bold text-gray-700 mb-4">Más compartidos</h2>
                 <ul class="space-y-4">
                     <li class="flex items-center space-x-4" onclick="window.location.href='./Publicacion.aspx'">
-                        <img src="img/diputados.webp" alt="Publicación 1" class="w-16 h-16 rounded-md object-cover">
+                        <img src="img/diputados.jpg" alt="Publicación 1" class="w-16 h-16 rounded-md object-cover">
                         <a href="#" class="text-blue-500 hover:underline">Diputados se suben el sueldo y pasarán a cobrar más de $2,2 millones</a>
                     </li>
                     <li class="flex items-center space-x-4">
-                        <img src="img/apple.webp" alt="Compartido 2" class="w-16 h-16 rounded-md object-cover">
+                        <img src="img/apple.jpg" alt="Compartido 2" class="w-16 h-16 rounded-md object-cover">
                         <a href="#" class="text-blue-500 hover:underline">Apple quiere aprovechar las bondades de ChatGPT y firma un acuerdo con OpenAI para potenciar el futuro iPhone 16</a>
                     </li>
                     </li>

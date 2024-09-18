@@ -24,7 +24,7 @@ namespace PrensaVerificada2.Assets
             {
                 // Si el UsuarioID es distinto de 0, guardamos el ID en la sesión y redirigimos a Home.aspx
                 Session["usuario"] = User.UsuarioID.ToString();
-                Response.Redirect("Home.aspx");
+                Response.Redirect("Index.aspx");
             }
             else
             {
