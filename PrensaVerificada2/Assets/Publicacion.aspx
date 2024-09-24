@@ -2,15 +2,17 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
+        
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diputados se suben el sueldo</title>
+    <title>Portal de noticias prensa verificada</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100">
+
+     <form id="form1" runat="server">
 
      <!-- Header Container -->
      <div id="header"></div>
@@ -18,22 +20,20 @@
     <!-- Main Content -->
     <main class="container mx-auto mt-8">
         <article class="bg-white p-8 rounded-lg shadow-md">
-            <h1 class="text-3xl font-bold mb-4">Diputados se suben el sueldo y pasarán a cobrar más de $2,2 millones</h1>
-            <p class="text-gray-600 mb-4">Fernando Brovelli - 4 de Junio 2024</p>
-            <img src="img/diputados.jpg" alt="Sesión en la Cámara de Diputados" class="w-11/12 h-1/6 rounded-none mb-6">
-            <p class="text-gray-700 leading-7 mb-4">
-                La <a href="#" class="text-blue-500 hover:underline">Cámara de Diputados</a> tendrá un ajuste que rondará el 80% en sus dietas, confirmaron fuentes parlamentarias a Ámbito. La suba será en tres cuotas desde los próximos meses y sería la primera desde noviembre. El acuerdo se realizó una semana después del incremento que percibieron en las dietas los miembros del <a href="#" class="text-blue-500 hover:underline">Senado de la Nación</a> y se oficializaría en una sesión que prevé discutir un nuevo sistema jubilatorio y la emergencia presupuestaria de universidades.
+            <h1 id="titulo" runat="server" class="text-3xl font-bold mb-4">No cargo el titulo</h1>
+            <p id="autor" runat="server" class="text-gray-600 mb-4">No cargo el autor</p>
+            <img id="img" runat="server" src="img2/imagen_1.jpg" alt="No cargo imagen" class="w-11/12 h-1/6 rounded-none mb-6">
+            <p id="texto" runat="server" class="text-gray-700 leading-7 mb-4">
+                No cargo el texto
             </p>
-            <p class="text-gray-700 leading-7 mb-4">
-                A partir de este incremento, los diputados pasarán a percibir más de $2,2 millones. Los legisladores cobraban $1,2 millones por mes y solicitaban una actualización en sus dietas, principalmente los provenientes de las provincias que argumentaban la necesidad de costear los gastos de hotelería y alquiler en la ciudad de Buenos Aires en las jornadas de sesión.
-            </p>
-            <p class="text-gray-700 leading-7 mb-4">
-                Si bien desde Casa Rosada insisten en el congelamiento de los haberes del cuerpo parlamentario, y en la gestualidad proponen iniciativas para retrotraer los aumentos que finalmente no se abordan en el ámbito legislativo, la falta de una reglamentación que establezca parámetros para los incrementos salariales termina habilitando las partidas discrecionales acordadas por los diputados y que Martín Menem, presidente de esa Cámara, autorizaría por resolución para evitar una votación en el recinto.
-            </p>
-            <img src="img/martin-menem-diputados.jpg" alt="Diputado hablando con la prensa" class="w-11/12 h-1/6 rounded-none mb-6">
-            <button id="volverButton" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">Volver</button>
+            <img id="img2" runat="server" src="img2/imagen_1.jpg" alt="No cargo imagen" class="w-11/12 h-1/6 rounded-none mb-6">
+            
         </article>
+
     </main>
+    <div class="flex justify-center mt-8">
+            <asp:Button ID="VolverBtn" class="bg-gray-200 text-gray-600 px-6 py-2 rounded" runat="server" OnClick="VolverBtn_Click" Text="Volver" />
+    </div>
 
     <!-- Footer Container -->
     <div id="footer" class="mt-8"></div>
@@ -73,6 +73,9 @@
             window.location.href = 'https://www.apple.com'; // URL para redirigir al iniciar sesión con Apple
         });
     </script>
+
+
+     </form>
 
 
 </body>

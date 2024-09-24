@@ -38,11 +38,11 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public BE.Autor RetrieveAutor(BE.Autor Autor)
+        public BE.Autor RetrieveAutor(int id)
         {
-            throw new NotImplementedException();
-        }
-
+            BE.Autor Autor = DAL.DAOs.Autor.GetInstancia().Retreive(new BE.Autor { AutorID = id });
+            return Autor;
+        }   
         public bool Modificar(BE.Autor Autor)
         {
             throw new NotImplementedException();

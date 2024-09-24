@@ -37,9 +37,10 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public BE.Publicacion RetrievePublicacion(BE.Publicacion Publicacion)
+        public BE.Publicacion RetrievePublicacion(string id)
         {
-            throw new NotImplementedException();
+            BE.Publicacion Publi = DAL.Publicacion.GetInstancia().Retreive(new BE.Publicacion { PublicacionID = Convert.ToInt32(id) });
+            return Publi;
         }
 
         public bool Modificar(BE.Publicacion Publicacion)

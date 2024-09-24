@@ -41,6 +41,21 @@ namespace DAL.DAOs
             return publicaciones;
         }
 
+        public BE.Publicacion Retreive(BE.Publicacion publicacion)
+        {
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(string.Format("SELECT * FROM PrensaVerificada.dbo.publicaciones WHERE publicacionid = '{0}'", publicacion.PublicacionID.ToString()));
+
+            if (dt.Rows.Count != 0)
+            {
+                // Recupera la primera fila y la mapea a un objeto BE.Publicacion
+                DataRow row = dt.Rows[0];
+                publicacion = MAPPER.Publicacion.GetInstancia().Map(row);
+            }
+
+            return publicacion; // Devuelve el objeto o null si no hay filas
+        }
+
+
         public bool Update(BE.Publicacion publicacion)
         {
             string query = string.Format("UPDATE publicaciones SET titulo = '{0}', subtitulo = '{1}', contenido = '{2}', imagen = '{3}', fechapublicacion = '{4}', autorid = {5}, categoriaid = {6} WHERE publicacionid = {7}",
