@@ -45,7 +45,7 @@
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                <asp:Repeater ID="ArticlesRepeater" runat="server">
+                <asp:Repeater ID="ArticlesRepeater" runat="server" OnItemCommand="ArticlesRepeater_ItemCommand">
                     <ItemTemplate>
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap flex items-center">
@@ -60,13 +60,16 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="relative inline-block text-left">
-                                    <!-- Botón de acciones -->
-                                    <asp:LinkButton ID="ActionsButton" runat="server" Text="Acciones" OnClientClick="toggleMenu(this); return false;" CssClass="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50" />
+                                    <!-- Botón de acciones para mostrar/ocultar el menú -->
+                                    <asp:LinkButton ID="ActionsButton" runat="server" Text="Acciones" 
+                                        OnClientClick='<%# "toggleMenu(\"" + "menuContainer_" + Eval("PublicacionID") + "\"); return false;" %>' 
+                                        CssClass="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50" />
 
                                     <!-- Menú desplegable de acciones -->
                                     <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
-                                    id='<%# "menuContainer_" + Eval("PublicacionID") %>'
-                                    style="z-index: 1000; position: absolute;">
+                                         id='<%# "menuContainer_" + Eval("PublicacionID") %>'
+                                         style="z-index: 1000; position: absolute;">
+                                        <!-- Botones dentro del menú que ejecutan acciones en el servidor -->
                                         <asp:LinkButton ID="ContinueButton" runat="server" CommandName="Continuar" CommandArgument='<%# Eval("PublicacionID") %>' Text="Continuar editando" CssClass="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" />
                                         <asp:LinkButton ID="PauseButton" runat="server" CommandName="Pausar" CommandArgument='<%# Eval("PublicacionID") %>' Text="Pausar" CssClass="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" />
                                         <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" CommandArgument='<%# Eval("PublicacionID") %>' Text="Borrar" CssClass="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" />
@@ -76,6 +79,7 @@
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
+
             </tbody>
         </table>
     </div>
@@ -122,15 +126,16 @@
                 document.getElementById('footer').innerHTML = data;
             });
 
-        function toggleMenu(button) {
-            // Encuentra el contenedor del menú, que es el siguiente elemento del botón
-            var menuContainer = button.nextElementSibling;
+        function toggleMenu(menuId) {
+            // Buscar el contenedor del menú usando su ID
+            var menuContainer = document.getElementById(menuId);
 
-            // Si el contenedor existe, alterna la clase 'hidden'
+            // Si se encuentra el contenedor del menú, alternar la clase 'hidden'
             if (menuContainer) {
                 menuContainer.classList.toggle('hidden');
             }
         }
+
     </script>
 
 </body>

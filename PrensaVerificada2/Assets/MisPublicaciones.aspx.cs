@@ -66,36 +66,28 @@ namespace PrensaVerificada2.Assets
 
         protected void ArticlesRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            // Obtener el ID de la publicación desde el CommandArgument
             int publicacionID = int.Parse(e.CommandArgument.ToString());
 
             switch (e.CommandName)
             {
-                case "Edit":
-                    // Lógica para continuar editando la publicación
+                case "Continuar":
                     EditarPublicacion(publicacionID);
                     break;
 
-                case "Suspend":
-                    // Lógica para suspender la publicación
+                case "Pausar":
                     SuspenderPublicacion(publicacionID);
                     break;
 
                 case "Delete":
-                    // Lógica para eliminar la publicación
                     EliminarPublicacion(publicacionID);
-                    break;
-
-                case "ShowMenu":
-                    // Aquí podrías manejar el despliegue del menú con JavaScript o CSS
-                    MostrarMenu(e.Item);
                     break;
             }
         }
 
         private void EditarPublicacion(int publicacionID)
         {
-            // Lógica para editar la publicación
+            // Redirigir a la página de edición pasando el ID de la publicación en la QueryString
+            Response.Redirect($"Editor.aspx?publiID={publicacionID}");
         }
 
         private void SuspenderPublicacion(int publicacionID)
