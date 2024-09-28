@@ -19,6 +19,7 @@
     <h2 class="text-center text-3xl font-semibold mb-6">Tus publicaciones</h2>
 
     <!-- Tabla -->
+    <form id="form1" runat="server">
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
@@ -59,9 +60,17 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="relative inline-block text-left">
-                                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                        Acciones
-                                    </button>
+                                    <!-- Botón de acciones -->
+                                    <asp:LinkButton ID="ActionsButton" runat="server" Text="Acciones" OnClientClick="toggleMenu(this); return false;" CssClass="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50" />
+
+                                    <!-- Menú desplegable de acciones -->
+                                    <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+                                    id='<%# "menuContainer_" + Eval("PublicacionID") %>'
+                                    style="z-index: 1000; position: absolute;">
+                                        <asp:LinkButton ID="ContinueButton" runat="server" CommandName="Continuar" CommandArgument='<%# Eval("PublicacionID") %>' Text="Continuar editando" CssClass="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" />
+                                        <asp:LinkButton ID="PauseButton" runat="server" CommandName="Pausar" CommandArgument='<%# Eval("PublicacionID") %>' Text="Pausar" CssClass="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" />
+                                        <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" CommandArgument='<%# Eval("PublicacionID") %>' Text="Borrar" CssClass="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" />
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -70,6 +79,7 @@
             </tbody>
         </table>
     </div>
+        </form>
 </section>
 
 
@@ -111,6 +121,16 @@
             .then(data => {
                 document.getElementById('footer').innerHTML = data;
             });
+
+        function toggleMenu(button) {
+            // Encuentra el contenedor del menú, que es el siguiente elemento del botón
+            var menuContainer = button.nextElementSibling;
+
+            // Si el contenedor existe, alterna la clase 'hidden'
+            if (menuContainer) {
+                menuContainer.classList.toggle('hidden');
+            }
+        }
     </script>
 
 </body>
