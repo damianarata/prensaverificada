@@ -55,6 +55,71 @@ namespace DAL.DAOs
             return publicacion; // Devuelve el objeto o null si no hay filas
         }
 
+        public List<BE.Publicacion> RetrieveLatestPublicaciones(int skipCount = 0)
+        {
+            // Ejecuta la consulta para obtener las últimas 6 publicaciones con estadoid = 1,
+            // omitiendo las primeras 'skipCount' filas (si skipCount > 0).
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(
+                string.Format(
+                    @"SELECT * 
+              FROM PrensaVerificada.dbo.publicaciones 
+              WHERE estadoid = 1 
+              ORDER BY fechapublicacion DESC 
+              OFFSET {0} ROWS FETCH NEXT 6 ROWS ONLY",
+                    skipCount
+                )
+            );
+
+            // Crear una lista para almacenar las publicaciones.
+            List<BE.Publicacion> publicaciones = new List<BE.Publicacion>();
+
+            if (dt.Rows.Count != 0)
+            {
+                // Itera sobre cada fila de resultados y mapea a objetos BE.Publicacion.
+                foreach (DataRow row in dt.Rows)
+                {
+                    BE.Publicacion publicacion = MAPPER.Publicacion.GetInstancia().Map(row);
+                    publicaciones.Add(publicacion);
+                }
+            }
+
+            return publicaciones; // Devuelve la lista de publicaciones (puede estar vacía si no hay resultados).
+        }
+
+        public List<BE.Publicacion> RetrievePublicacionesPorAutor(int autorid, int skipCount = 0)
+        {
+            // Ejecuta la consulta para obtener todas las publicaciones de un autor específico,
+            // ordenando por fecha de publicación y omitiendo 'skipCount' filas si es necesario.
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(
+                string.Format(
+                    @"SELECT * 
+              FROM PrensaVerificada.dbo.publicaciones 
+              WHERE autorid = {0} 
+              ORDER BY fechapublicacion DESC 
+              OFFSET {1} ROWS",
+                    autorid, skipCount
+                )
+            );
+
+            // Crea una lista para almacenar las publicaciones.
+            List<BE.Publicacion> publicaciones = new List<BE.Publicacion>();
+
+            if (dt.Rows.Count != 0)
+            {
+                // Itera sobre cada fila de resultados y mapea a objetos BE.Publicacion.
+                foreach (DataRow row in dt.Rows)
+                {
+                    BE.Publicacion publicacion = MAPPER.Publicacion.GetInstancia().Map(row);
+                    publicaciones.Add(publicacion);
+                }
+            }
+
+            return publicaciones; // Devuelve la lista de publicaciones (puede estar vacía si no hay resultados).
+        }
+
+
+
+
 
         public bool Update(BE.Publicacion publicacion)
         {

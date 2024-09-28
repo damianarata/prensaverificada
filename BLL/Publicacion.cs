@@ -43,10 +43,34 @@ namespace BLL
             return Publi;
         }
 
+        public List<BE.Publicacion> RetrieveLatestPublicaciones(int skipCount = 0)
+        {
+            return DAL.DAOs.Publicacion.GetInstancia().RetrieveLatestPublicaciones(skipCount);
+        }
+
+        public List<BE.Publicacion> RetrievePublicacionesPorAutor(int autorid, int skipCount = 0)
+        {
+            return DAL.DAOs.Publicacion.GetInstancia().RetrievePublicacionesPorAutor(autorid, skipCount);
+        }
+
         public bool Modificar(BE.Publicacion Publicacion)
         {
             throw new NotImplementedException();
         }
+
+        private static readonly Dictionary<int, string> EstadoMap = new Dictionary<int, string>
+        {
+            { 1, "activo" },
+            { 2, "pausado" },
+            { 3, "borrador" },
+            { 4, "bloqueado" }
+        };
+
+        public string GetEstadoNombre(int estadoid)
+        {
+            return EstadoMap.TryGetValue(estadoid, out string nombre) ? nombre : "Desconocido";
+        }
+
         #endregion
 
         #region Icrud

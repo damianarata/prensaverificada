@@ -12,5 +12,6 @@ namespace BE
         public DateTime FechaPublicacion { get; set; }
         public int AutorID { get; set; }
         public int CategoriaID { get; set; }
+        public int EstadoID { get; set; }
     }
 }

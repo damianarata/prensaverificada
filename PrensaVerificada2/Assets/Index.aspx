@@ -12,6 +12,8 @@
 
 <body class="bg-gray-100 flex flex-col min-h-screen">
 
+    <form id="form1" runat="server">
+
     <!-- Contenedor para el Header -->
     <div id="header"></div>
 
@@ -177,6 +179,22 @@
                 </div>
                 <!-- Fin del bloque de artículo -->
                 <!-- Repite el bloque de publicación para cada artículo según sea necesario -->
+                <asp:Repeater ID="ArticlesRepeater" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                    <ItemTemplate>
+                    <div class="bg-white p-4 rounded-lg shadow-md" onclick="window.location.href='Publicacion.aspx?publiID=<%# Eval("publiID") %>'">
+                        <img src='<%# Eval("ImageUrl") %>' alt='<%# Eval("Title") %>' class="w-full h-32 object-cover rounded-lg mb-4">
+                        <span class="block text-blue-600 text-sm font-semibold mb-2"><%# Eval("Category") %></span>
+                        <h3 class="text-xl font-semibold mb-2"><%# Eval("Title") %></h3>
+                        <div class="flex items-center mt-4">
+                            <img src='<%# Eval("AuthorImage") %>' alt="Autor" class="w-8 h-8 rounded-full mr-2">
+                            <div>
+                                <p class="text-sm font-semibold"><%# Eval("Author") %></p>
+                                <p class="text-sm text-gray-600"><%# Eval("Date") %></p>
+                            </div>
+                        </div>
+                    </div>
+                </ItemTemplate>
+                </asp:Repeater>
             </div>
 
             <!-- Botón de cargar más -->
@@ -224,6 +242,8 @@
                 document.getElementById('footer').innerHTML = data;
             });
     </script>
+
+    </form>
 
 </body>
 
