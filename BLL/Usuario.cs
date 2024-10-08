@@ -103,6 +103,11 @@ namespace BLL
             return new BE.Usuario { UsuarioID = 0 };
         }
 
+        // Usar esta funcion para saber si tiene que validarse la sesion o no.
+        public bool Restriction () {
+            return true;
+        }
+
         #endregion
         #region Icrud
         public bool Create(BE.Usuario User)

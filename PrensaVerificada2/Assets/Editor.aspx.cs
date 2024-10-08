@@ -11,6 +11,13 @@ namespace PrensaVerificada2.Assets
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (BLL.Usuario.GetInstancia().Restriction() == true)
+            {
+                if (Session["usuario"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
             try
             {
                 // Verificar si el parámetro publiID está presente en la Query String
@@ -81,7 +88,18 @@ namespace PrensaVerificada2.Assets
                 };
 
                 // Llamar al método de lógica de negocios para guardar la nueva publicación
-                //BLL.Publicacion.GetInstancia().Agregar(nuevaPublicacion);
+                //
+                string publiID = Request.QueryString["publiID"];
+
+                if (string.IsNullOrEmpty(publiID))
+                {
+                    BLL.Publicacion.GetInstancia().Create(nuevaPublicacion);
+                }
+                else
+                {
+                    nuevaPublicacion.PublicacionID = Convert.ToInt32(publiID);
+                    BLL.Publicacion.GetInstancia().Update(nuevaPublicacion);
+                }
 
                 // Mensaje de éxito o redireccionamiento (opcional)
                 lblMensaje.Text = "Publicación creada con éxito.";

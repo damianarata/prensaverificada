@@ -11,6 +11,13 @@ namespace PrensaVerificada2.Assets
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (BLL.Usuario.GetInstancia().Restriction() == true)
+            {
+                if (Session["usuario"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
             try
             {
                 //// Verificar si el parámetro publiID está presente en la Query String

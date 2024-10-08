@@ -76,7 +76,7 @@ namespace BLL
         #region Icrud
         public bool Create(BE.Publicacion Publicacion)
         {
-            return DAL.Publicacion.GetInstancia().Create(Publicacion);
+            return DAL.DAOs.Publicacion.GetInstancia().Create(Publicacion);
         }
 
         public bool Delete(BE.Publicacion Publicacion)
@@ -91,7 +91,7 @@ namespace BLL
 
         public bool Update(BE.Publicacion Publicacion)
         {
-            throw new NotImplementedException();
+            return DAL.DAOs.Publicacion.GetInstancia().Update(Publicacion);
         }
         #endregion
     }

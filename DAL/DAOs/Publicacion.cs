@@ -22,8 +22,8 @@ namespace DAL.DAOs
 
         public bool Create(BE.Publicacion publicacion)
         {
-            string query = string.Format("INSERT INTO publicaciones (titulo, subtitulo, contenido, imagen, fechapublicacion, autorid, categoriaid) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6});",
-                publicacion.Titulo, publicacion.Subtitulo, publicacion.Contenido, publicacion.Imagen, publicacion.FechaPublicacion.ToString("yyyy-MM-dd"), publicacion.AutorID, publicacion.CategoriaID);
+            string query = string.Format("INSERT INTO publicaciones (titulo, subtitulo, contenido, imagen, fechapublicacion, autorid, categoriaid, estadoid) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6}, {7});",
+                publicacion.Titulo, publicacion.Subtitulo, publicacion.Contenido, publicacion.Imagen, publicacion.FechaPublicacion.ToString("yyyy-MM-dd"), publicacion.AutorID, publicacion.CategoriaID, publicacion.EstadoID);
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
 
@@ -123,8 +123,8 @@ namespace DAL.DAOs
 
         public bool Update(BE.Publicacion publicacion)
         {
-            string query = string.Format("UPDATE publicaciones SET titulo = '{0}', subtitulo = '{1}', contenido = '{2}', imagen = '{3}', fechapublicacion = '{4}', autorid = {5}, categoriaid = {6} WHERE publicacionid = {7}",
-                publicacion.Titulo, publicacion.Subtitulo, publicacion.Contenido, publicacion.Imagen, publicacion.FechaPublicacion.ToString("yyyy-MM-dd"), publicacion.AutorID, publicacion.CategoriaID, publicacion.PublicacionID);
+            string query = string.Format("UPDATE publicaciones SET titulo = '{0}', subtitulo = '{1}', contenido = '{2}', imagen = '{3}', fechapublicacion = '{4}', autorid = {5}, categoriaid = {6}, estadoid = {7} WHERE publicacionid = {8}",
+                publicacion.Titulo, publicacion.Subtitulo, publicacion.Contenido, publicacion.Imagen, publicacion.FechaPublicacion.ToString("yyyy-MM-dd"), publicacion.AutorID, publicacion.CategoriaID, publicacion.EstadoID, publicacion.PublicacionID);
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
 
