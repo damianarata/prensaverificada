@@ -37,21 +37,46 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public BE.Publicacion RetrievePublicacion(BE.Publicacion Publicacion)
+        public BE.Publicacion RetrievePublicacion(string id)
         {
-            throw new NotImplementedException();
+            BE.Publicacion Publi = DAL.Publicacion.GetInstancia().Retreive(new BE.Publicacion { PublicacionID = Convert.ToInt32(id) });
+            return Publi;
+        }
+
+        public List<BE.Publicacion> RetrieveLatestPublicaciones(int skipCount = 0)
+        {
+            return DAL.DAOs.Publicacion.GetInstancia().RetrieveLatestPublicaciones(skipCount);
+        }
+
+        public List<BE.Publicacion> RetrievePublicacionesPorAutor(int autorid, int skipCount = 0)
+        {
+            return DAL.DAOs.Publicacion.GetInstancia().RetrievePublicacionesPorAutor(autorid, skipCount);
         }
 
         public bool Modificar(BE.Publicacion Publicacion)
         {
             throw new NotImplementedException();
         }
+
+        private static readonly Dictionary<int, string> EstadoMap = new Dictionary<int, string>
+        {
+            { 1, "activo" },
+            { 2, "pausado" },
+            { 3, "borrador" },
+            { 4, "bloqueado" }
+        };
+
+        public string GetEstadoNombre(int estadoid)
+        {
+            return EstadoMap.TryGetValue(estadoid, out string nombre) ? nombre : "Desconocido";
+        }
+
         #endregion
 
         #region Icrud
         public bool Create(BE.Publicacion Publicacion)
         {
-            return DAL.Publicacion.GetInstancia().Create(Publicacion);
+            return DAL.DAOs.Publicacion.GetInstancia().Create(Publicacion);
         }
 
         public bool Delete(BE.Publicacion Publicacion)
@@ -66,7 +91,7 @@ namespace BLL
 
         public bool Update(BE.Publicacion Publicacion)
         {
-            throw new NotImplementedException();
+            return DAL.DAOs.Publicacion.GetInstancia().Update(Publicacion);
         }
         #endregion
     }

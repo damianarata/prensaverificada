@@ -19,94 +19,93 @@
     <section class="container mx-auto p-8 bg-white shadow-lg rounded-lg mt-8">
         <h2 class="text-center text-3xl font-semibold mb-6">Tu publicación</h2>
 
-        <!-- Barra de herramientas -->
-        <div class="bg-gray-50 p-4 rounded-t-lg border-b border-gray-200">
-            <div class="flex items-center space-x-4">
-                <!-- Etiquetas -->
-                <div class="flex items-center space-x-2">
-                    <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none">
-                        Etiquetas
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none">
-                        Editar
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none">
-                        Ver
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none">
-                        Insertar
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none">
-                        Formato
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none">
-                        Herramientas
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none">
-                        Ayuda
-                    </button>
-                </div>
-
-                <!-- Opciones adicionales -->
-                <div class="flex-grow flex justify-end items-center space-x-4">
-                    <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none">
-                        Previsualizar
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none">
-                        Publicar
-                    </button>
-                </div>
-            </div>
-        </div>
-
+    <form runat="server">
         <!-- Editor de texto -->
         <div class="p-8">
-            <h3 class="text-2xl font-semibold mb-4">Titulo</h3>
-            <h4 class="text-xl font-medium mb-4">Subtitulo</h4>
+    <!-- Título editable con TextBox -->
+    <div class="mb-4">
+        <label for="txtTitulo" class="block text-sm font-medium text-gray-700">Título</label>
+        <asp:TextBox ID="txtTitulo" runat="server" CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" Text="Titulo" />
+    </div>
 
-            <!-- Lista de verificación -->
-            <ul class="mb-4">
-                <li class="flex items-center mb-2">
-                    <input type="checkbox" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" checked>
-                    <span class="ml-2 text-gray-700">Principales frases</span>
-                </li>
-                <li class="flex items-center mb-2">
-                    <input type="checkbox" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                    <span class="ml-2 text-gray-700">Organize training sessions for working with rich text editor</span>
-                </li>
-                <li class="flex items-center mb-2">
-                    <input type="checkbox" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                    <span class="ml-2 text-gray-700">Strategize the rich text editor component structure</span>
-                </li>
-            </ul>
+    <!-- Subtítulo editable con TextBox -->
+    <div class="mb-4">
+        <label for="txtSubtitulo" class="block text-sm font-medium text-gray-700">Subtítulo</label>
+        <asp:TextBox ID="txtSubtitulo" runat="server" CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" Text="Subtitulo" />
+    </div>
 
-            <!-- Lista de características -->
-            <div class="grid grid-cols-2 gap-4 mb-8">
-                <ul class="list-disc pl-5">
-                    <li>Responsive design</li>
-                    <li>WYSIWYG interface</li>
-                    <li>Text alignment</li>
-                    <li>Image insertion and editing</li>
-                </ul>
-                <ul class="list-disc pl-5">
-                    <li>Rich-text formatting</li>
-                    <li>Font styles and sizes</li>
-                    <li>Bullet and numbered lists</li>
-                    <li>Hyperlink creation</li>
-                </ul>
-                <ul class="list-disc pl-5">
-                    <li>Real-time editing</li>
-                    <li>Text color and highlighting</li>
-                    <li>Undo/redo functionality</li>
-                    <li>Dark and light mode</li>
-                </ul>
-            </div>
+     <div class="mb-4">
+        <label for="txtContenido" class="block text-sm font-medium text-gray-700">Contenido</label>
+        <asp:TextBox 
+            ID="TextContenido" 
+            runat="server" 
+            CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" 
+            TextMode="MultiLine" 
+            Rows="5" 
+            Text="Esta es la primera línea del contenido editable. 
+    Este es el segundo párrafo de ejemplo para mostrar cómo se ve el contenido en varias líneas.
+    Puedes editar este contenido para ajustarlo a tus necesidades.
+    Este es un ejemplo de cómo se vería un párrafo largo en el TextBox.
+    Agrega más líneas según sea necesario." />
+    </div>
+    
+     <div class="mb-8">
+    <label for="ddlCategoria" class="block text-sm font-medium text-gray-700">Seleccionar categoría</label>
+    <asp:DropDownList ID="ddlCategoria" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged"
+        CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+        <asp:ListItem Text="Seleccione una categoría" Value="" />
+        <asp:ListItem Text="Política" Value="1" />
+        <asp:ListItem Text="Economía" Value="2" />
+        <asp:ListItem Text="Deportes" Value="3" />
+        <asp:ListItem Text="Tecnología" Value="4" />
+        <asp:ListItem Text="Viajes" Value="5" />
+    </asp:DropDownList>
+    </div>
 
-            <!-- Imagen -->
-            <div class="mb-8">
-                <img src="https://via.placeholder.com/800x400" alt="Imagen de ejemplo" class="w-full h-auto rounded-lg shadow-md">
-            </div>
-        </div>
+
+    <!-- Imagen seleccionable con DropDownList -->
+    <div class="mb-8">
+    <label for="ddlImagen" class="block text-sm font-medium text-gray-700">Seleccionar imagen</label>
+    <asp:DropDownList ID="ddlImagen" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlImagen_SelectedIndexChanged"
+        CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+        <asp:ListItem Text="Imagen 1" Value="img2/imagen_1.jpg" />
+        <asp:ListItem Text="Imagen 2" Value="img2/imagen_2.jpg" />
+        <asp:ListItem Text="Imagen 3" Value="img2/imagen_3.jpg" />
+        <asp:ListItem Text="Imagen 4" Value="img2/imagen_4.jpg" />
+        <asp:ListItem Text="Imagen 5" Value="img2/imagen_5.jpg" />
+        <asp:ListItem Text="Imagen 6" Value="img2/imagen_6.jpg" />
+        <asp:ListItem Text="Imagen 7" Value="img2/imagen_7.jpg" />
+        <asp:ListItem Text="Imagen 8" Value="img2/imagen_8.jpg" />
+        <asp:ListItem Text="Imagen 9" Value="img2/imagen_9.jpg" />
+        <asp:ListItem Text="Imagen 10" Value="img2/imagen_10.jpg" />
+        <asp:ListItem Text="Imagen 11" Value="img2/imagen_11.jpg" />
+        <asp:ListItem Text="Imagen 12" Value="img2/imagen_12.jpg" />
+        <asp:ListItem Text="Imagen 13" Value="img2/imagen_13.jpg" />
+        <asp:ListItem Text="Imagen 14" Value="img2/imagen_14.jpg" />
+        <asp:ListItem Text="Imagen 15" Value="img2/imagen_15.jpg" />
+        <asp:ListItem Text="Imagen 16" Value="img2/imagen_16.jpg" />
+        <asp:ListItem Text="Imagen 17" Value="img2/imagen_17.jpg" />
+        <asp:ListItem Text="Imagen 18" Value="img2/imagen_18.jpg" />
+        <asp:ListItem Text="Imagen 19" Value="img2/imagen_19.jpg" />
+        <asp:ListItem Text="Imagen 20" Value="img2/imagen_20.jpg" />
+    </asp:DropDownList>
+</div>
+
+<!-- Control Image para mostrar la imagen seleccionada -->
+<div class="mb-8">
+    <asp:Image ID="imgPreview" runat="server" CssClass="w-full h-auto rounded-lg shadow-md" ImageUrl="https://via.placeholder.com/800x400" />
+</div>
+
+
+    <!-- Botón de guardar cambios -->
+    <asp:Button ID="btnGuardar" runat="server" Text="Guardar Cambios" CssClass="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-blue-600 text-white text-sm font-medium hover:bg-blue-700" OnClick="btnGuardar_Click" />
+     <!-- Botón de publicar -->
+    <asp:Button ID="btnPublicar" runat="server" Text="Publicar" CssClass="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-green-600 text-white text-sm font-medium hover:bg-green-700" OnClick="btnPublicar_Click" />
+</div>
+        <div>
+        <asp:Label ID="lblMensaje" runat="server" CssClass="text-red-500"></asp:Label>
+    </div>
+        </form>
     </section>
 
     <!-- Contenedor para el Footer -->

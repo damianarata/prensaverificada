@@ -30,6 +30,7 @@ namespace DAL.MAPPER
             publicacion.FechaPublicacion = Convert.ToDateTime(row["fechapublicacion"]);
             publicacion.AutorID = Convert.ToInt32(row["autorid"]);
             publicacion.CategoriaID = Convert.ToInt32(row["categoriaid"]);
+            publicacion.EstadoID = Convert.ToInt32(row["estadoid"]);
             return publicacion;
         }
     }

@@ -29,7 +29,7 @@
                 <!-- Contraseña -->
                 <div class="mb-4">
                     <label for="password" class="block text-gray-700">Contraseña</label>&nbsp;
-                    <asp:TextBox ID="TextBox2" runat="server" class="w-full p-2 border border-gray-300 rounded mt-1"></asp:TextBox>
+                    <asp:TextBox ID="TextBox2" TextMode="Password" runat="server" class="w-full p-2 border border-gray-300 rounded mt-1"></asp:TextBox>
                 </div>
 
                 <!-- reCAPTCHA -->
