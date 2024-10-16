@@ -105,7 +105,7 @@ namespace BLL
 
         // Usar esta funcion para saber si tiene que validarse la sesion o no.
         public bool Restriction () {
-            return true;
+            return false;
         }
 
         #endregion
