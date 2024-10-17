@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace PrensaVerificada2.Assets
 {
@@ -36,6 +37,7 @@ namespace PrensaVerificada2.Assets
                 img.Src = Publi.Imagen;
                 img.Alt = Publi.Titulo;
                 texto.InnerText = Publi.Contenido;
+                updateFront(Publi.IdTipoLetra,Publi.IdTipoTamano);
             }
             catch (Exception ex)
             {
@@ -52,5 +54,19 @@ namespace PrensaVerificada2.Assets
         {
             ClientScript.RegisterStartupScript(this.GetType(), "GoBack", "window.history.back();", true);
         }
+
+        protected void updateFront(int letra, int tam)
+        {
+            int selectedFontSize = Convert.ToInt32(BLL.Publicacion.GetInstancia().GetTipoTamanoNombre(tam));
+            string selectedFont = BLL.Publicacion.GetInstancia().GetTipoLetraNombre(letra);
+
+            // Aplicar estilos usando CSS
+            titulo.Style["font-size"] = $"{selectedFontSize}pt";
+            titulo.Style["font-family"] = selectedFont;
+
+            texto.Style["font-size"] = $"{selectedFontSize}pt";
+            texto.Style["font-family"] = selectedFont;
+        }
+
     }
 }
