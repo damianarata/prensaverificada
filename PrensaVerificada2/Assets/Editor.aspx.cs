@@ -163,5 +163,23 @@ namespace PrensaVerificada2.Assets
             }
         }
 
+
+        protected void ddlFontFamily_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Cambiar la fuente del TextBox según la selección en el DropDownList
+            string selectedFont = ddlFontFamily.SelectedValue;
+            txtTitulo.Font.Name = selectedFont;
+            txtSubtitulo.Font.Name = selectedFont;
+            TextContenido.Font.Name = selectedFont;
+        }
+
+        protected void ddlFontSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Cambiar el tamaño del TextBox según la selección en el DropDownList
+            int selectedFontSize = int.Parse(ddlFontSize.SelectedValue);
+            txtTitulo.Font.Size = FontUnit.Point(selectedFontSize);
+            txtSubtitulo.Font.Size = FontUnit.Point(selectedFontSize);
+            TextContenido.Font.Size = FontUnit.Point(selectedFontSize);
+        }
     }
 }

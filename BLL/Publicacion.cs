@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using BE;
+using System.Linq;
 
 namespace BLL
 {
@@ -70,6 +71,51 @@ namespace BLL
         {
             return EstadoMap.TryGetValue(estadoid, out string nombre) ? nombre : "Desconocido";
         }
+
+        private static readonly Dictionary<int, string> TipoLetraMap = new Dictionary<int, string>
+        {
+            { 1, "Arial" },
+            { 2, "Times New Roman" },
+            { 3, "Verdana" },
+            { 4, "Courier New" },
+            { 5, "Georgia" }
+        };
+
+        private static readonly Dictionary<string, int> TipoLetraIdMap = TipoLetraMap.ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
+
+        public string GetTipoLetraNombre(int tipoLetraId)
+        {
+            return TipoLetraMap.TryGetValue(tipoLetraId, out string nombre) ? nombre : "Arial";
+        }
+
+        public int GetTipoLetraId(string tipoLetraNombre)
+        {
+            return TipoLetraIdMap.TryGetValue(tipoLetraNombre, out int id) ? id : 1;
+        }
+
+        private static readonly Dictionary<int, string> TipoTamanoMap = new Dictionary<int, string>
+        {
+            { 1, "8 pt" },
+            { 2, "10 pt" },
+            { 3, "12 pt" },
+            { 4, "14 pt" },
+            { 5, "16 pt" },
+            { 6, "18 pt" },
+            { 7, "20 pt" }
+        };
+
+        private static readonly Dictionary<string, int> TipoTamanoIdMap = TipoTamanoMap.ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
+
+        public string GetTipoTamanoNombre(int tipoTamanoId)
+        {
+            return TipoTamanoMap.TryGetValue(tipoTamanoId, out string nombre) ? nombre : "8 pt";
+        }
+
+        public int GetTipoTamanoId(string tipoTamanoNombre)
+        {
+            return TipoTamanoIdMap.TryGetValue(tipoTamanoNombre, out int id) ? id : 1;
+        }
+
 
         #endregion
 

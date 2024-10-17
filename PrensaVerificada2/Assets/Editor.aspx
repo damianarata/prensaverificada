@@ -21,7 +21,30 @@
 
     <form runat="server">
         <!-- Editor de texto -->
-        <div class="p-8">
+<div class="p-8">
+    <div class="flex items-center space-x-4">
+        <label for="ddlFontFamily" class="text-sm font-medium text-gray-700">Tipo de letra</label>
+        <asp:DropDownList ID="ddlFontFamily" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlFontFamily_SelectedIndexChanged">
+            <asp:ListItem Text="Arial" Value="Arial"></asp:ListItem>
+            <asp:ListItem Text="Times New Roman" Value="Times New Roman"></asp:ListItem>
+            <asp:ListItem Text="Verdana" Value="Verdana"></asp:ListItem>
+            <asp:ListItem Text="Courier New" Value="Courier New"></asp:ListItem>
+            <asp:ListItem Text="Georgia" Value="Georgia"></asp:ListItem>
+        </asp:DropDownList>
+
+        <label for="ddlFontSize" class="text-sm font-medium text-gray-700">Tamaño de letra</label>
+        <asp:DropDownList ID="ddlFontSize" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlFontSize_SelectedIndexChanged">
+            <asp:ListItem Text="8 pt" Value="8"></asp:ListItem>
+            <asp:ListItem Text="10 pt" Value="10"></asp:ListItem>
+            <asp:ListItem Text="12 pt" Value="12"></asp:ListItem>
+            <asp:ListItem Text="14 pt" Value="14"></asp:ListItem>
+            <asp:ListItem Text="16 pt" Value="16"></asp:ListItem>
+            <asp:ListItem Text="18 pt" Value="18"></asp:ListItem>
+            <asp:ListItem Text="20 pt" Value="20"></asp:ListItem>
+        </asp:DropDownList>
+    </div>
+</div>
+
     <!-- Título editable con TextBox -->
     <div class="mb-4">
         <label for="txtTitulo" class="block text-sm font-medium text-gray-700">Título</label>

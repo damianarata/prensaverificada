@@ -15,6 +15,24 @@ namespace PrensaVerificada2.Assets
     {
 
         /// <summary>
+        /// Control ddlFontFamily.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFontFamily;
+
+        /// <summary>
+        /// Control ddlFontSize.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFontSize;
+
+        /// <summary>
         /// Control txtTitulo.
         /// </summary>
         /// <remarks>
