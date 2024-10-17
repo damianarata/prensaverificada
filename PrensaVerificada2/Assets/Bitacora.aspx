@@ -87,22 +87,24 @@
               var userMenuButton = document.getElementById('user-menu-button');
               var userMenu = document.getElementById('user-menu');
 
-              userMenuButton.addEventListener('click', function () {
+              userMenuButton.addEventListener('click', function (event) {
+                  event.preventDefault(); // Evita comportamiento de enlace predeterminado
                   userMenu.classList.toggle('hidden');
               });
 
-                              document.addEventListener('click', function (event) {
-                    var isClickInside = userMenuButton.contains(event.target);
+              document.addEventListener('click', function (event) {
+                  var isClickInside = userMenuButton.contains(event.target) || userMenu.contains(event.target);
 
-                    if (!isClickInside) {
-                        userMenu.classList.add('hidden');
-                    }
-                });
+                  if (!isClickInside) {
+                      userMenu.classList.add('hidden');
+                  }
+              });
 
-                document.getElementById('login-btn').addEventListener('click', function() {
-                    window.location.href = './Login.aspx';
-                });
-            });
+              document.getElementById('login-btn').addEventListener('click', function (event) {
+                  event.preventDefault(); // Asegura que no se recargue la página
+                  window.location.href = './Login.aspx';
+              });
+          });
 
         // Cargar el Footer
         fetch('footer.html')

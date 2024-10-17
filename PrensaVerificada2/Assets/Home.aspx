@@ -111,19 +111,21 @@
                 var userMenuButton = document.getElementById('user-menu-button');
                 var userMenu = document.getElementById('user-menu');
 
-                userMenuButton.addEventListener('click', function () {
+                userMenuButton.addEventListener('click', function (event) {
+                    event.preventDefault(); // Evita comportamiento de enlace predeterminado
                     userMenu.classList.toggle('hidden');
                 });
 
                 document.addEventListener('click', function (event) {
-                    var isClickInside = userMenuButton.contains(event.target);
+                    var isClickInside = userMenuButton.contains(event.target) || userMenu.contains(event.target);
 
                     if (!isClickInside) {
                         userMenu.classList.add('hidden');
                     }
                 });
 
-                document.getElementById('login-btn').addEventListener('click', function () {
+                document.getElementById('login-btn').addEventListener('click', function (event) {
+                    event.preventDefault(); // Asegura que no se recargue la página
                     window.location.href = './Login.aspx';
                 });
             });

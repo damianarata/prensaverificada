@@ -95,20 +95,20 @@ namespace BLL
 
         private static readonly Dictionary<int, string> TipoTamanoMap = new Dictionary<int, string>
         {
-            { 1, "8 pt" },
-            { 2, "10 pt" },
-            { 3, "12 pt" },
-            { 4, "14 pt" },
-            { 5, "16 pt" },
-            { 6, "18 pt" },
-            { 7, "20 pt" }
+            { 1, "8" },
+            { 2, "10" },
+            { 3, "12" },
+            { 4, "14" },
+            { 5, "16" },
+            { 6, "18" },
+            { 7, "20" }
         };
 
         private static readonly Dictionary<string, int> TipoTamanoIdMap = TipoTamanoMap.ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
 
         public string GetTipoTamanoNombre(int tipoTamanoId)
         {
-            return TipoTamanoMap.TryGetValue(tipoTamanoId, out string nombre) ? nombre : "8 pt";
+            return TipoTamanoMap.TryGetValue(tipoTamanoId, out string nombre) ? nombre : "8";
         }
 
         public int GetTipoTamanoId(string tipoTamanoNombre)

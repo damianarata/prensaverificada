@@ -20,27 +20,28 @@
         <h2 class="text-center text-3xl font-semibold mb-6">Tu publicación</h2>
 
     <form runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" />
         <!-- Editor de texto -->
 <div class="p-8">
     <div class="flex items-center space-x-4">
         <label for="ddlFontFamily" class="text-sm font-medium text-gray-700">Tipo de letra</label>
         <asp:DropDownList ID="ddlFontFamily" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlFontFamily_SelectedIndexChanged">
-            <asp:ListItem Text="Arial" Value="Arial"></asp:ListItem>
-            <asp:ListItem Text="Times New Roman" Value="Times New Roman"></asp:ListItem>
-            <asp:ListItem Text="Verdana" Value="Verdana"></asp:ListItem>
-            <asp:ListItem Text="Courier New" Value="Courier New"></asp:ListItem>
-            <asp:ListItem Text="Georgia" Value="Georgia"></asp:ListItem>
+            <asp:ListItem Text="Arial" Value="1"></asp:ListItem>
+            <asp:ListItem Text="Times New Roman" Value="2"></asp:ListItem>
+            <asp:ListItem Text="Verdana" Value="3"></asp:ListItem>
+            <asp:ListItem Text="Courier New" Value="4"></asp:ListItem>
+            <asp:ListItem Text="Georgia" Value="5"></asp:ListItem>
         </asp:DropDownList>
 
         <label for="ddlFontSize" class="text-sm font-medium text-gray-700">Tamaño de letra</label>
         <asp:DropDownList ID="ddlFontSize" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlFontSize_SelectedIndexChanged">
-            <asp:ListItem Text="8 pt" Value="8"></asp:ListItem>
-            <asp:ListItem Text="10 pt" Value="10"></asp:ListItem>
-            <asp:ListItem Text="12 pt" Value="12"></asp:ListItem>
-            <asp:ListItem Text="14 pt" Value="14"></asp:ListItem>
-            <asp:ListItem Text="16 pt" Value="16"></asp:ListItem>
-            <asp:ListItem Text="18 pt" Value="18"></asp:ListItem>
-            <asp:ListItem Text="20 pt" Value="20"></asp:ListItem>
+            <asp:ListItem Text="8 pt" Value="1"></asp:ListItem>
+            <asp:ListItem Text="10 pt" Value="2"></asp:ListItem>
+            <asp:ListItem Text="12 pt" Value="3"></asp:ListItem>
+            <asp:ListItem Text="14 pt" Value="4"></asp:ListItem>
+            <asp:ListItem Text="16 pt" Value="5"></asp:ListItem>
+            <asp:ListItem Text="18 pt" Value="6"></asp:ListItem>
+            <asp:ListItem Text="20 pt" Value="7"></asp:ListItem>
         </asp:DropDownList>
     </div>
 </div>
@@ -121,24 +122,26 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header').innerHTML = data;
-  
+
                 // Dropdown Menu Logic
                 var userMenuButton = document.getElementById('user-menu-button');
                 var userMenu = document.getElementById('user-menu');
-  
-                userMenuButton.addEventListener('click', function () {
+
+                userMenuButton.addEventListener('click', function (event) {
+                    event.preventDefault(); // Evita comportamiento de enlace predeterminado
                     userMenu.classList.toggle('hidden');
                 });
-  
+
                 document.addEventListener('click', function (event) {
-                    var isClickInside = userMenuButton.contains(event.target);
+                    var isClickInside = userMenuButton.contains(event.target) || userMenu.contains(event.target);
 
                     if (!isClickInside) {
                         userMenu.classList.add('hidden');
                     }
                 });
 
-                document.getElementById('login-btn').addEventListener('click', function() {
+                document.getElementById('login-btn').addEventListener('click', function (event) {
+                    event.preventDefault(); // Asegura que no se recargue la página
                     window.location.href = './Login.aspx';
                 });
             });

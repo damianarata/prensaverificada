@@ -19,37 +19,23 @@ namespace PrensaVerificada2.Assets
                     Response.Redirect("Login.aspx");
                 }
             }
-            try
-            {
-                // Verificar si el parámetro publiID está presente en la Query String
-                string publiID = Request.QueryString["publiID"];
 
-                if (string.IsNullOrEmpty(publiID))
-                {
-                    //
-                }
-                else
-                {
-                    // Cargar publicación existente
-                    BE.Publicacion Publi = BLL.Publicacion.GetInstancia().RetrievePublicacion(publiID);
-                    BE.Autor Autor = BLL.Autor.GetInstancia().RetrieveAutor(Publi.AutorID);
-
-                    // Rellenar los campos con los valores de la publicación
-                    txtTitulo.Text = Publi.Titulo;
-                    txtSubtitulo.Text = Publi.Subtitulo; // Asumiendo que Subtitulo es un campo de Publicacion
-                    TextContenido.Text = Publi.Contenido;
-                    ddlCategoria.SelectedValue = Publi.CategoriaID.ToString(); // Convertir a string para el DropDownList
-                    imgPreview.ImageUrl = Publi.Imagen;
-                }
-            }
-            catch (Exception ex)
+            if (!IsPostBack)
             {
-                // Manejo de errores: mostrar un mensaje o redirigir a otra página
-                Response.Write($"Error: {ex.Message}");
-                // Redirigir a una página de error o a la página principal
-                // Response.Redirect("ErrorPage.aspx");
+                try
+                {
+                    cargarpubli();
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de errores: mostrar un mensaje o redirigir a otra página
+                    Response.Write($"Error: {ex.Message}");
+                    // Redirigir a una página de error o a la página principal
+                    // Response.Redirect("ErrorPage.aspx");
+                }
             }
         }
+
 
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -60,6 +46,35 @@ namespace PrensaVerificada2.Assets
         protected void btnPublicar_Click(object sender, EventArgs e)
         {
             cargar(1);
+        }
+
+        protected void cargarpubli()
+        {
+
+            // Verificar si el parámetro publiID está presente en la Query String
+            string publiID = Request.QueryString["publiID"];
+
+            if (string.IsNullOrEmpty(publiID))
+            {
+                //
+            }
+            else
+            {
+                // Cargar publicación existente
+                BE.Publicacion Publi = BLL.Publicacion.GetInstancia().RetrievePublicacion(publiID);
+                BE.Autor Autor = BLL.Autor.GetInstancia().RetrieveAutor(Publi.AutorID);
+
+                // Rellenar los campos con los valores de la publicación
+                txtTitulo.Text = Publi.Titulo;
+                txtSubtitulo.Text = Publi.Subtitulo; // Asumiendo que Subtitulo es un campo de Publicacion
+                TextContenido.Text = Publi.Contenido;
+                ddlCategoria.SelectedValue = Publi.CategoriaID.ToString(); // Convertir a string para el DropDownList
+                imgPreview.ImageUrl = Publi.Imagen;
+                ddlFontFamily.SelectedValue = Publi.IdTipoLetra.ToString();
+                ddlFontSize.SelectedValue = Publi.IdTipoTamano.ToString();
+
+
+            }
         }
 
         protected void cargar(int status)
@@ -83,8 +98,11 @@ namespace PrensaVerificada2.Assets
                     FechaPublicacion = DateTime.Now, // Asignar la fecha actual
                     AutorID = 1,  // Definir el AutorID correspondiente (ajustar según sea necesario)
                     CategoriaID = categoriaID,
-                    EstadoID = status
-                };
+                    EstadoID = status,
+                    IdTipoLetra = Convert.ToInt32(ddlFontFamily.SelectedValue),
+                    IdTipoTamano = Convert.ToInt32(ddlFontSize.SelectedValue)
+
+            };
 
                 // Llamar al método de lógica de negocios para guardar la nueva publicación
                 //
@@ -96,6 +114,7 @@ namespace PrensaVerificada2.Assets
                 }
                 else
                 {
+                    nuevaPublicacion.PublicacionID = Convert.ToInt32(publiID);
                     nuevaPublicacion.PublicacionID = Convert.ToInt32(publiID);
                     BLL.Publicacion.GetInstancia().Update(nuevaPublicacion);
                 }
@@ -166,8 +185,7 @@ namespace PrensaVerificada2.Assets
 
         protected void ddlFontFamily_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Cambiar la fuente del TextBox según la selección en el DropDownList
-            string selectedFont = ddlFontFamily.SelectedValue;
+            string selectedFont = BLL.Publicacion.GetInstancia().GetTipoLetraNombre(int.Parse(ddlFontFamily.SelectedValue));
             txtTitulo.Font.Name = selectedFont;
             txtSubtitulo.Font.Name = selectedFont;
             TextContenido.Font.Name = selectedFont;
@@ -175,11 +193,22 @@ namespace PrensaVerificada2.Assets
 
         protected void ddlFontSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Cambiar el tamaño del TextBox según la selección en el DropDownList
-            int selectedFontSize = int.Parse(ddlFontSize.SelectedValue);
+            int selectedFontSize = Convert.ToInt32(BLL.Publicacion.GetInstancia().GetTipoTamanoNombre(int.Parse(ddlFontSize.SelectedValue)));
             txtTitulo.Font.Size = FontUnit.Point(selectedFontSize);
             txtSubtitulo.Font.Size = FontUnit.Point(selectedFontSize);
             TextContenido.Font.Size = FontUnit.Point(selectedFontSize);
+        }
+
+        protected void updateFront()
+        {
+            int selectedFontSize = Convert.ToInt32(BLL.Publicacion.GetInstancia().GetTipoTamanoNombre(int.Parse(ddlFontSize.SelectedValue)));
+            txtTitulo.Font.Size = FontUnit.Point(selectedFontSize);
+            txtSubtitulo.Font.Size = FontUnit.Point(selectedFontSize);
+            TextContenido.Font.Size = FontUnit.Point(selectedFontSize);
+            string selectedFont = BLL.Publicacion.GetInstancia().GetTipoLetraNombre(int.Parse(ddlFontFamily.SelectedValue));
+            txtTitulo.Font.Name = selectedFont;
+            txtSubtitulo.Font.Name = selectedFont;
+            TextContenido.Font.Name = selectedFont;
         }
     }
 }
