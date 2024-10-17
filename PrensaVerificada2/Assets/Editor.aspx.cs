@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace PrensaVerificada2.Assets
 {
@@ -37,10 +38,8 @@ namespace PrensaVerificada2.Assets
                     txtTitulo.Text = Publi.Titulo;
                     txtSubtitulo.Text = Publi.Subtitulo; // Asumiendo que Subtitulo es un campo de Publicacion
                     TextContenido.Text = Publi.Contenido;
-                    // Establecer la imagen seleccionada (puedes agregar lógica para seleccionar la correcta)
-                    ddlImagen.SelectedValue = Publi.Imagen;
                     ddlCategoria.SelectedValue = Publi.CategoriaID.ToString(); // Convertir a string para el DropDownList
-                    imgPreview.ImageUrl = ddlImagen.SelectedValue;
+                    imgPreview.ImageUrl = Publi.Imagen;
                 }
             }
             catch (Exception ex)
@@ -71,7 +70,7 @@ namespace PrensaVerificada2.Assets
                 string titulo = txtTitulo.Text;
                 string subtitulo = txtSubtitulo.Text;
                 string contenido = TextContenido.Text;
-                string imagenSeleccionada = ddlImagen.SelectedValue;
+                string imagenSeleccionada = imgPreview.ImageUrl ?? string.Empty;
                 int categoriaID = Convert.ToInt32(ddlCategoria.SelectedValue);
 
                 // Crear una nueva instancia de Publicacion
@@ -116,7 +115,7 @@ namespace PrensaVerificada2.Assets
         protected void ddlImagen_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Establecer la URL de la imagen seleccionada en el control Image
-            imgPreview.ImageUrl = ddlImagen.SelectedValue;
+            //imgPreview.ImageUrl = ddlImagen.SelectedValue;
         }
 
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
@@ -124,6 +123,45 @@ namespace PrensaVerificada2.Assets
             // Establecer la URL de la imagen seleccionada en el control Image
         }
 
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            if (FileUpload1.HasFile)
+            {
+                try
+                {
+                    // Verificar el tipo de archivo
+                    string extension = Path.GetExtension(FileUpload1.FileName).ToLower();
+                    string[] allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif" };
+
+                    if (Array.Exists(allowedExtensions, ext => ext == extension))
+                    {
+                        // Guardar la imagen en una carpeta
+                        string filePath = "~/Assets/Uploads/" + Path.GetFileName(FileUpload1.FileName);
+                        string serverPath = Server.MapPath(filePath);
+                        Response.Write("Guardando archivo en: " + serverPath);
+                        FileUpload1.SaveAs(serverPath);
+
+
+                        // Mostrar la imagen cargada
+                        imgPreview.ImageUrl = "Uploads/" + Path.GetFileName(FileUpload1.FileName);
+                        lblMessage.Text = "Imagen cargada con éxito.";
+                        lblMessage.ForeColor = System.Drawing.Color.Green;
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Solo se permiten archivos JPG, JPEG, PNG o GIF.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lblMessage.Text = "Error: " + ex.Message;
+                }
+            }
+            else
+            {
+                lblMessage.Text = "Por favor, selecciona una imagen para cargar.";
+            }
+        }
 
     }
 }

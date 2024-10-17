@@ -61,35 +61,14 @@
         <asp:ListItem Text="Viajes" Value="5" />
     </asp:DropDownList>
     </div>
-
-
-    <!-- Imagen seleccionable con DropDownList -->
     <div class="mb-8">
-    <label for="ddlImagen" class="block text-sm font-medium text-gray-700">Seleccionar imagen</label>
-    <asp:DropDownList ID="ddlImagen" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlImagen_SelectedIndexChanged"
-        CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-        <asp:ListItem Text="Imagen 1" Value="img2/imagen_1.jpg" />
-        <asp:ListItem Text="Imagen 2" Value="img2/imagen_2.jpg" />
-        <asp:ListItem Text="Imagen 3" Value="img2/imagen_3.jpg" />
-        <asp:ListItem Text="Imagen 4" Value="img2/imagen_4.jpg" />
-        <asp:ListItem Text="Imagen 5" Value="img2/imagen_5.jpg" />
-        <asp:ListItem Text="Imagen 6" Value="img2/imagen_6.jpg" />
-        <asp:ListItem Text="Imagen 7" Value="img2/imagen_7.jpg" />
-        <asp:ListItem Text="Imagen 8" Value="img2/imagen_8.jpg" />
-        <asp:ListItem Text="Imagen 9" Value="img2/imagen_9.jpg" />
-        <asp:ListItem Text="Imagen 10" Value="img2/imagen_10.jpg" />
-        <asp:ListItem Text="Imagen 11" Value="img2/imagen_11.jpg" />
-        <asp:ListItem Text="Imagen 12" Value="img2/imagen_12.jpg" />
-        <asp:ListItem Text="Imagen 13" Value="img2/imagen_13.jpg" />
-        <asp:ListItem Text="Imagen 14" Value="img2/imagen_14.jpg" />
-        <asp:ListItem Text="Imagen 15" Value="img2/imagen_15.jpg" />
-        <asp:ListItem Text="Imagen 16" Value="img2/imagen_16.jpg" />
-        <asp:ListItem Text="Imagen 17" Value="img2/imagen_17.jpg" />
-        <asp:ListItem Text="Imagen 18" Value="img2/imagen_18.jpg" />
-        <asp:ListItem Text="Imagen 19" Value="img2/imagen_19.jpg" />
-        <asp:ListItem Text="Imagen 20" Value="img2/imagen_20.jpg" />
-    </asp:DropDownList>
-</div>
+        <asp:FileUpload ID="FileUpload1" runat="server" />
+        <br /><br />
+        <asp:Button ID="btnUpload" runat="server" Text="Cargar Imagen" Class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300" OnClick="btnUpload_Click" />
+        <br /><br />
+        <asp:Image ID="Image1" runat="server" Width="300px" />
+        <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
+    </div>
 
 <!-- Control Image para mostrar la imagen seleccionada -->
 <div class="mb-8">
