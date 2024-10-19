@@ -21,16 +21,15 @@
     <main class="container mx-auto mt-8">
         <article class="bg-white p-8 rounded-lg shadow-md">
             <h1 id="titulo" runat="server" class="text-3xl font-bold mb-4">No cargo el titulo</h1>
+            <h2 id="subtitulo" runat="server" class="text-2xl font-semibold mb-4">No cargo el subtitulo</h2>
             <p id="autor" runat="server" class="text-gray-600 mb-4">No cargo el autor</p>
             <img id="img" runat="server" src="img2/imagen_1.jpg" alt="No cargo imagen" class="w-11/12 h-1/6 rounded-none mb-6">
-            <p id="texto" runat="server" class="text-gray-700 leading-7 mb-4">
-                No cargo el texto
-            </p>
-            <img id="img2" runat="server" src="img2/imagen_1.jpg" alt="No cargo imagen" class="w-11/12 h-1/6 rounded-none mb-6">
-            
-        </article>
 
+            <asp:PlaceHolder ID="phTextBoxes" runat="server"></asp:PlaceHolder>
+            <asp:PlaceHolder ID="phPublicacionContent" runat="server"></asp:PlaceHolder>
+        </article>
     </main>
+
     <div class="flex justify-center mt-8">
             <asp:Button ID="VolverBtn" class="bg-gray-200 text-gray-600 px-6 py-2 rounded" runat="server" OnClick="VolverBtn_Click" Text="Volver" />
     </div>
@@ -49,16 +48,22 @@
                 var userMenuButton = document.getElementById('user-menu-button');
                 var userMenu = document.getElementById('user-menu');
 
-                userMenuButton.addEventListener('click', function () {
+                userMenuButton.addEventListener('click', function (event) {
+                    event.preventDefault(); // Evita comportamiento de enlace predeterminado
                     userMenu.classList.toggle('hidden');
                 });
 
                 document.addEventListener('click', function (event) {
-                    var isClickInside = userMenuButton.contains(event.target);
+                    var isClickInside = userMenuButton.contains(event.target) || userMenu.contains(event.target);
 
                     if (!isClickInside) {
                         userMenu.classList.add('hidden');
                     }
+                });
+
+                document.getElementById('login-btn').addEventListener('click', function (event) {
+                    event.preventDefault(); // Asegura que no se recargue la página
+                    window.location.href = './Login.aspx';
                 });
             });
 

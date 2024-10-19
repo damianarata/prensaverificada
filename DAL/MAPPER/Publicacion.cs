@@ -31,7 +31,12 @@ namespace DAL.MAPPER
             publicacion.AutorID = Convert.ToInt32(row["autorid"]);
             publicacion.CategoriaID = Convert.ToInt32(row["categoriaid"]);
             publicacion.EstadoID = Convert.ToInt32(row["estadoid"]);
+            publicacion.IdTipoLetra = Convert.ToInt32(row["id_tipo_letra"]);
+            publicacion.IdTipoTamano = Convert.ToInt32(row["id_tipo_tamano"]);
+            publicacion.Parrafos = Convert.ToInt32(row["parrafos"]);
             return publicacion;
         }
+
+
     }
 }

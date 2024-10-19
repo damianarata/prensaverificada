@@ -13,5 +13,8 @@ namespace BE
         public int AutorID { get; set; }
         public int CategoriaID { get; set; }
         public int EstadoID { get; set; }
+        public int IdTipoLetra { get; set; }
+        public int IdTipoTamano { get; set; }
+        public int Parrafos { get; set; }
     }
 }

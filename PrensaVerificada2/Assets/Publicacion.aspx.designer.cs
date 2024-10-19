@@ -33,6 +33,15 @@ namespace PrensaVerificada2.Assets
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl titulo;
 
         /// <summary>
+        /// Control subtitulo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl subtitulo;
+
+        /// <summary>
         /// Control autor.
         /// </summary>
         /// <remarks>
@@ -51,22 +60,22 @@ namespace PrensaVerificada2.Assets
         protected global::System.Web.UI.HtmlControls.HtmlImage img;
 
         /// <summary>
-        /// Control texto.
+        /// Control phTextBoxes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl texto;
+        protected global::System.Web.UI.WebControls.PlaceHolder phTextBoxes;
 
         /// <summary>
-        /// Control img2.
+        /// Control phPublicacionContent.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage img2;
+        protected global::System.Web.UI.WebControls.PlaceHolder phPublicacionContent;
 
         /// <summary>
         /// Control VolverBtn.

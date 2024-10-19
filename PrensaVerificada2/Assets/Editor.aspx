@@ -20,8 +20,32 @@
         <h2 class="text-center text-3xl font-semibold mb-6">Tu publicación</h2>
 
     <form runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" />
         <!-- Editor de texto -->
-        <div class="p-8">
+<div class="p-8">
+    <div class="flex items-center space-x-4">
+        <label for="ddlFontFamily" class="text-sm font-medium text-gray-700">Tipo de letra</label>
+        <asp:DropDownList ID="ddlFontFamily" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlFontFamily_SelectedIndexChanged">
+            <asp:ListItem Text="Arial" Value="1"></asp:ListItem>
+            <asp:ListItem Text="Times New Roman" Value="2"></asp:ListItem>
+            <asp:ListItem Text="Verdana" Value="3"></asp:ListItem>
+            <asp:ListItem Text="Courier New" Value="4"></asp:ListItem>
+            <asp:ListItem Text="Georgia" Value="5"></asp:ListItem>
+        </asp:DropDownList>
+
+        <label for="ddlFontSize" class="text-sm font-medium text-gray-700">Tamaño de letra</label>
+        <asp:DropDownList ID="ddlFontSize" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlFontSize_SelectedIndexChanged">
+            <asp:ListItem Text="8 pt" Value="1"></asp:ListItem>
+            <asp:ListItem Text="10 pt" Value="2"></asp:ListItem>
+            <asp:ListItem Text="12 pt" Value="3"></asp:ListItem>
+            <asp:ListItem Text="14 pt" Value="4"></asp:ListItem>
+            <asp:ListItem Text="16 pt" Value="5"></asp:ListItem>
+            <asp:ListItem Text="18 pt" Value="6"></asp:ListItem>
+            <asp:ListItem Text="20 pt" Value="7"></asp:ListItem>
+        </asp:DropDownList>
+    </div>
+</div>
+
     <!-- Título editable con TextBox -->
     <div class="mb-4">
         <label for="txtTitulo" class="block text-sm font-medium text-gray-700">Título</label>
@@ -33,20 +57,42 @@
         <label for="txtSubtitulo" class="block text-sm font-medium text-gray-700">Subtítulo</label>
         <asp:TextBox ID="txtSubtitulo" runat="server" CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" Text="Subtitulo" />
     </div>
+        <div class="mb-4">
+        <label for="ddlParagraphs" class="block text-sm font-medium text-gray-700">Número de Párrafos</label>
+        <asp:DropDownList ID="ddlNumParrafos" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlNumParrafos_SelectedIndexChanged">
+            <asp:ListItem Text="1 Párrafo" Value="1" />
+            <asp:ListItem Text="2 Párrafos" Value="2" />
+            <asp:ListItem Text="3 Párrafos" Value="3" />
+        </asp:DropDownList>
+        <asp:PlaceHolder ID="phTextBoxes" runat="server"></asp:PlaceHolder>
+    </div>
 
-     <div class="mb-4">
-        <label for="txtContenido" class="block text-sm font-medium text-gray-700">Contenido</label>
+    <div class="mb-4 flex space-x-4"> <!-- Se utiliza flex para alinear los TextBox -->
         <asp:TextBox 
-            ID="TextContenido" 
+            ID="txtParagraph1" 
             runat="server" 
             CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" 
             TextMode="MultiLine" 
             Rows="5" 
-            Text="Esta es la primera línea del contenido editable. 
-    Este es el segundo párrafo de ejemplo para mostrar cómo se ve el contenido en varias líneas.
-    Puedes editar este contenido para ajustarlo a tus necesidades.
-    Este es un ejemplo de cómo se vería un párrafo largo en el TextBox.
-    Agrega más líneas según sea necesario." />
+            Text="Escribe el contenido del primer párrafo aquí." />
+    
+        <asp:TextBox 
+            ID="txtParagraph2" 
+            runat="server" 
+            CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" 
+            TextMode="MultiLine" 
+            Rows="5" 
+            Visible="false" 
+            Text="Escribe el contenido del segundo párrafo aquí." />
+
+        <asp:TextBox 
+            ID="txtParagraph3" 
+            runat="server" 
+            CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" 
+            TextMode="MultiLine" 
+            Rows="5" 
+            Visible="false" 
+            Text="Escribe el contenido del tercer párrafo aquí." />
     </div>
     
      <div class="mb-8">
@@ -61,35 +107,14 @@
         <asp:ListItem Text="Viajes" Value="5" />
     </asp:DropDownList>
     </div>
-
-
-    <!-- Imagen seleccionable con DropDownList -->
     <div class="mb-8">
-    <label for="ddlImagen" class="block text-sm font-medium text-gray-700">Seleccionar imagen</label>
-    <asp:DropDownList ID="ddlImagen" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlImagen_SelectedIndexChanged"
-        CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-        <asp:ListItem Text="Imagen 1" Value="img2/imagen_1.jpg" />
-        <asp:ListItem Text="Imagen 2" Value="img2/imagen_2.jpg" />
-        <asp:ListItem Text="Imagen 3" Value="img2/imagen_3.jpg" />
-        <asp:ListItem Text="Imagen 4" Value="img2/imagen_4.jpg" />
-        <asp:ListItem Text="Imagen 5" Value="img2/imagen_5.jpg" />
-        <asp:ListItem Text="Imagen 6" Value="img2/imagen_6.jpg" />
-        <asp:ListItem Text="Imagen 7" Value="img2/imagen_7.jpg" />
-        <asp:ListItem Text="Imagen 8" Value="img2/imagen_8.jpg" />
-        <asp:ListItem Text="Imagen 9" Value="img2/imagen_9.jpg" />
-        <asp:ListItem Text="Imagen 10" Value="img2/imagen_10.jpg" />
-        <asp:ListItem Text="Imagen 11" Value="img2/imagen_11.jpg" />
-        <asp:ListItem Text="Imagen 12" Value="img2/imagen_12.jpg" />
-        <asp:ListItem Text="Imagen 13" Value="img2/imagen_13.jpg" />
-        <asp:ListItem Text="Imagen 14" Value="img2/imagen_14.jpg" />
-        <asp:ListItem Text="Imagen 15" Value="img2/imagen_15.jpg" />
-        <asp:ListItem Text="Imagen 16" Value="img2/imagen_16.jpg" />
-        <asp:ListItem Text="Imagen 17" Value="img2/imagen_17.jpg" />
-        <asp:ListItem Text="Imagen 18" Value="img2/imagen_18.jpg" />
-        <asp:ListItem Text="Imagen 19" Value="img2/imagen_19.jpg" />
-        <asp:ListItem Text="Imagen 20" Value="img2/imagen_20.jpg" />
-    </asp:DropDownList>
-</div>
+        <asp:FileUpload ID="FileUpload1" runat="server" />
+        <br /><br />
+        <asp:Button ID="btnUpload" runat="server" Text="Cargar Imagen" Class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300" OnClick="btnUpload_Click" />
+        <br /><br />
+        <asp:Image ID="Image1" runat="server" Width="300px" />
+        <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label>
+    </div>
 
 <!-- Control Image para mostrar la imagen seleccionada -->
 <div class="mb-8">
@@ -119,24 +144,26 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header').innerHTML = data;
-  
+
                 // Dropdown Menu Logic
                 var userMenuButton = document.getElementById('user-menu-button');
                 var userMenu = document.getElementById('user-menu');
-  
-                userMenuButton.addEventListener('click', function () {
+
+                userMenuButton.addEventListener('click', function (event) {
+                    event.preventDefault(); // Evita comportamiento de enlace predeterminado
                     userMenu.classList.toggle('hidden');
                 });
-  
+
                 document.addEventListener('click', function (event) {
-                    var isClickInside = userMenuButton.contains(event.target);
+                    var isClickInside = userMenuButton.contains(event.target) || userMenu.contains(event.target);
 
                     if (!isClickInside) {
                         userMenu.classList.add('hidden');
                     }
                 });
 
-                document.getElementById('login-btn').addEventListener('click', function() {
+                document.getElementById('login-btn').addEventListener('click', function (event) {
+                    event.preventDefault(); // Asegura que no se recargue la página
                     window.location.href = './Login.aspx';
                 });
             });
