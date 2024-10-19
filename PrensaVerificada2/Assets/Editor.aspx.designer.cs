@@ -60,13 +60,49 @@ namespace PrensaVerificada2.Assets
         protected global::System.Web.UI.WebControls.TextBox txtSubtitulo;
 
         /// <summary>
-        /// Control TextContenido.
+        /// Control ddlNumParrafos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextContenido;
+        protected global::System.Web.UI.WebControls.DropDownList ddlNumParrafos;
+
+        /// <summary>
+        /// Control phTextBoxes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phTextBoxes;
+
+        /// <summary>
+        /// Control txtParagraph1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtParagraph1;
+
+        /// <summary>
+        /// Control txtParagraph2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtParagraph2;
+
+        /// <summary>
+        /// Control txtParagraph3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtParagraph3;
 
         /// <summary>
         /// Control ddlCategoria.

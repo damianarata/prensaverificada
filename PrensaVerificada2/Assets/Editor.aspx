@@ -57,20 +57,42 @@
         <label for="txtSubtitulo" class="block text-sm font-medium text-gray-700">Subtítulo</label>
         <asp:TextBox ID="txtSubtitulo" runat="server" CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" Text="Subtitulo" />
     </div>
+        <<div class="mb-4">
+        <label for="ddlParagraphs" class="block text-sm font-medium text-gray-700">Número de Párrafos</label>
+        <asp:DropDownList ID="ddlNumParrafos" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlNumParrafos_SelectedIndexChanged">
+            <asp:ListItem Text="1 Párrafo" Value="1" />
+            <asp:ListItem Text="2 Párrafos" Value="2" />
+            <asp:ListItem Text="3 Párrafos" Value="3" />
+        </asp:DropDownList>
+        <asp:PlaceHolder ID="phTextBoxes" runat="server"></asp:PlaceHolder>
+    </div>
 
-     <div class="mb-4">
-        <label for="txtContenido" class="block text-sm font-medium text-gray-700">Contenido</label>
+    <div class="mb-4 flex space-x-4"> <!-- Se utiliza flex para alinear los TextBox -->
         <asp:TextBox 
-            ID="TextContenido" 
+            ID="txtParagraph1" 
             runat="server" 
             CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" 
             TextMode="MultiLine" 
             Rows="5" 
-            Text="Esta es la primera línea del contenido editable. 
-    Este es el segundo párrafo de ejemplo para mostrar cómo se ve el contenido en varias líneas.
-    Puedes editar este contenido para ajustarlo a tus necesidades.
-    Este es un ejemplo de cómo se vería un párrafo largo en el TextBox.
-    Agrega más líneas según sea necesario." />
+            Text="Escribe el contenido del primer párrafo aquí." />
+    
+        <asp:TextBox 
+            ID="txtParagraph2" 
+            runat="server" 
+            CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" 
+            TextMode="MultiLine" 
+            Rows="5" 
+            Visible="false" 
+            Text="Escribe el contenido del segundo párrafo aquí." />
+
+        <asp:TextBox 
+            ID="txtParagraph3" 
+            runat="server" 
+            CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" 
+            TextMode="MultiLine" 
+            Rows="5" 
+            Visible="false" 
+            Text="Escribe el contenido del tercer párrafo aquí." />
     </div>
     
      <div class="mb-8">

@@ -22,7 +22,7 @@ namespace DAL.DAOs
 
         public bool Create(BE.Publicacion publicacion)
         {
-            string query = string.Format("INSERT INTO publicaciones (titulo, subtitulo, contenido, imagen, fechapublicacion, autorid, categoriaid, estadoid, id_tipo_letra, id_tipo_tamano) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9});",
+            string query = string.Format("INSERT INTO publicaciones (titulo, subtitulo, contenido, imagen, fechapublicacion, autorid, categoriaid, estadoid, id_tipo_letra, id_tipo_tamano, parrafos) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9}, {10});",
                 publicacion.Titulo,
                 publicacion.Subtitulo,
                 publicacion.Contenido,
@@ -32,10 +32,12 @@ namespace DAL.DAOs
                 publicacion.CategoriaID,
                 publicacion.EstadoID,
                 publicacion.IdTipoLetra,
-                publicacion.IdTipoTamano);
+                publicacion.IdTipoTamano,
+                publicacion.Parrafos);
 
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
+
 
 
         public List<BE.Publicacion> RetreiveAll()
@@ -134,7 +136,7 @@ namespace DAL.DAOs
 
         public bool Update(BE.Publicacion publicacion)
         {
-            string query = string.Format("UPDATE publicaciones SET titulo = '{0}', subtitulo = '{1}', contenido = '{2}', imagen = '{3}', fechapublicacion = '{4}', autorid = {5}, categoriaid = {6}, estadoid = {7}, id_tipo_letra = {8}, id_tipo_tamano = {9} WHERE publicacionid = {10}",
+            string query = string.Format("UPDATE publicaciones SET titulo = '{0}', subtitulo = '{1}', contenido = '{2}', imagen = '{3}', fechapublicacion = '{4}', autorid = {5}, categoriaid = {6}, estadoid = {7}, id_tipo_letra = {8}, id_tipo_tamano = {9}, parrafos = {10} WHERE publicacionid = {11}",
                 publicacion.Titulo,
                 publicacion.Subtitulo,
                 publicacion.Contenido,
@@ -145,10 +147,12 @@ namespace DAL.DAOs
                 publicacion.EstadoID,
                 publicacion.IdTipoLetra,
                 publicacion.IdTipoTamano,
+                publicacion.Parrafos,
                 publicacion.PublicacionID);
 
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
+
 
 
         public bool Delete(BE.Publicacion publicacion)

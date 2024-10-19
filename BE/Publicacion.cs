@@ -15,5 +15,6 @@ namespace BE
         public int EstadoID { get; set; }
         public int IdTipoLetra { get; set; }
         public int IdTipoTamano { get; set; }
+        public int Parrafos { get; set; }
     }
 }

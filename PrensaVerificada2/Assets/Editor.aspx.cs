@@ -24,7 +24,12 @@ namespace PrensaVerificada2.Assets
             {
                 try
                 {
+                    // Cargar los datos de la publicación
                     cargarpubli();
+
+                    // Configuración de los TextBox de párrafos según la selección inicial (1, 2 o 3)
+                    int selectedParagraphs = ddlNumParrafos.SelectedValue != null ? int.Parse(ddlNumParrafos.SelectedValue) : 1;
+                    UpdateParagraphTextBoxes(selectedParagraphs);
                 }
                 catch (Exception ex)
                 {
@@ -35,6 +40,29 @@ namespace PrensaVerificada2.Assets
                 }
             }
         }
+
+        // Método para actualizar los TextBox según la cantidad de párrafos seleccionados
+        private void UpdateParagraphTextBoxes(int numParagraphs)
+        {
+            // Limpiar cualquier TextBox previamente generado
+            phTextBoxes.Controls.Clear();
+
+            for (int i = 1; i <= numParagraphs; i++)
+            {
+                TextBox txtParagraph = new TextBox
+                {
+                    ID = $"txtParagraph{i}",
+                    TextMode = TextBoxMode.MultiLine,
+                    CssClass = "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2",
+                    Rows = 5,
+                    Text = $"Este es el párrafo {i}. Puedes editar este contenido."
+                };
+
+                // Agregar el TextBox al PlaceHolder
+                phTextBoxes.Controls.Add(txtParagraph);
+            }
+        }
+
 
 
 
@@ -50,13 +78,12 @@ namespace PrensaVerificada2.Assets
 
         protected void cargarpubli()
         {
-
             // Verificar si el parámetro publiID está presente en la Query String
             string publiID = Request.QueryString["publiID"];
 
             if (string.IsNullOrEmpty(publiID))
             {
-                //
+                // Manejar el caso en que no hay publiID
             }
             else
             {
@@ -67,15 +94,39 @@ namespace PrensaVerificada2.Assets
                 // Rellenar los campos con los valores de la publicación
                 txtTitulo.Text = Publi.Titulo;
                 txtSubtitulo.Text = Publi.Subtitulo; // Asumiendo que Subtitulo es un campo de Publicacion
-                TextContenido.Text = Publi.Contenido;
+
+                // Cargar el contenido basado en el número de párrafos
+                string[] parrafos = Publi.Contenido.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                int parrafosCount = Publi.Parrafos;
+
+                // Asegúrate de que no excedas el número de párrafos que se espera
+                for (int i = 0; i < parrafosCount; i++)
+                {
+                    if (i < parrafos.Length)
+                    {
+                        // Asumiendo que tienes tres TextBoxes llamados txtParagraph1, txtParagraph2, txtParagraph3
+                        switch (i)
+                        {
+                            case 0:
+                                txtParagraph1.Text = parrafos[i]; // Cargar primer párrafo
+                                break;
+                            case 1:
+                                txtParagraph2.Text = parrafos[i]; // Cargar segundo párrafo
+                                break;
+                            case 2:
+                                txtParagraph3.Text = parrafos[i]; // Cargar tercer párrafo
+                                break;
+                        }
+                    }
+                }
+
                 ddlCategoria.SelectedValue = Publi.CategoriaID.ToString(); // Convertir a string para el DropDownList
                 imgPreview.ImageUrl = Publi.Imagen;
                 ddlFontFamily.SelectedValue = Publi.IdTipoLetra.ToString();
                 ddlFontSize.SelectedValue = Publi.IdTipoTamano.ToString();
-
-
             }
         }
+
 
         protected void cargar(int status)
         {
@@ -84,7 +135,26 @@ namespace PrensaVerificada2.Assets
                 // Obtener los valores de los controles en la página
                 string titulo = txtTitulo.Text;
                 string subtitulo = txtSubtitulo.Text;
-                string contenido = TextContenido.Text;
+
+                // Concatenar los párrafos en contenido
+                string contenido = string.Empty;
+
+                // Suponiendo que tienes tres TextBoxes para los párrafos
+                if (!string.IsNullOrEmpty(txtParagraph1.Text))
+                {
+                    contenido += txtParagraph1.Text.Trim();
+                }
+
+                if (!string.IsNullOrEmpty(txtParagraph2.Text))
+                {
+                    contenido += (contenido.Length > 0 ? "\n\n" : "") + txtParagraph2.Text.Trim();
+                }
+
+                if (!string.IsNullOrEmpty(txtParagraph3.Text))
+                {
+                    contenido += (contenido.Length > 0 ? "\n\n" : "") + txtParagraph3.Text.Trim();
+                }
+
                 string imagenSeleccionada = imgPreview.ImageUrl ?? string.Empty;
                 int categoriaID = Convert.ToInt32(ddlCategoria.SelectedValue);
 
@@ -100,12 +170,11 @@ namespace PrensaVerificada2.Assets
                     CategoriaID = categoriaID,
                     EstadoID = status,
                     IdTipoLetra = Convert.ToInt32(ddlFontFamily.SelectedValue),
-                    IdTipoTamano = Convert.ToInt32(ddlFontSize.SelectedValue)
-
-            };
+                    IdTipoTamano = Convert.ToInt32(ddlFontSize.SelectedValue),
+                    Parrafos = Convert.ToInt32(ddlNumParrafos.SelectedValue)
+                };
 
                 // Llamar al método de lógica de negocios para guardar la nueva publicación
-                //
                 string publiID = Request.QueryString["publiID"];
 
                 if (string.IsNullOrEmpty(publiID))
@@ -114,7 +183,6 @@ namespace PrensaVerificada2.Assets
                 }
                 else
                 {
-                    nuevaPublicacion.PublicacionID = Convert.ToInt32(publiID);
                     nuevaPublicacion.PublicacionID = Convert.ToInt32(publiID);
                     BLL.Publicacion.GetInstancia().Update(nuevaPublicacion);
                 }
@@ -127,9 +195,9 @@ namespace PrensaVerificada2.Assets
             {
                 // Manejo de errores (opcional)
                 lblMensaje.Text = "Error al crear la publicación: " + ex.Message;
-
             }
         }
+
 
         protected void ddlImagen_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -186,17 +254,29 @@ namespace PrensaVerificada2.Assets
         protected void ddlFontFamily_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedFont = BLL.Publicacion.GetInstancia().GetTipoLetraNombre(int.Parse(ddlFontFamily.SelectedValue));
+
+            // Aplicar la fuente a los TextBoxes de párrafos
             txtTitulo.Font.Name = selectedFont;
             txtSubtitulo.Font.Name = selectedFont;
-            TextContenido.Font.Name = selectedFont;
+
+            // Suponiendo que tienes tres TextBoxes para los párrafos
+            txtParagraph1.Font.Name = selectedFont;
+            txtParagraph2.Font.Name = selectedFont;
+            txtParagraph3.Font.Name = selectedFont;
         }
 
         protected void ddlFontSize_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedFontSize = Convert.ToInt32(BLL.Publicacion.GetInstancia().GetTipoTamanoNombre(int.Parse(ddlFontSize.SelectedValue)));
+
+            // Aplicar el tamaño de fuente a los TextBoxes de párrafos
             txtTitulo.Font.Size = FontUnit.Point(selectedFontSize);
             txtSubtitulo.Font.Size = FontUnit.Point(selectedFontSize);
-            TextContenido.Font.Size = FontUnit.Point(selectedFontSize);
+
+            // Suponiendo que tienes tres TextBoxes para los párrafos
+            txtParagraph1.Font.Size = FontUnit.Point(selectedFontSize);
+            txtParagraph2.Font.Size = FontUnit.Point(selectedFontSize);
+            txtParagraph3.Font.Size = FontUnit.Point(selectedFontSize);
         }
 
         protected void updateFront()
@@ -204,11 +284,31 @@ namespace PrensaVerificada2.Assets
             int selectedFontSize = Convert.ToInt32(BLL.Publicacion.GetInstancia().GetTipoTamanoNombre(int.Parse(ddlFontSize.SelectedValue)));
             txtTitulo.Font.Size = FontUnit.Point(selectedFontSize);
             txtSubtitulo.Font.Size = FontUnit.Point(selectedFontSize);
-            TextContenido.Font.Size = FontUnit.Point(selectedFontSize);
+
+            // Aplicar el tamaño de fuente a los TextBoxes de párrafos
+            txtParagraph1.Font.Size = FontUnit.Point(selectedFontSize);
+            txtParagraph2.Font.Size = FontUnit.Point(selectedFontSize);
+            txtParagraph3.Font.Size = FontUnit.Point(selectedFontSize);
+
             string selectedFont = BLL.Publicacion.GetInstancia().GetTipoLetraNombre(int.Parse(ddlFontFamily.SelectedValue));
             txtTitulo.Font.Name = selectedFont;
             txtSubtitulo.Font.Name = selectedFont;
-            TextContenido.Font.Name = selectedFont;
+
+            // Aplicar la fuente a los TextBoxes de párrafos
+            txtParagraph1.Font.Name = selectedFont;
+            txtParagraph2.Font.Name = selectedFont;
+            txtParagraph3.Font.Name = selectedFont;
         }
+
+        protected void ddlNumParrafos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedParagraphs = Convert.ToInt32(ddlNumParrafos.SelectedValue);
+
+            // Muestra los TextBox según la selección
+            txtParagraph1.Visible = selectedParagraphs >= 1;
+            txtParagraph2.Visible = selectedParagraphs >= 2;
+            txtParagraph3.Visible = selectedParagraphs >= 3;
+        }
+
     }
 }
