@@ -27,21 +27,16 @@ namespace PrensaVerificada2.Assets
                     // Cargar los datos de la publicación
                     cargarpubli();
 
-                    // Configuración de los TextBox de párrafos según la selección inicial (1, 2 o 3)
                     int selectedParagraphs = ddlNumParrafos.SelectedValue != null ? int.Parse(ddlNumParrafos.SelectedValue) : 1;
                     UpdateParagraphTextBoxes(selectedParagraphs);
                 }
                 catch (Exception ex)
                 {
-                    // Manejo de errores: mostrar un mensaje o redirigir a otra página
                     Response.Write($"Error: {ex.Message}");
-                    // Redirigir a una página de error o a la página principal
-                    // Response.Redirect("ErrorPage.aspx");
                 }
             }
         }
 
-        // Método para actualizar los TextBox según la cantidad de párrafos seleccionados
         private void UpdateParagraphTextBoxes(int numParagraphs)
         {
             // Limpiar cualquier TextBox previamente generado
@@ -78,7 +73,6 @@ namespace PrensaVerificada2.Assets
 
         protected void cargarpubli()
         {
-            // Verificar si el parámetro publiID está presente en la Query String
             string publiID = Request.QueryString["publiID"];
 
             if (string.IsNullOrEmpty(publiID))
@@ -87,40 +81,35 @@ namespace PrensaVerificada2.Assets
             }
             else
             {
-                // Cargar publicación existente
                 BE.Publicacion Publi = BLL.Publicacion.GetInstancia().RetrievePublicacion(publiID);
                 BE.Autor Autor = BLL.Autor.GetInstancia().RetrieveAutor(Publi.AutorID);
 
-                // Rellenar los campos con los valores de la publicación
                 txtTitulo.Text = Publi.Titulo;
-                txtSubtitulo.Text = Publi.Subtitulo; // Asumiendo que Subtitulo es un campo de Publicacion
+                txtSubtitulo.Text = Publi.Subtitulo; 
 
-                // Cargar el contenido basado en el número de párrafos
                 string[] parrafos = Publi.Contenido.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
                 int parrafosCount = Publi.Parrafos;
 
-                // Asegúrate de que no excedas el número de párrafos que se espera
                 for (int i = 0; i < parrafosCount; i++)
                 {
                     if (i < parrafos.Length)
                     {
-                        // Asumiendo que tienes tres TextBoxes llamados txtParagraph1, txtParagraph2, txtParagraph3
                         switch (i)
                         {
                             case 0:
-                                txtParagraph1.Text = parrafos[i]; // Cargar primer párrafo
+                                txtParagraph1.Text = parrafos[i];
                                 break;
                             case 1:
-                                txtParagraph2.Text = parrafos[i]; // Cargar segundo párrafo
+                                txtParagraph2.Text = parrafos[i];
                                 break;
                             case 2:
-                                txtParagraph3.Text = parrafos[i]; // Cargar tercer párrafo
+                                txtParagraph3.Text = parrafos[i];
                                 break;
                         }
                     }
                 }
 
-                ddlCategoria.SelectedValue = Publi.CategoriaID.ToString(); // Convertir a string para el DropDownList
+                ddlCategoria.SelectedValue = Publi.CategoriaID.ToString();
                 imgPreview.ImageUrl = Publi.Imagen;
                 ddlFontFamily.SelectedValue = Publi.IdTipoLetra.ToString();
                 ddlFontSize.SelectedValue = Publi.IdTipoTamano.ToString();
@@ -132,14 +121,10 @@ namespace PrensaVerificada2.Assets
         {
             try
             {
-                // Obtener los valores de los controles en la página
                 string titulo = txtTitulo.Text;
                 string subtitulo = txtSubtitulo.Text;
-
-                // Concatenar los párrafos en contenido
                 string contenido = string.Empty;
 
-                // Suponiendo que tienes tres TextBoxes para los párrafos
                 if (!string.IsNullOrEmpty(txtParagraph1.Text))
                 {
                     contenido += txtParagraph1.Text.Trim();
@@ -158,15 +143,14 @@ namespace PrensaVerificada2.Assets
                 string imagenSeleccionada = imgPreview.ImageUrl ?? string.Empty;
                 int categoriaID = Convert.ToInt32(ddlCategoria.SelectedValue);
 
-                // Crear una nueva instancia de Publicacion
                 BE.Publicacion nuevaPublicacion = new BE.Publicacion
                 {
                     Titulo = titulo,
                     Subtitulo = subtitulo,
                     Contenido = contenido,
                     Imagen = imagenSeleccionada,
-                    FechaPublicacion = DateTime.Now, // Asignar la fecha actual
-                    AutorID = 1,  // Definir el AutorID correspondiente (ajustar según sea necesario)
+                    FechaPublicacion = DateTime.Now,
+                    AutorID = 1,
                     CategoriaID = categoriaID,
                     EstadoID = status,
                     IdTipoLetra = Convert.ToInt32(ddlFontFamily.SelectedValue),
@@ -174,7 +158,6 @@ namespace PrensaVerificada2.Assets
                     Parrafos = Convert.ToInt32(ddlNumParrafos.SelectedValue)
                 };
 
-                // Llamar al método de lógica de negocios para guardar la nueva publicación
                 string publiID = Request.QueryString["publiID"];
 
                 if (string.IsNullOrEmpty(publiID))
@@ -186,14 +169,11 @@ namespace PrensaVerificada2.Assets
                     nuevaPublicacion.PublicacionID = Convert.ToInt32(publiID);
                     BLL.Publicacion.GetInstancia().Update(nuevaPublicacion);
                 }
-
-                // Mensaje de éxito o redireccionamiento (opcional)
                 lblMensaje.Text = "Publicación creada con éxito.";
                 ClientScript.RegisterStartupScript(this.GetType(), "redirect", "setTimeout(function() { window.location.href = 'MisPublicaciones.aspx'; }, 3000);", true);
             }
             catch (Exception ex)
             {
-                // Manejo de errores (opcional)
                 lblMensaje.Text = "Error al crear la publicación: " + ex.Message;
             }
         }

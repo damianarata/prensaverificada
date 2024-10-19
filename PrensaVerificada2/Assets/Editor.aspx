@@ -57,7 +57,7 @@
         <label for="txtSubtitulo" class="block text-sm font-medium text-gray-700">Subtítulo</label>
         <asp:TextBox ID="txtSubtitulo" runat="server" CssClass="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" Text="Subtitulo" />
     </div>
-        <<div class="mb-4">
+        <div class="mb-4">
         <label for="ddlParagraphs" class="block text-sm font-medium text-gray-700">Número de Párrafos</label>
         <asp:DropDownList ID="ddlNumParrafos" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlNumParrafos_SelectedIndexChanged">
             <asp:ListItem Text="1 Párrafo" Value="1" />

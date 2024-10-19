@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 using System.IO;
 
 namespace PrensaVerificada2.Assets
@@ -19,40 +20,48 @@ namespace PrensaVerificada2.Assets
                     Response.Redirect("Login.aspx");
                 }
             }
+
             try
             {
-                //// Verificar si el parámetro publiID está presente en la Query String
                 string publiID = Request.QueryString["publiID"];
                 if (string.IsNullOrEmpty(publiID))
                 {
                     throw new ArgumentException("El parámetro 'publiID' no está presente en la Query String.");
                 }
 
-                // Configurar los controles con los valores obtenidos
-                //string publiID = "1";
                 BE.Publicacion Publi = BLL.Publicacion.GetInstancia().RetrievePublicacion(publiID);
                 BE.Autor Autor = BLL.Autor.GetInstancia().RetrieveAutor(Publi.AutorID);
+
                 titulo.InnerText = Publi.Titulo;
                 autor.InnerText = Autor.Nombre;
+                subtitulo.InnerText = Publi.Subtitulo;
                 img.Src = Publi.Imagen;
                 img.Alt = Publi.Titulo;
-                texto.InnerText = Publi.Contenido;
-                updateFront(Publi.IdTipoLetra,Publi.IdTipoTamano);
+
+                int selectedFontSize = Convert.ToInt32(BLL.Publicacion.GetInstancia().GetTipoTamanoNombre(Publi.IdTipoTamano));
+                string selectedFont = BLL.Publicacion.GetInstancia().GetTipoLetraNombre(Publi.IdTipoLetra);
+
+                updateFront(Publi.IdTipoLetra, Publi.IdTipoTamano);
+                DisplayParagraphs(Publi, selectedFontSize, selectedFont);
             }
             catch (Exception ex)
             {
-                // Manejo de errores: mostrar un mensaje o redirigir a otra página
-                // Puedes también registrar el error si es necesario
                 Response.Write($"Error: {ex.Message}");
-                // Redirigir a una página de error o a la página principal
-                // Response.Redirect("ErrorPage.aspx");
             }
         }
 
 
+
         protected void VolverBtn_Click(object sender, EventArgs e)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "GoBack", "window.history.back();", true);
+            if (Request.UrlReferrer != null)
+            {
+                Response.Redirect(Request.UrlReferrer.ToString());
+            }
+            else
+            {
+                Response.Redirect("Index.aspx");
+            }
         }
 
         protected void updateFront(int letra, int tam)
@@ -60,13 +69,45 @@ namespace PrensaVerificada2.Assets
             int selectedFontSize = Convert.ToInt32(BLL.Publicacion.GetInstancia().GetTipoTamanoNombre(tam));
             string selectedFont = BLL.Publicacion.GetInstancia().GetTipoLetraNombre(letra);
 
-            // Aplicar estilos usando CSS
             titulo.Style["font-size"] = $"{selectedFontSize}pt";
             titulo.Style["font-family"] = selectedFont;
+            autor.Style["font-size"] = $"{selectedFontSize}pt";
+            autor.Style["font-family"] = selectedFont;
+            subtitulo.Style["font-size"] = $"{selectedFontSize}pt";
+            subtitulo.Style["font-family"] = selectedFont;
 
-            texto.Style["font-size"] = $"{selectedFontSize}pt";
-            texto.Style["font-family"] = selectedFont;
+            foreach (Control control in phTextBoxes.Controls)
+            {
+                if (control is Label label)
+                {
+                    label.Style["font-size"] = $"{selectedFontSize}pt";
+                    label.Style["font-family"] = selectedFont;
+                }
+            }
         }
 
+
+        private void DisplayParagraphs(BE.Publicacion publi, int selectedFontSize, string selectedFont)
+        {
+            phTextBoxes.Controls.Clear(); 
+            HtmlGenericControl paragraphContainer = new HtmlGenericControl("div");
+            paragraphContainer.Attributes.Add("class", "flex space-x-4");
+            string[] paragraphs = publi.Contenido.Split(new[] { "\n\n" }, StringSplitOptions.None);
+
+            for (int i = 0; i < paragraphs.Length && i < 3; i++)
+            {
+                HtmlGenericControl paragraphDiv = new HtmlGenericControl("div")
+                {
+                    ID = $"divParagraph{i + 1}",
+                    InnerText = paragraphs[i],
+                };
+
+                paragraphDiv.Attributes.Add("class", "flex-1 p-2");
+                paragraphDiv.Style["font-size"] = $"{selectedFontSize}pt";
+                paragraphDiv.Style["font-family"] = selectedFont; 
+                paragraphContainer.Controls.Add(paragraphDiv);
+            }
+            phTextBoxes.Controls.Add(paragraphContainer);
+        }
     }
 }
