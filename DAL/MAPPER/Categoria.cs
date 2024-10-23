@@ -25,6 +25,7 @@ namespace DAL.MAPPER
             BE.Categoria categoria = new BE.Categoria();
             categoria.CategoriaID = Convert.ToInt32(row["categoriaid"]);
             categoria.Nombre = row["nombre"].ToString();
+            categoria.Imagen = row["imagen"].ToString();
             return categoria;
         }
     }

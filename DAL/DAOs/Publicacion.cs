@@ -22,7 +22,7 @@ namespace DAL.DAOs
 
         public bool Create(BE.Publicacion publicacion)
         {
-            string query = string.Format("INSERT INTO publicaciones (titulo, subtitulo, contenido, imagen, fechapublicacion, autorid, categoriaid, estadoid, id_tipo_letra, id_tipo_tamano, parrafos) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9}, {10});",
+            string query = string.Format("INSERT INTO publicaciones (titulo, subtitulo, contenido, imagen, fechapublicacion, autorid, categoriaid, estadoid, id_tipo_letra, id_tipo_tamano, parrafos, contador_total, contador_semanal) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12});",
                 publicacion.Titulo,
                 publicacion.Subtitulo,
                 publicacion.Contenido,
@@ -33,7 +33,9 @@ namespace DAL.DAOs
                 publicacion.EstadoID,
                 publicacion.IdTipoLetra,
                 publicacion.IdTipoTamano,
-                publicacion.Parrafos);
+                publicacion.Parrafos,
+                publicacion.ContadorTotal,
+                publicacion.ContadorSemanal);
 
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
@@ -60,18 +62,29 @@ namespace DAL.DAOs
 
             if (dt.Rows.Count != 0)
             {
-                // Recupera la primera fila y la mapea a un objeto BE.Publicacion
                 DataRow row = dt.Rows[0];
                 publicacion = MAPPER.Publicacion.GetInstancia().Map(row);
             }
 
-            return publicacion; // Devuelve el objeto o null si no hay filas
+            return publicacion;
+        }
+
+        public List<BE.Publicacion> RetreiveTop()
+        {
+            List<BE.Publicacion> publicaciones = new List<BE.Publicacion>();
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader("SELECT TOP 5 * FROM PrensaVerificada.dbo.publicaciones ORDER BY contador_total DESC");
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    publicaciones.Add(MAPPER.Publicacion.GetInstancia().Map(row));
+                }
+            }
+            return publicaciones;
         }
 
         public List<BE.Publicacion> RetrieveLatestPublicaciones(int skipCount = 0)
         {
-            // Ejecuta la consulta para obtener las últimas 6 publicaciones con estadoid = 1,
-            // omitiendo las primeras 'skipCount' filas (si skipCount > 0).
             DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(
                 string.Format(
                     @"SELECT * 
@@ -83,12 +96,10 @@ namespace DAL.DAOs
                 )
             );
 
-            // Crear una lista para almacenar las publicaciones.
             List<BE.Publicacion> publicaciones = new List<BE.Publicacion>();
 
             if (dt.Rows.Count != 0)
             {
-                // Itera sobre cada fila de resultados y mapea a objetos BE.Publicacion.
                 foreach (DataRow row in dt.Rows)
                 {
                     BE.Publicacion publicacion = MAPPER.Publicacion.GetInstancia().Map(row);
@@ -96,13 +107,11 @@ namespace DAL.DAOs
                 }
             }
 
-            return publicaciones; // Devuelve la lista de publicaciones (puede estar vacía si no hay resultados).
+            return publicaciones;
         }
 
         public List<BE.Publicacion> RetrievePublicacionesPorAutor(int autorid, int skipCount = 0)
         {
-            // Ejecuta la consulta para obtener todas las publicaciones de un autor específico,
-            // ordenando por fecha de publicación y omitiendo 'skipCount' filas si es necesario.
             DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(
                 string.Format(
                     @"SELECT * 
@@ -114,12 +123,10 @@ namespace DAL.DAOs
                 )
             );
 
-            // Crea una lista para almacenar las publicaciones.
             List<BE.Publicacion> publicaciones = new List<BE.Publicacion>();
 
             if (dt.Rows.Count != 0)
             {
-                // Itera sobre cada fila de resultados y mapea a objetos BE.Publicacion.
                 foreach (DataRow row in dt.Rows)
                 {
                     BE.Publicacion publicacion = MAPPER.Publicacion.GetInstancia().Map(row);
@@ -127,7 +134,7 @@ namespace DAL.DAOs
                 }
             }
 
-            return publicaciones; // Devuelve la lista de publicaciones (puede estar vacía si no hay resultados).
+            return publicaciones;
         }
 
 
@@ -136,7 +143,7 @@ namespace DAL.DAOs
 
         public bool Update(BE.Publicacion publicacion)
         {
-            string query = string.Format("UPDATE publicaciones SET titulo = '{0}', subtitulo = '{1}', contenido = '{2}', imagen = '{3}', fechapublicacion = '{4}', autorid = {5}, categoriaid = {6}, estadoid = {7}, id_tipo_letra = {8}, id_tipo_tamano = {9}, parrafos = {10} WHERE publicacionid = {11}",
+            string query = string.Format("UPDATE publicaciones SET titulo = '{0}', subtitulo = '{1}', contenido = '{2}', imagen = '{3}', fechapublicacion = '{4}', autorid = {5}, categoriaid = {6}, estadoid = {7}, id_tipo_letra = {8}, id_tipo_tamano = {9}, parrafos = {10}, contador_total = {11}, contador_semanal = {12} WHERE publicacionid = {13}",
                 publicacion.Titulo,
                 publicacion.Subtitulo,
                 publicacion.Contenido,
@@ -148,6 +155,8 @@ namespace DAL.DAOs
                 publicacion.IdTipoLetra,
                 publicacion.IdTipoTamano,
                 publicacion.Parrafos,
+                publicacion.ContadorTotal,
+                publicacion.ContadorSemanal,
                 publicacion.PublicacionID);
 
             return AccesoDatos.GetInstancia().ExecuteQuery(query);

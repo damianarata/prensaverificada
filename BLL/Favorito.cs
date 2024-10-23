@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using BE;
+using System.Data;
 
 namespace BLL
 {
@@ -45,6 +46,11 @@ namespace BLL
         public bool Modificar(BE.Favorito Favorito)
         {
             throw new NotImplementedException();
+        }
+
+        public DataTable RetrieveTop()
+        {
+            return DAL.DAOs.Favorito.GetInstancia().RetrieveTop();
         }
         #endregion
 

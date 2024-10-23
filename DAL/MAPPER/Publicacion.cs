@@ -34,9 +34,9 @@ namespace DAL.MAPPER
             publicacion.IdTipoLetra = Convert.ToInt32(row["id_tipo_letra"]);
             publicacion.IdTipoTamano = Convert.ToInt32(row["id_tipo_tamano"]);
             publicacion.Parrafos = Convert.ToInt32(row["parrafos"]);
+            publicacion.ContadorTotal = Convert.ToInt32(row["contador_total"]);
+            publicacion.ContadorSemanal = Convert.ToInt32(row["contador_semanal"]);
             return publicacion;
         }
-
-
     }
 }
