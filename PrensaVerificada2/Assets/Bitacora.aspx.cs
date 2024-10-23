@@ -46,11 +46,11 @@ namespace PrensaVerificada2.Assets
 
             if (!IsPostBack)
             {
-                CargarDatosGrafico();
                 Session.Remove("bitacora_pages");
                 Session.Remove("bitacora_filtro");
                 LoadAllLogEntries();
             }
+            CargarDatosGrafico();
         }
 
         protected void SearchButton_Click(object sender, EventArgs e)
