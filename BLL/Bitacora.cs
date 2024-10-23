@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using BE;
+using System.Globalization;
 
 namespace BLL
 {
@@ -32,10 +33,30 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public List<BE.Bitacora> Listar()
+        public List<BE.Bitacora> Listar(int skipCount = 0)
         {
-            throw new NotImplementedException();
+            return DAL.DAOs.Bitacora.GetInstancia().RetreiveAll(skipCount);
         }
+
+        public List<BE.Bitacora> ListarConFiltros(DateTime? startDate, DateTime? endDate, string username, string operationType, int skipCount = 0)
+        {
+            string startDate1 = null;
+            string endDate1 = null;
+
+            if (startDate.HasValue)
+            {
+                startDate1 = startDate.Value.ToString("dd/MM/yyyy");
+            }
+
+            if (endDate.HasValue)
+            {
+                endDate1 = endDate.Value.ToString("dd/MM/yyyy");
+            }
+
+            // Llamada a ObtenerConFiltros con el parámetro actualizado
+            return DAL.DAOs.Bitacora.GetInstancia().ObtenerConFiltros(startDate1, endDate1, username, operationType, skipCount);
+        }
+
 
         public BE.Bitacora RetrieveBitacora(BE.Bitacora Bitacora)
         {
