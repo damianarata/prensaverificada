@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Web.UI.DataVisualization.Charting;
+
 
 namespace PrensaVerificada2.Assets
 {
@@ -43,6 +46,7 @@ namespace PrensaVerificada2.Assets
 
             if (!IsPostBack)
             {
+                CargarDatosGrafico();
                 Session.Remove("bitacora_pages");
                 Session.Remove("bitacora_filtro");
                 LoadAllLogEntries();
@@ -120,6 +124,41 @@ namespace PrensaVerificada2.Assets
             {
                 LoadAllLogEntries();
             }
+        }
+
+        private void CargarDatosGrafico()
+        {
+            // SEMANA
+            Chart1.Series["Series1"].Points.Clear();
+            Chart1.Series["Series1"].IsValueShownAsLabel = true;
+            DataTable dt = BLL.Bitacora.GetInstancia().getReport("Últimos 7 días");
+
+            foreach (DataRow row in dt.Rows)
+            {
+                string criticidad = row["criticidad"].ToString();
+                int totalRegistros = Convert.ToInt32(row["TotalRegistros"]);
+
+                Chart1.Series["Series1"].Points.AddXY(criticidad, totalRegistros);
+            }
+
+            Chart1.Series["Series1"].Color = System.Drawing.Color.Blue;
+            Chart1.Legends.Add(new Legend("Últimos 7 días"));
+            // MES
+            Chart2.Series["Series2"].Points.Clear();
+            Chart2.Series["Series2"].IsValueShownAsLabel = true;
+
+            DataTable dtx = BLL.Bitacora.GetInstancia().getReport("Último mes");
+
+            foreach (DataRow row in dtx.Rows)
+            {
+                string criticidad = row["criticidad"].ToString();
+                int totalRegistros = Convert.ToInt32(row["TotalRegistros"]);
+
+                Chart2.Series["Series2"].Points.AddXY(criticidad, totalRegistros);
+            }
+
+            Chart2.Series["Series2"].Color = System.Drawing.Color.Blue;
+            Chart2.Legends.Add(new Legend("Último mes"));
         }
 
     }

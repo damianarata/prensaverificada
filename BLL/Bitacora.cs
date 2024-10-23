@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BE;
 using System.Globalization;
+using System.Data;
 
 namespace BLL
 {
@@ -57,6 +58,10 @@ namespace BLL
             return DAL.DAOs.Bitacora.GetInstancia().ObtenerConFiltros(startDate1, endDate1, username, operationType, skipCount);
         }
 
+        public DataTable getReport(string filter)
+        {
+            return DAL.DAOs.Bitacora.GetInstancia().getReport(filter);
+        }
 
         public BE.Bitacora RetrieveBitacora(BE.Bitacora Bitacora)
         {

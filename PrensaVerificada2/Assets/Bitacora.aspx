@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Bitacora.aspx.cs" Inherits="PrensaVerificada2.Assets.Bitacora" %>
 
+<%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,6 +22,40 @@
         <h1 class="text-2xl font-semibold text-gray-800">Consultar Bitácora</h1>
 
         <form runat="server">
+            <div style="display: flex; justify-content: space-around;">
+
+                <asp:Chart ID="Chart1" runat="server" Width="400px" Height="300px">
+                    <Titles>
+                        <asp:Title Name="Acciones en los Últimos 7 Días"  Text="Acciones en los Últimos 7 Días" Font="Arial, 12pt, style=Bold" ForeColor="#4B5563"/>
+                    </Titles>
+                    <Series>
+                        <asp:Series Name="Series1" ChartType="Pie">
+                        </asp:Series>
+                    </Series>
+                    <ChartAreas>
+                        <asp:ChartArea Name="Ultimos 7 dias">
+                        </asp:ChartArea>
+                    </ChartAreas>
+                </asp:Chart>
+
+                <asp:Chart ID="Chart2" runat="server" Width="400px" Height="300px">
+                    <Titles>
+                        <asp:Title Name="Acciones en el Último Mes" Text="Acciones en el Último Mes" Font="Arial, 12pt, style=Bold" ForeColor="#4B5563" />
+                    </Titles>
+                    <Series>
+                        <asp:Series Name="Series2" ChartType="Pie">
+                        </asp:Series>
+                    </Series>
+                    <ChartAreas>
+                        <asp:ChartArea Name="Ultimo mes">
+                        </asp:ChartArea>
+                    </ChartAreas>
+                </asp:Chart>
+
+            </div>
+
+
+
           <div class="mt-4">
             <p class="text-gray-700">Filtrar por Fecha</p>
             <div class="grid grid-cols-2 gap-4 mt-2">

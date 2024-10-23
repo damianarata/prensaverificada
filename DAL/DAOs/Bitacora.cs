@@ -92,7 +92,11 @@ namespace DAL.DAOs
             return bitacoras;
         }
 
-
+        public DataTable getReport(string filter)
+        {
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(string.Format("SELECT * FROM vw_BitacoraCriticidad WHERE Periodo = '{0}'", filter));
+            return dt;
+        }
         public bool Update(BE.Bitacora bitacora)
         {
             string query = string.Format("UPDATE PrensaVerificada.dbo.bitacora SET usuarioid = {0}, fecha = '{1}', accion = '{2}' WHERE bitacoraid = {3}",
