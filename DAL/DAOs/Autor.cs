@@ -66,5 +66,11 @@ namespace DAL.DAOs
             string query = string.Format("DELETE FROM autores WHERE autorid = {0}", autor.AutorID);
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
+
+        public DataTable RetrieveTop()
+        {
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader("SELECT * FROM dbo.vw_autores_mas_leidos ORDER BY total_lecturas DESC");
+            return dt;
+        }
     }
 }

@@ -52,5 +52,11 @@ namespace DAL.DAOs
             string query = string.Format("DELETE FROM categorias WHERE categoriaid = {0}", categoria.CategoriaID);
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
+
+        public DataTable RetrieveTop()
+        {
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader("SELECT * FROM vw_categorias_mas_leidas ORDER BY total_lecturas DESC");
+            return dt;
+        }
     }
 }

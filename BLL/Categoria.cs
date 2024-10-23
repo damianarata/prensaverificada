@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using BE;
+using System.Data;
 
 namespace BLL
 {
@@ -34,7 +35,11 @@ namespace BLL
 
         public List<BE.Categoria> Listar()
         {
-            throw new NotImplementedException();
+            return DAL.DAOs.Categoria.GetInstancia().RetreiveAll();
+        }
+        public DataTable RetrieveTop()
+        {
+            return DAL.DAOs.Categoria.GetInstancia().RetrieveTop();
         }
 
         public BE.Categoria RetrieveCategoria(BE.Categoria Categoria)

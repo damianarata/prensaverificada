@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BE;
 using DAL;
+using System.Data;
 
 namespace BLL
 {
@@ -42,7 +43,11 @@ namespace BLL
         {
             BE.Autor Autor = DAL.DAOs.Autor.GetInstancia().Retreive(new BE.Autor { AutorID = id });
             return Autor;
-        }   
+        }
+        public DataTable RetrieveTop()
+        {
+            return DAL.DAOs.Autor.GetInstancia().RetrieveTop();
+        }
         public bool Modificar(BE.Autor Autor)
         {
             throw new NotImplementedException();

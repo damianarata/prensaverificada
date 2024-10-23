@@ -16,5 +16,7 @@ namespace BE
         public int IdTipoLetra { get; set; }
         public int IdTipoTamano { get; set; }
         public int Parrafos { get; set; }
+        public int ContadorTotal { get; set; }
+        public int ContadorSemanal { get; set; }
     }
 }

@@ -30,6 +30,11 @@ namespace DAL
             return DAOs.Publicacion.GetInstancia().RetreiveAll();
         }
 
+        public List<BE.Publicacion> RetreiveTop()
+        {
+            return DAOs.Publicacion.GetInstancia().RetreiveAll();
+        }
+
         public BE.Publicacion Retreive(BE.Publicacion Publicacion)
         {
             return DAOs.Publicacion.GetInstancia().Retreive(Publicacion);

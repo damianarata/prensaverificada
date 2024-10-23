@@ -53,5 +53,11 @@ namespace DAL.DAOs
             string query = string.Format("DELETE FROM favoritos WHERE favoritoid = {0}", favorito.FavoritoID);
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
+
+        public DataTable RetrieveTop()
+        {
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader("SELECT TOP 5 * FROM vw_publicaciones_mas_favoritas ORDER BY total_favoritos DESC;");
+            return dt;
+        }
     }
 }
