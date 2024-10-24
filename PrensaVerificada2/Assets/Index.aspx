@@ -46,7 +46,7 @@
             <!-- Grid de publicaciones -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Repite el bloque de publicación para cada artículo según sea necesario -->
-                <asp:Repeater ID="ArticlesRepeater" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                <asp:Repeater ID="ArticlesRepeater" runat="server">
                     <ItemTemplate>
                     <div class="bg-white p-4 rounded-lg shadow-md" onclick="window.location.href='Publicacion.aspx?publiID=<%# Eval("publiID") %>'">
                         <img src='<%# Eval("ImageUrl") %>' alt='<%# Eval("Title") %>' class="w-full h-32 object-cover rounded-lg mb-4">
@@ -66,7 +66,7 @@
 
             <!-- Botón de cargar más -->
             <div class="flex justify-center mt-8">
-                <button class="px-6 py-2 bg-gray-300 text-gray-600 rounded-full text-lg font-semibold">Cargar más</button>
+                <asp:Button ID="CargarMasButton" runat="server" Text="Cargar más" class="px-6 py-2 bg-gray-300 text-gray-600 rounded-full text-lg font-semibold" OnClick="CargarMasButton_Click" />
             </div>
         </div>
     </div>

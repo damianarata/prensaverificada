@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
   <!-- Contenedor para el Header -->
   <div id="header"></div>
@@ -18,94 +20,111 @@
   <!-- Contenido principal -->
   <div class="flex-grow">
     <!-- Sección de perfil del autor -->
-    <div class="w-full max-w-5xl mx-auto bg-white shadow-md rounded-lg overflow-hidden mt-8 p-8">
-      <div class="flex items-center">
-        <img src="img/alconada.jpg" alt="Imagen del Autor" class="w-24 h-24 rounded-full object-cover">
-        <div class="ml-6">
-          <h1 class="text-3xl font-semibold text-gray-800">Hugo Alconada Mon</h1>
-          <p class="text-gray-600 italic">LA NACIÓN</p>
-        </div>
-      </div>
-      <div class="mt-4">
-        <p class="text-gray-700 leading-relaxed">
-          Rol: Prosecretario de Redacción. Abogado por la Universidad Nacional de La Plata, Argentina; máster en Artes Liberales por la Universidad de Navarra, España, y Visiting Scholar en la Universidad de Missouri-Columbia, EEUU. Becario de la Universidad de Stanford, del Programa Eisenhower y de las Naciones Unidas (ONU). Entre 1999 y 2001 trabajó para el diario El Día, de La Plata (Argentina). En 2002 ingresó en el diario La Nación, y entre 2005 y 2009 fue su corresponsal en los Estados Unidos. Sus notas y reportajes se han publicado en medios de Estados Unidos, Alemania, España y otra docena de países. Maestro de la Fundación Gabriel García Márquez para el Nuevo Periodismo Iberoamericano (FNPI) y profesor de cursos de postgrado de Columbia University. Desde 2017 es columnista del New York Times en español.
-        </p>
-        <div class="flex space-x-4 mt-4">
-            <a href="https://x.com/halconada" class="text-gray-500 hover:text-gray-700"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.instagram.com/halconada/?hl=es" class="text-gray-500 hover:text-gray-700"><i class="fab fa-instagram"></i></a>
-        </div>
-      </div>
-    </div>
+      <asp:UpdatePanel ID="UpdatePanelArticles" runat="server">
+    <ContentTemplate>
+        <asp:Repeater ID="AuthorDetailRepeater" runat="server">
+            <ItemTemplate>
+                <!-- Detalles del Autor -->
+                <div class="w-full max-w-5xl mx-auto bg-white shadow-md rounded-lg overflow-hidden mt-8 p-8">
+                    <div class="flex items-center">
+                        <img src='<%# Eval("ImageUrl") %>' alt="Imagen del Autor" class="w-24 h-24 rounded-full object-cover">
+                        <div class="ml-6">
+                            <h1 class="text-3xl font-semibold text-gray-800"><%# Eval("Nombre") %></h1>
+                            <p class="text-gray-600 italic"><%# Eval("Medio") %></p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-700 leading-relaxed">
+                            <%# Eval("Descripcion") %>
+                        </p>
+                        <div class="flex space-x-4 mt-4">
+                            <asp:PlaceHolder ID="SocialMediaPlaceholder" runat="server">
+                                <!-- Facebook -->
+                                <a href='<%# Eval("FacebookUrl") %>' class="text-gray-500 hover:text-gray-700" target="_blank" 
+                                   style="display: <%# string.IsNullOrEmpty(Eval("FacebookUrl").ToString()) ? "none" : "inline" %>;">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+
+                                <!-- Twitter -->
+                                <a href='<%# Eval("TwitterUrl") %>' class="text-gray-500 hover:text-gray-700" target="_blank" 
+                                   style="display: <%# string.IsNullOrEmpty(Eval("TwitterUrl").ToString()) ? "none" : "inline" %>;">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+
+                                <!-- Instagram -->
+                                <a href='<%# Eval("InstagramUrl") %>' class="text-gray-500 hover:text-gray-700" target="_blank" 
+                                   style="display: <%# string.IsNullOrEmpty(Eval("InstagramUrl").ToString()) ? "none" : "inline" %>;">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+
+                                <!-- LinkedIn -->
+                                <a href='<%# Eval("LinkedInUrl") %>' class="text-gray-500 hover:text-gray-700" target="_blank" 
+                                   style="display: <%# string.IsNullOrEmpty(Eval("LinkedInUrl").ToString()) ? "none" : "inline" %>;">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+
+                                <!-- YouTube -->
+                                <a href='<%# Eval("YouTubeUrl") %>' class="text-gray-500 hover:text-gray-700" target="_blank" 
+                                   style="display: <%# string.IsNullOrEmpty(Eval("YouTubeUrl").ToString()) ? "none" : "inline" %>;">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </asp:PlaceHolder>
+                        </div>
+                    </div>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
+
 
     <!-- Sección de últimas notas -->
     <div class="w-full max-w-5xl mx-auto mt-8">
       <h2 class="text-2xl font-semibold text-gray-800">Últimas notas</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-        <!-- Nota 1 -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden" onclick="window.location.href='./Publicacion.aspx'">
-          <img src="img/chocolate.jpg" alt="Imagen Nota 1" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <span class="text-sm text-blue-600">Política</span>
-            <h3 class="mt-2 text-lg font-semibold text-gray-800">Caso Chocolate: ordenaron la inhibición general de todo el patrimonio de los Albini</h3>
-            <p class="text-gray-600 text-sm mt-2">Hugo Alconada <span class="text-gray-400">4 de junio de 2024</span></p>
-          </div>
-        </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <asp:Repeater ID="ArticlesRepeater" runat="server" EnableViewState="true">
+            <ItemTemplate>
+                <div class="bg-white p-4 rounded-lg shadow-md" onclick="window.location.href='Publicacion.aspx?publiID=<%# Eval("publiID") %>'">
+                    <!-- HiddenField to store publiID -->
+                    <asp:HiddenField ID="HiddenPubliID" runat="server" Value='<%# Eval("publiID") %>' />
+            
+                    <!-- Article Image -->
+                    <img src='<%# Eval("ImageUrl") %>' alt='<%# Eval("Title") %>' class="w-full h-32 object-cover rounded-lg mb-4">
+            
+                    <!-- Category -->
+                    <span class="block text-blue-600 text-sm font-semibold mb-2">
+                        <asp:Literal ID="CategoryControl" runat="server" Text='<%# Eval("Category") %>' />
+                    </span>
+            
+                    <!-- Title -->
+                    <h3 class="text-xl font-semibold mb-2">
+                        <asp:Literal ID="TitleControl" runat="server" Text='<%# Eval("Title") %>' />
+                    </h3>
+            
+                    <!-- Author and Date Section -->
+                    <div class="flex items-center mt-4">
+                        <img src='<%# Eval("AuthorImage") %>' alt="Autor" class="w-8 h-8 rounded-full mr-2">
+                        <div>
+                            <p class="text-sm font-semibold">
+                                <asp:Literal ID="AuthorControl" runat="server" Text='<%# Eval("Author") %>' />
+                            </p>
+                            <p class="text-sm text-gray-600">
+                                <asp:Literal ID="DateControl" runat="server" Text='<%# Eval("Date") %>' />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
 
-        <!-- Nota 2 -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden" onclick="window.location.href='./Publicacion.aspx'">
-          <img src="img/javier-karina.jpg" alt="Imagen Nota 2" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <span class="text-sm text-blue-600">Política</span>
-            <h3 class="mt-2 text-lg font-semibold text-gray-800">Resiliencia, dureza y tarot, el alma del ángel protector del Presidente</h3>
-            <p class="text-gray-600 text-sm mt-2">Hugo Alconada <span class="text-gray-400">4 de junio de 2024</span></p>
-          </div>
-        </div>
-
-        <!-- Nota 3 -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden" onclick="window.location.href='./Publicacion.aspx'">
-          <img src="img/cristobal.jpg" alt="Imagen Nota 3" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <span class="text-sm text-blue-600">Política</span>
-            <h3 class="mt-2 text-lg font-semibold text-gray-800">Empresarios que jugaban en offside a sabiendas de que el VAR los protegía</h3>
-            <p class="text-gray-600 text-sm mt-2">Hugo Alconada <span class="text-gray-400">4 de junio de 2024</span></p>
-          </div>
-        </div>
-
-        <!-- Nota 4 -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden" onclick="window.location.href='./Publicacion.aspx'">
-          <img src="img/karina-milei.jpg" alt="Imagen Nota 4" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <span class="text-sm text-blue-600">Política</span>
-            <h3 class="mt-2 text-lg font-semibold text-gray-800">Karina Milei manejó una sociedad en Miami que compró cuatro propiedades por unos US$2,7 millones</h3>
-            <p class="text-gray-600 text-sm mt-2">Hugo Alconada <span class="text-gray-400">4 de junio de 2024</span></p>
-          </div>
-        </div>
-
-        <!-- Nota 5 -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden" onclick="window.location.href='./Publicacion.aspx'">
-          <img src="img/srtabaco.jpg" alt="Imagen Nota 5" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <span class="text-sm text-blue-600">Política</span>
-            <h3 class="mt-2 text-lg font-semibold text-gray-800">Un duro informe de la UIF alertó sobre el crecimiento exponencial de la fortuna del “Señor del Tabaco”</h3>
-            <p class="text-gray-600 text-sm mt-2">Hugo Alconada <span class="text-gray-400">4 de junio de 2024</span></p>
-          </div>
-        </div>
-
-        <!-- Nota 6 -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden" onclick="window.location.href='./Publicacion.aspx'">
-          <img src="img/psa.jpg" alt="Imagen Nota 6" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <span class="text-sm text-blue-600">Política</span>
-            <h3 class="mt-2 text-lg font-semibold text-gray-800">Corrupción, narcotráfico y trata. La trama delictiva detrás del auto que usó Lijo, candidato de Milei a la Corte</h3>
-            <p class="text-gray-600 text-sm mt-2">Hugo Alconada <span class="text-gray-400">4 de junio de 2024</span></p>
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-center mt-6">
-        <button type="button" class="px-6 py-3 text-white bg-blue-600 rounded-lg text-lg font-semibold hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">Cargar más</button>
-      </div>
+            </div>
+            <!-- Botón de cargar más -->
+            <div class="flex justify-center mt-8">
+                <asp:Button ID="ButtonNext" runat="server" Text="Cargas mas" CssClass="px-6 py-2 bg-gray-300 text-gray-600 rounded-full text-lg font-semibold" OnClick="CargarMasButton_Click" />
+            </div>
+        
+        </ContentTemplate>
+</asp:UpdatePanel>
     </div>
-  </div>
+</form>
 
   <!-- Contenedor para el Footer -->
   <div id="footer" class="mt-8"></div>

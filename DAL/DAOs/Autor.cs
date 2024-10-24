@@ -22,10 +22,20 @@ namespace DAL.DAOs
 
         public bool Create(BE.Autor autor)
         {
-            string query = string.Format("INSERT INTO autores (nombre, biografia, twitter, instagram, foto) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}');",
-                autor.Nombre, autor.Biografia, autor.Twitter, autor.Instagram, autor.Foto);
+            string query = string.Format("INSERT INTO autores (nombre, biografia, twitter, instagram, foto, medio, linkedin, facebook, youtube) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}');",
+                autor.Nombre,
+                autor.Biografia,
+                autor.Twitter,
+                autor.Instagram,
+                autor.Foto,
+                autor.Medio,
+                autor.Linkedin,
+                autor.Facebook,
+                autor.Youtube);
+
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
+
 
         public List<BE.Autor> RetreiveAll()
         {
@@ -56,10 +66,21 @@ namespace DAL.DAOs
         }
         public bool Update(BE.Autor autor)
         {
-            string query = string.Format("UPDATE autores SET nombre = '{0}', biografia = '{1}', twitter = '{2}', instagram = '{3}', foto = '{4}' WHERE autorid = {5}",
-                autor.Nombre, autor.Biografia, autor.Twitter, autor.Instagram, autor.Foto, autor.AutorID);
+            string query = string.Format("UPDATE autores SET nombre = '{0}', biografia = '{1}', twitter = '{2}', instagram = '{3}', foto = '{4}', medio = '{5}', linkedin = '{6}', facebook = '{7}', youtube = '{8}' WHERE autorid = {9}",
+                autor.Nombre,
+                autor.Biografia,
+                autor.Twitter,
+                autor.Instagram,
+                autor.Foto,
+                autor.Medio,
+                autor.Linkedin,
+                autor.Facebook,
+                autor.Youtube,
+                autor.AutorID);
+
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
+
 
         public bool Delete(BE.Autor autor)
         {
