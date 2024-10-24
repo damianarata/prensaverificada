@@ -52,6 +52,8 @@ namespace PrensaVerificada2.Assets
             {
                 Response.Write($"Error: {ex.Message}");
             }
+            Session["Index_Articles"] = null;
+            Session["index_pages"] = null;
         }
 
 
@@ -81,9 +83,9 @@ namespace PrensaVerificada2.Assets
             var publicaciones = BLL.Publicacion.GetInstancia().RetrievePublicacionesPorAutor(autorid, skipCount);
             var articles = new List<dynamic>();
 
-            if (Session["Articles"] != null)
+            if (Session["Autor_Articles"] != null)
             {
-                articles = (List<dynamic>)Session["Articles"];
+                articles = (List<dynamic>)Session["Autor_Articles"];
             }
 
             foreach (var publi in publicaciones)
@@ -103,7 +105,7 @@ namespace PrensaVerificada2.Assets
                 });
             }
 
-            Session["Articles"] = articles;
+            Session["Autor_Articles"] = articles;
 
             ArticlesRepeater.DataSource = articles;
             ArticlesRepeater.DataBind();

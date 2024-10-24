@@ -51,6 +51,10 @@ namespace PrensaVerificada2.Assets
                 LoadAllLogEntries();
             }
             CargarDatosGrafico();
+            Session["Index_Articles"] = null;
+            Session["Autor_Articles"] = null;
+            Session["autor_pages"] = null;
+            Session["index_pages"] = null;
         }
 
         protected void SearchButton_Click(object sender, EventArgs e)

@@ -11,7 +11,31 @@ namespace PrensaVerificada2.Assets
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            LoadCategorias();
+            Session["Index_Articles"] = null;
+            Session["Autor_Articles"] = null;
+            Session["autor_pages"] = null;
+            Session["index_pages"] = null;
         }
+
+        private void LoadCategorias()
+        {
+            var categorias = BLL.Categoria.GetInstancia().Listar();
+            var topArticles = new List<dynamic>();
+
+            foreach (var cat in categorias)
+            {
+                topArticles.Add(new
+                {
+                    categoriaID = cat.CategoriaID,
+                    ImageUrl = cat.Imagen,
+                    Title = cat.Nombre
+                });
+            }
+
+            CategoriaRepeater.DataSource = topArticles;
+            CategoriaRepeater.DataBind();
+        }
+
     }
 }

@@ -19,6 +19,10 @@ namespace PrensaVerificada2.Assets
                 }
             }
             LoadArticles();
+            Session["Index_Articles"] = null;
+            Session["Autor_Articles"] = null;
+            Session["autor_pages"] = null;
+            Session["index_pages"] = null;
         }
         private void LoadArticles()
         {

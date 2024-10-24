@@ -24,6 +24,10 @@ namespace PrensaVerificada2.Assets
             LoadTopAutores();
             LoadCategorias();
             LoadFavoritos();
+            Session["Index_Articles"] = null;
+            Session["Autor_Articles"] = null;
+            Session["autor_pages"] = null;
+            Session["index_pages"] = null;
         }
 
         private void LoadTopReadArticles()

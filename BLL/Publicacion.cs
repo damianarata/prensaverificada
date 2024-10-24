@@ -54,6 +54,11 @@ namespace BLL
             return DAL.DAOs.Publicacion.GetInstancia().RetrievePublicacionesPorAutor(autorid, skipCount);
         }
 
+        public List<BE.Publicacion> RetrievePublicacionesPorCategoria(int autorid, int skipCount = 0)
+        {
+            return DAL.DAOs.Publicacion.GetInstancia().RetrievePublicacionesPorCategoria(autorid, skipCount);
+        }
+
         public List<BE.Publicacion> RetrieveTop()
         {
             return DAL.DAOs.Publicacion.GetInstancia().RetreiveTop();

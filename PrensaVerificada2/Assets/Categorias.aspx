@@ -18,58 +18,21 @@
     <h2 class="text-3xl font-bold text-center mb-8">Nuestras Categorías</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       
-      <!-- Politica -->
-      <div class="bg-white rounded-lg shadow-md">
-        <img src="./img/casa-rosada.jpg" alt="Política" class="w-full h-48 object-cover rounded-t-lg">
-        <div class="p-4">
-          <h3 class="text-xl font-semibold">Política</h3>
-        </div>
-      </div>
-      
-      <!-- Tecnologia -->
-      <div class="bg-white rounded-lg shadow-md">
-        <img src="img/robot.jpg" alt="Tecnología" class="w-full h-48 object-cover rounded-t-lg">
-        <div class="p-4">
-          <h3 class="text-xl font-semibold">Tecnología</h3>
-        </div>
-      </div>
-      
-      <!-- Viajes -->
-      <div class="bg-white rounded-lg shadow-md">
-          <img src="img/viajes.jpeg" alt="Viajes" class="w-full h-48 object-cover rounded-t-lg">
-          <div class="p-4">
-            <h3 class="text-xl font-semibold">Viajes</h3>
-          </div>
-      </div>
+        <!-- Categorias -->
+        <asp:Repeater ID="CategoriaRepeater" runat="server">
+            <ItemTemplate>
+                <div class="bg-white p-6 rounded-lg shadow-md" onclick="window.location.href='Index.aspx?categoriaID=<%# Eval("categoriaID") %>'">
+                    <img src='<%# Eval("ImageUrl") %>' alt='<%# Eval("Title") %>' class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold"><%# Eval("Title") %></h3>
+                    </div>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
 
-      <!-- Negocio -->
-      <div class="bg-white rounded-lg shadow-md">
-        <img src="img/acciones.jpeg" alt="Negocio" class="w-full h-48 object-cover rounded-t-lg">
-        <div class="p-4">
-          <h3 class="text-xl font-semibold">Negocio</h3>
-        </div>
-      </div>
-
-      <!-- Economia -->
-      <div class="bg-white rounded-lg shadow-md">
-        <img src="img/dolar2.jpg" alt="Economia" class="w-full h-48 object-cover rounded-t-lg">
-        <div class="p-4">
-          <h3 class="text-xl font-semibold">Economía</h3>
-        </div>
-      </div>
-
-      <!-- Deportes -->
-      <div class="bg-white rounded-lg shadow-md">
-        <img src="img/messi.jpg" alt="Deportes" class="w-full h-48 object-cover rounded-t-lg">
-        <div class="p-4">
-          <h3 class="text-xl font-semibold">Deportes</h3>
-        </div>
-      </div>  
-      </div>
-    <div class="flex justify-center mt-8">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cargar más</button>
     </div>
-  </section>
+</section>
+
 
   <!-- Contenedor para el Footer -->
   <div id="footer" class="mt-8"></div>

@@ -11,7 +11,10 @@ namespace PrensaVerificada2.Assets
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["Index_Articles"] = null;
+            Session["Autor_Articles"] = null;
+            Session["autor_pages"] = null;
+            Session["index_pages"] = null;
         }
     }
 }
