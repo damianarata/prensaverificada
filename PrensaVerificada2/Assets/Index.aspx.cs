@@ -41,7 +41,23 @@ namespace PrensaVerificada2.Assets
         private void LoadArticles(int skipCount = 0)
         {
             var articles = Session["Index_Articles"] as List<dynamic> ?? new List<dynamic>();
-            var publicaciones = BLL.Publicacion.GetInstancia().RetrieveLatestPublicaciones(skipCount);
+            List<BE.Publicacion> publicaciones;
+            if (!string.IsNullOrEmpty(Request.QueryString["categoriaID"]))
+            {
+                int categoriaID;
+                if (int.TryParse(Request.QueryString["categoriaID"], out categoriaID))
+                {
+                    publicaciones = BLL.Publicacion.GetInstancia().RetrievePublicacionesPorCategoria(categoriaID, skipCount);
+                }
+                else
+                {
+                    publicaciones = BLL.Publicacion.GetInstancia().RetrieveLatestPublicaciones(skipCount);
+                }
+            }
+            else
+            {
+                publicaciones = BLL.Publicacion.GetInstancia().RetrieveLatestPublicaciones(skipCount);
+            }
 
             foreach (var publi in publicaciones)
             {
