@@ -18,6 +18,32 @@ namespace PrensaVerificada2.Assets
                     Response.Redirect("Login.aspx");
                 }
             }
+            LoadAutores();
+        }
+
+        private void LoadAutores()
+        {
+            var topArticles = new List<dynamic>();
+            var autores = BLL.Autor.GetInstancia().RetreiveAll();
+            foreach (var autor in autores)
+            {
+                topArticles.Add(new
+                {
+                    autorID = autor.AutorID,
+                    ImageUrl = autor.Foto,
+                    Nombre = autor.Nombre,
+                    Medio = autor.Medio,
+                    Descripcion = autor.Biografia,
+                    TwitterUrl = autor.Twitter,
+                    InstagramUrl = autor.Instagram,
+                    FacebookUrl = autor.Facebook,
+                    LinkedInUrl = autor.Linkedin,
+                    YouTubeUrl = autor.Youtube,
+                });
+            }
+
+            AuthorsRepeater.DataSource = topArticles;
+            AuthorsRepeater.DataBind();
         }
     }
 }

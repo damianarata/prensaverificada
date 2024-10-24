@@ -116,9 +116,9 @@ namespace DAL.DAOs
                 string.Format(
                     @"SELECT * 
               FROM PrensaVerificada.dbo.publicaciones 
-              WHERE autorid = {0} 
+              WHERE autorid = {0} AND estadoid = 1
               ORDER BY fechapublicacion DESC 
-              OFFSET {1} ROWS",
+              OFFSET {1} ROWS FETCH NEXT 6 ROWS ONLY",
                     autorid, skipCount
                 )
             );

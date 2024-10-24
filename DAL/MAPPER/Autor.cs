@@ -28,6 +28,10 @@ namespace DAL.MAPPER
             autor.Twitter = row["twitter"].ToString();
             autor.Instagram = row["instagram"].ToString();
             autor.Foto = row["foto"].ToString();
+            autor.Medio = row["medio"].ToString();
+            autor.Linkedin = row["linkedin"].ToString();
+            autor.Facebook = row["facebook"].ToString();
+            autor.Youtube = row["youtube"].ToString();
             return autor;
         }
     }

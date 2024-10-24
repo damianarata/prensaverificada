@@ -67,7 +67,7 @@ namespace BLL
 
         public List<BE.Autor> RetreiveAll()
         {
-            throw new NotImplementedException();
+            return DAL.DAOs.Autor.GetInstancia().RetreiveAll();
         }
 
         public bool Update(BE.Autor Autor)
