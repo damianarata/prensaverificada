@@ -48,6 +48,10 @@ namespace PrensaVerificada2.Assets
             {
                 Response.Write($"Error: {ex.Message}");
             }
+            Session["Index_Articles"] = null;
+            Session["Autor_Articles"] = null;
+            Session["autor_pages"] = null;
+            Session["index_pages"] = null;
         }
 
 

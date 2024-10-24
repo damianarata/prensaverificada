@@ -24,9 +24,7 @@ namespace PrensaVerificada2.Assets
             {
                 try
                 {
-                    // Cargar los datos de la publicación
                     cargarpubli();
-
                     int selectedParagraphs = ddlNumParrafos.SelectedValue != null ? int.Parse(ddlNumParrafos.SelectedValue) : 1;
                     UpdateParagraphTextBoxes(selectedParagraphs);
                 }
@@ -35,6 +33,10 @@ namespace PrensaVerificada2.Assets
                     Response.Write($"Error: {ex.Message}");
                 }
             }
+            Session["Index_Articles"] = null;
+            Session["Autor_Articles"] = null;
+            Session["autor_pages"] = null;
+            Session["index_pages"] = null;
         }
 
         private void UpdateParagraphTextBoxes(int numParagraphs)
