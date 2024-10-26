@@ -64,6 +64,25 @@ namespace BLL
             return DAL.DAOs.Publicacion.GetInstancia().RetreiveTop();
         }
 
+        public List<BE.Publicacion> RetrievePublicacionesConFiltros(DateTime? startDate, DateTime? endDate, string author, string category, string title, string content, int skipCount)
+        {
+            string startDate1 = null;
+            string endDate1 = null;
+
+            if (startDate.HasValue)
+            {
+                startDate1 = startDate.Value.ToString("dd/MM/yyyy");
+            }
+
+            if (endDate.HasValue)
+            {
+                endDate1 = endDate.Value.ToString("dd/MM/yyyy");
+            }
+
+            return DAL.DAOs.Publicacion.GetInstancia().RetrievePublicacionesConFiltros(startDate1, endDate1, author, category, title, content, skipCount);
+        }
+
+
         public bool Modificar(BE.Publicacion Publicacion)
         {
             throw new NotImplementedException();

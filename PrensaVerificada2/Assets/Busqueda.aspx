@@ -14,72 +14,64 @@
 
     <!-- Contenedor para el Header -->
     <div id="header"></div>
-
+    <form runat="server">
     <!-- Búsqueda Avanzada -->
     <section class="container mx-auto p-8">
         <h2 class="text-center text-3xl font-semibold mb-6">Búsqueda Avanzada</h2>
 
         <!-- Filtros de búsqueda -->
         <div class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <div class="flex flex-wrap gap-4 items-center justify-center">
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded">Hoy</button>
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded">Ayer</button>
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded">Últimos 7 días</button>
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded">Último mes</button>
-                <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded">Último año</button>
-                <input type="date" class="border border-gray-300 p-2 rounded" value="2022-02-08">
-            </div>
-
             <div class="flex flex-wrap gap-4 items-center justify-center mt-4">
-                <select class="border border-gray-300 p-2 rounded">
-                    <option value="">Autores</option>
-                </select>
-                <input type="text" placeholder="Filtrar Autores" class="border border-gray-300 p-2 rounded">
-                <input type="text" placeholder="Palabras clave" class="border border-gray-300 p-2 rounded">
-                <select class="border border-gray-300 p-2 rounded">
-                    <option value="">Categorías</option>
-                </select>
-                <input type="text" placeholder="Filtrar categorías" class="border border-gray-300 p-2 rounded">
-                <select class="border border-gray-300 p-2 rounded">
-                    <option value="">Etiquetas</option>
-                </select>
-                <input type="text" placeholder="Filtrar etiquetas" class="border border-gray-300 p-2 rounded">
+                <div class="flex items-center">
+                    <label for="TextBox1" class="text-sm font-medium text-gray-700 mr-2">Fecha de Inicio</label>
+                    <asp:TextBox ID="TextBox1" runat="server" CssClass="p-2 border border-gray-300 rounded-md shadow-sm" TextMode="Date"></asp:TextBox>
+                </div>
+                <div class="flex items-center">
+                    <label for="TextBox2" class="text-sm font-medium text-gray-700 mr-2">Fecha de Fin</label>
+                    <asp:TextBox ID="TextBox2" runat="server" CssClass="p-2 border border-gray-300 rounded-md shadow-sm" TextMode="Date"></asp:TextBox>
+                </div>
+                <asp:DropDownList ID="AuthorDropDown" runat="server" CssClass="p-2 border border-gray-300 rounded-md shadow-sm">
+                    <asp:ListItem Text="Autores" Value="" />
+                </asp:DropDownList>
+                <asp:DropDownList ID="CategoriasDropDown" runat="server" CssClass="p-2 border border-gray-300 rounded-md shadow-sm">
+                    <asp:ListItem Text="Categoria" Value="" />
+                </asp:DropDownList>
+                <asp:TextBox ID="TitFilterTextBox" runat="server" Placeholder="Filtrar Titulo" CssClass="p-2 border border-gray-300 rounded-md shadow-sm" />
+                <asp:TextBox ID="CamFilterTextBox" runat="server" Placeholder="Filtrar Contenido" CssClass="p-2 border border-gray-300 rounded-md shadow-sm" />
             </div>
-
             <div class="flex justify-center mt-6">
-                <button class="bg-gray-300 text-gray-700 px-4 py-2 rounded">Borrar</button>
-                <button class="bg-blue-500 text-white px-4 py-2 ml-4 rounded">Buscar</button>
+                <asp:Button ID="BorrarButton" runat="server" Text="Borrar" CssClass="bg-gray-300 text-gray-700 px-4 py-2 rounded" OnClick="BorrarButton_Click" />
+                <asp:Button ID="searchButton" runat="server" Text="Buscar" CssClass="bg-blue-500 text-white px-4 py-2 ml-4 rounded" OnClick="SearchButton_Click" />
             </div>
         </div>
 
         <!-- Resultados de búsqueda -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white p-4 rounded-lg shadow-md">
-                <img src="img/mbappe.jpg" alt="Imagen 1" class="rounded h-48 w-full mb-4">
-                <span class="block text-blue-600 mb-2">Deportes</span>
-                <h3 class="text-xl font-semibold mb-2">El contrato de Mbappé en el Real Madrid es impresionante</h3>
-                <p class="text-gray-500">Ernie Smith &bull; 4 de junio de 2024</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Repite el bloque de publicación para cada artículo según sea necesario -->
+                <asp:Repeater ID="ArticlesRepeater" runat="server">
+                    <ItemTemplate>
+                    <div class="bg-white p-4 rounded-lg shadow-md" onclick="window.location.href='Publicacion.aspx?publiID=<%# Eval("publiID") %>'">
+                        <img src='<%# Eval("ImageUrl") %>' alt='<%# Eval("Title") %>' class="w-full h-32 object-cover rounded-lg mb-4">
+                        <span class="block text-blue-600 text-sm font-semibold mb-2"><%# Eval("Category") %></span>
+                        <h3 class="text-xl font-semibold mb-2"><%# Eval("Title") %></h3>
+                        <div class="flex items-center mt-4">
+                            <img src='<%# Eval("AuthorImage") %>' alt="Autor" class="w-8 h-8 rounded-full mr-2">
+                            <div>
+                                <p class="text-sm font-semibold"><%# Eval("Author") %></p>
+                                <p class="text-sm text-gray-600"><%# Eval("Date") %></p>
+                            </div>
+                        </div>
+                    </div>
+                </ItemTemplate>
+                </asp:Repeater>
             </div>
-            <div class="bg-white p-4 rounded-lg shadow-md">
-                <img src="img/netflix-peliculas-7jpg.jpg" alt="Imagen 2" class="rounded h-48 w-full mb-4">
-                <span class="block text-blue-600 mb-2">Streaming</span>
-                <h3 class="text-xl font-semibold mb-2">Está en Netflix, tiene a Brad Pitt y está basada en un best seller</h3>
-                <p class="text-gray-500">Eric Smith &bull; 4 de junio de 2024</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow-md">
-                <img src="./img/dolar.jpg" alt="Imagen 3" class="rounded h-48 w-full mb-4">
-                <span class="block text-blue-600 mb-2">Economía</span>
-                <h3 class="text-xl font-semibold mb-2">Fuerte suba del dólar blue de los financieros y se amplía la brecha con el oficial</h3>
-                <p class="text-gray-500">Tracey Wilson &bull; 4 de junio de 2024</p>
-            </div>
-        </div>
 
         <!-- Botón de retorno -->
         <div class="flex justify-center mt-8">
-            <button id="principal-btn" class="bg-gray-200 text-gray-600 px-6 py-2 rounded">Parece que no hay más, volver a inicio</button>
+            <asp:Button ID="CargarButton" runat="server" Text="Cargar mas" CssClass="bg-gray-200 text-gray-600 px-6 py-2 rounded" OnClick="CargarMasButton_Click" />
         </div>
     </section>
-
+        </form>
     <!-- Contenedor para el Footer -->
     <div id="footer" class="mt-8"></div>
 
