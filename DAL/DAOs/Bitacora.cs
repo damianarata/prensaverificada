@@ -56,8 +56,6 @@ namespace DAL.DAOs
 
         public List<BE.Bitacora> ObtenerConFiltros(string startDate, string endDate, string username, string operationType, int skipCount = 0)
         {
-            List<SqlParameter> parameters = new List<SqlParameter>();
-
             string query = "SELECT * FROM PrensaVerificada.dbo.bitacora WHERE 1=1";
 
             if (!string.IsNullOrEmpty(startDate))

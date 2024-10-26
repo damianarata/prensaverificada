@@ -164,6 +164,53 @@ namespace DAL.DAOs
             return publicaciones;
         }
 
+        public List<BE.Publicacion> RetrievePublicacionesConFiltros(string startDate, string endDate, string author, string category, string title, string content, int skipCount)
+        {
+            string query = "SELECT * FROM PrensaVerificada.dbo.publicaciones WHERE estadoid = 1 ";
+
+            if (!string.IsNullOrEmpty(startDate))
+            {
+                query += " AND [fechapublicacion] BETWEEN '" + startDate + "' AND '" + endDate + "'";
+            }
+
+            if (!string.IsNullOrEmpty(author))
+            {
+                query += " AND autorid = " + author;
+            }
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                query += " AND categoriaid = " + category;
+            }
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                query += " AND titulo like '%" + title + "%'";
+            }
+
+            if (!string.IsNullOrEmpty(content))
+            {
+                query += " AND contenido like '%" + content + "%'";
+            }
+
+            query += string.Format(" ORDER BY fechapublicacion DESC OFFSET {0} ROWS FETCH NEXT 20 ROWS ONLY", skipCount.ToString());
+
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(query);
+
+            List<BE.Publicacion> publicaciones = new List<BE.Publicacion>();
+
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    BE.Publicacion publicacion = MAPPER.Publicacion.GetInstancia().Map(row);
+                    publicaciones.Add(publicacion);
+                }
+            }
+
+            return publicaciones;
+        }
+
 
         public bool Update(BE.Publicacion publicacion)
         {
