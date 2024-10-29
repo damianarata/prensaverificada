@@ -57,7 +57,7 @@ namespace BLL
         #region Icrud
         public bool Create(BE.Autor Autor)
         {
-            return DAL.Autor.GetInstancia().Create(Autor);
+            return DAL.DAOs.Autor.GetInstancia().Create(Autor);
         }
 
         public bool Delete(BE.Autor Autor)
@@ -72,7 +72,7 @@ namespace BLL
 
         public bool Update(BE.Autor Autor)
         {
-            throw new NotImplementedException();
+            return DAL.DAOs.Autor.GetInstancia().Update(Autor);
         }
         #endregion
     }

@@ -22,7 +22,7 @@ namespace DAL.DAOs
 
         public bool Create(BE.Autor autor)
         {
-            string query = string.Format("INSERT INTO autores (nombre, biografia, twitter, instagram, foto, medio, linkedin, facebook, youtube) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}');",
+            string query = string.Format("INSERT INTO autores (nombre, biografia, twitter, instagram, foto, medio, linkedin, facebook, youtube, usuarioid) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}');",
                 autor.Nombre,
                 autor.Biografia,
                 autor.Twitter,
@@ -31,7 +31,8 @@ namespace DAL.DAOs
                 autor.Medio,
                 autor.Linkedin,
                 autor.Facebook,
-                autor.Youtube);
+                autor.Youtube,
+                autor.UsuarioID);
 
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
