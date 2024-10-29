@@ -12,110 +12,147 @@
 
   <!-- Contenedor para el Header -->
   <div id="header"></div>
-
+    <form runat="server">
   <!-- Contenido principal -->
   <div class="flex-grow flex justify-center items-center">
     <div class="w-full max-w-4xl bg-white shadow-md rounded-lg p-8 mt-8">
       <h1 class="text-center text-2xl font-semibold text-gray-800 mb-4">Tu perfil</h1>
-      <p class="text-lg text-gray-600 mb-8">Bienvenido, Damian</p>
+      <p class="text-lg text-gray-600 mb-8">Bienvenido</p>
       
       <!-- Formulario de perfil -->
       <div class="flex space-x-8">
         <!-- Imagen de perfil y nombre -->
-        <div class="flex-shrink-0 flex flex-col items-center">
-          <img src="img/dami.png" alt="Imagen de perfil" class="w-24 h-24 rounded-full object-cover mb-4">
-          <h2 class="text-lg font-semibold text-gray-800">Damian Arata</h2>
-          <p class="text-gray-600">usuario971</p>
+        <div class="flex-shrink-0 flex flex-col items-center w-[100px]">
+          <asp:Image ID="imgPerfil" runat="server" AlternateText="Imagen de perfil" CssClass="w-24 h-24 rounded-full object-cover mb-4" />
+          <h2 class="text-lg font-semibold text-gray-800">Subir foto</h2>
+            <label for="FileUpload1" class="cursor-pointer bg-gray-300 text-gray-700 px-2 py-1 rounded focus:outline-none focus:ring focus:ring-blue-500">
+                ...
+            </label>
+            <asp:FileUpload ID="FileUpload1" runat="server" CssClass="hidden" OnChange="displayFileName(this)" />
+                 <p id="fileNameDisplay" class="text-gray-600 mt-2 w-[50px] whitespace-nowrap overflow-hidden text-ellipsis text-center"></p>
         </div>
 
-        <!-- Campos de perfil -->
-        <div class="flex-grow">
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <div>
-              <label for="nombre" class="text-gray-700">Nombre</label>
-              <input type="text" id="nombre" placeholder="Escribí acá.." class="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
-            </div>
-            <div>
-              <label for="apellido" class="text-gray-700">Apellido</label>
-              <input type="text" id="apellido" placeholder="Escribí acá.." class="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
-            </div>
-            <div>
-              <label for="telefono" class="text-gray-700">Telefono</label>
-              <input type="text" id="telefono" placeholder="Escribí acá.." class="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
-            </div>
-            <div>
-              <label for="pais" class="text-gray-700">País</label>
-              <input type="text" id="pais" placeholder="Escribí acá.." class="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
-            </div>
-            <div>
-              <label for="lenguaje" class="text-gray-700">Lenguaje</label>
-              <input type="text" id="lenguaje" placeholder="Escribí acá.." class="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
-            </div>
-            <div>
-              <label for="timezone" class="text-gray-700">Time Zone</label>
-              <input type="text" id="timezone" placeholder="Escribí acá.." class="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
-            </div>
-          </div>
+            <!-- Formulario para los campos de perfil -->
+                <div class="flex-grow">
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="NombreTextBox" class="text-gray-700">Nombre</label>
+                            <asp:TextBox ID="NombreTextBox" runat="server" CssClass="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" Placeholder="Escribí acá.."></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvNombre" runat="server" 
+                                ControlToValidate="NombreTextBox" 
+                                ErrorMessage="El nombre es requerido" 
+                                CssClass="text-red-500 text-sm"
+                                Display="Dynamic">
+                            </asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="revNombre" runat="server" 
+                                ControlToValidate="NombreTextBox"
+                                ValidationExpression="^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$"
+                                ErrorMessage="El nombre solo puede contener letras" 
+                                CssClass="text-red-500 text-sm"
+                                Display="Dynamic">
+                            </asp:RegularExpressionValidator>
+                        </div>
 
-          <div class="flex justify-end space-x-4">
-            <button type="button" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-300">Cancelar</button>
-            <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">Guardar</button>
-          </div>
+                        <div>
+                            <label for="BiografiaTextBox" class="text-gray-700">Biografía</label>
+                            <asp:TextBox ID="BiografiaTextBox" runat="server" TextMode="MultiLine" CssClass="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" Placeholder="Escribí acá.."></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvBiografia" runat="server" 
+                                ControlToValidate="BiografiaTextBox" 
+                                ErrorMessage="La biografía es requerida" 
+                                CssClass="text-red-500 text-sm"
+                                Display="Dynamic">
+                            </asp:RequiredFieldValidator>
+                        </div>
+
+                        <div>
+                            <label for="TwitterTextBox" class="text-gray-700">Twitter</label>
+                            <asp:TextBox ID="TwitterTextBox" runat="server" CssClass="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" Placeholder="https://twitter.com/usuario"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="revTwitter" runat="server" 
+                                ControlToValidate="TwitterTextBox"
+                                ValidationExpression="^(https?:\/\/)?(www\.)?twitter\.com\/[a-zA-Z0-9_]{1,15}$"
+                                ErrorMessage="Ingresa una URL válida de Twitter" 
+                                CssClass="text-red-500 text-sm"
+                                Display="Dynamic">
+                            </asp:RegularExpressionValidator>
+                        </div>
+
+                        <div>
+                            <label for="InstagramTextBox" class="text-gray-700">Instagram</label>
+                            <asp:TextBox ID="InstagramTextBox" runat="server" CssClass="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" Placeholder="https://instagram.com/usuario"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="revInstagram" runat="server" 
+                                ControlToValidate="InstagramTextBox"
+                                ValidationExpression="^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9_\.]{1,30}$"
+                                ErrorMessage="Ingresa una URL válida de Instagram" 
+                                CssClass="text-red-500 text-sm"
+                                Display="Dynamic">
+                            </asp:RegularExpressionValidator>
+                        </div>
+
+                        <div>
+                            <label for="MedioTextBox" class="text-gray-700">Medio</label>
+                            <asp:TextBox ID="MedioTextBox" runat="server" CssClass="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" Placeholder="Escribí acá.."></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvMedio" runat="server" 
+                                ControlToValidate="MedioTextBox" 
+                                ErrorMessage="El medio es requerido" 
+                                CssClass="text-red-500 text-sm"
+                                Display="Dynamic">
+                            </asp:RequiredFieldValidator>
+                        </div>
+
+                        <div>
+                            <label for="LinkedinTextBox" class="text-gray-700">LinkedIn</label>
+                            <asp:TextBox ID="LinkedinTextBox" runat="server" CssClass="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" Placeholder="https://linkedin.com/in/usuario"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="revLinkedin" runat="server" 
+                                ControlToValidate="LinkedinTextBox"
+                                ValidationExpression="^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[a-zA-Z0-9\-]{5,30}$"
+                                ErrorMessage="Ingresa una URL válida de LinkedIn" 
+                                CssClass="text-red-500 text-sm"
+                                Display="Dynamic">
+                            </asp:RegularExpressionValidator>
+                        </div>
+
+                        <div>
+                            <label for="FacebookTextBox" class="text-gray-700">Facebook</label>
+                            <asp:TextBox ID="FacebookTextBox" runat="server" CssClass="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" Placeholder="https://facebook.com/usuario"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="revFacebook" runat="server" 
+                                ControlToValidate="FacebookTextBox"
+                                ValidationExpression="^(https?:\/\/)?(www\.)?facebook\.com\/[a-zA-Z0-9\.]{5,50}$"
+                                ErrorMessage="Ingresa una URL válida de Facebook" 
+                                CssClass="text-red-500 text-sm"
+                                Display="Dynamic">
+                            </asp:RegularExpressionValidator>
+                        </div>
+
+                        <div>
+                            <label for="YoutubeTextBox" class="text-gray-700">YouTube</label>
+                            <asp:TextBox ID="YoutubeTextBox" runat="server" CssClass="w-full mt-2 p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" Placeholder="https://youtube.com/@usuario"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="revYoutube" runat="server" 
+                                ControlToValidate="YoutubeTextBox"
+                                ValidationExpression="^(https?:\/\/)?(www\.)?youtube\.com\/@[a-zA-Z0-9\-_]{3,30}$"
+                                ErrorMessage="Ingresa una URL válida de YouTube" 
+                                CssClass="text-red-500 text-sm"
+                                Display="Dynamic">
+                            </asp:RegularExpressionValidator>
+                        </div>
+                    </div>
+                        <div class="flex justify-end space-x-4">
+                            <asp:Button ID="Button1" runat="server" OnClick="btnCancel" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-300" Text="Cancelar" />
+                            <asp:Button ID="ButtonGuardar" runat="server" OnClick="btnGuardar" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300" Text="Guardar" />
+                      </div>
+                </div>
         </div>
       </div>
-
-      <!-- Sección de emails -->
-      <div class="mt-8">
-        <h3 class="text-lg font-semibold text-gray-800">Mis emails</h3>
-        <div class="flex items-center space-x-4 mt-4">
-          <input type="checkbox" id="email1" checked class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-          <label for="email1" class="text-gray-700 flex-grow">Damian.Arata@gmail.com <span class="text-gray-400">(1 month ago)</span></label>
-        </div>
-        <button type="button" class="mt-4 px-4 py-2 text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 focus:ring-4 focus:ring-blue-300">+ Agregar Email</button>
       </div>
-
-      <!-- Botón para eliminar cuenta -->
-      <div class="mt-8">
-        <button id="open-modal" type="button" class="w-full py-3 bg-red-500 text-white rounded-lg text-lg font-semibold hover:bg-red-700 focus:ring-4 focus:ring-red-300">Eliminar cuenta</button>
-        <div class="bg-white rounded-lg p-6 w-full max-w-sm relative">
-          <!-- Cerrar Modal -->
-          <button id="close-modal" class="hidden absolute top-2 right-2 text-gray-600 hover:text-gray-800 focus:outline-none">
-              &times;
-          </button>
-          
-          <!-- Contenido del Modal -->
-          <!-- <div class="text-center">
-              <div class="mb-4 text-blue-500">
-                  <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m4 0h-1v-4h-1m-5 8V7h8v9m5 4H5a2 2 0 01-2-2V7a2 2 0 012-2h2.5l1-2h7l1 2H19a2 2 0 012 2v11a2 2 0 01-2 2z"></path>
-                  </svg>
-              </div>
-              <h2 class="text-lg font-semibold text-gray-800">Estamos verificando unas cosas</h2>
-              <p class="text-sm text-gray-600 mt-2">Para eliminar tu cuenta te pedimos que ingreses la contraseña y realices el captcha.</p>
-
-              <!- Formulario -->
-              <!-- <div class="mt-4">
-                  <input type="password" placeholder="Contraseña" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  <div class="mt-4">
-                      <div class="g-recaptcha" data-sitekey="your-site-key"></div>
-                  </div>
-              </div>
-          </div> --> 
-
-          <!-- Botones de acción -->
-          <!-- <div class="mt-6 flex justify-between">
-              <button id="cancel" class="text-gray-600 hover:text-gray-800">Cancelar</button>
-              <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Eliminar cuenta</button>
-          </div> -->
-      </div>
-      </div>
-    </div>
-  </div>
+        </form>
 
   <!-- Contenedor para el Footer -->
   <div id="footer" class="mt-8"></div>
 
   <script>
+      function displayFileName(input) {
+          var fileName = input.files[0] ? input.files[0].name : "Ningún archivo seleccionado";
+          document.getElementById('fileNameDisplay').textContent = fileName;
+      }
       // Cargar el Header
       fetch('header.html')
           .then(response => response.text())

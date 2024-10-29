@@ -66,8 +66,8 @@ namespace BLL
         }
         public BE.Usuario RetrieveUser(BE.Usuario User)
         {
-            //return DAL.Usuario.GetInstancia().Login(User);
-            throw new NotImplementedException();
+            return DAL.DAOs.Usuario.GetInstancia().Retreive(User);
+            
         }
         public void Logout()
         {

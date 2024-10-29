@@ -41,6 +41,19 @@ namespace DAL.DAOs
             return usuarios;
         }
 
+        public BE.Usuario Retreive(BE.Usuario user)
+        {
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(string.Format("SELECT * FROM PrensaVerificada.dbo.usuarios WHERE usuarioid = '{0}'", user.UsuarioID.ToString()));
+
+            if (dt.Rows.Count != 0)
+            {
+                DataRow row = dt.Rows[0];
+                user = MAPPER.Usuario.GetInstancia().Map(row);
+            }
+
+            return user;
+        }
+
         public bool Update(BE.Usuario usuario)
         {
             string query = string.Format("UPDATE usuarios SET nombre = '{0}', email = '{1}', contrasena = '{2}', fecharegistro = '{3}' WHERE usuarioid = {4}",

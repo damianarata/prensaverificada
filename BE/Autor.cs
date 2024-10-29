@@ -14,5 +14,6 @@ namespace BE
         public string Linkedin { get; set; }
         public string Facebook { get; set; }
         public string Youtube { get; set; }
+        public int UsuarioID { get; set; }
     }
 }
