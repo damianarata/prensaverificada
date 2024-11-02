@@ -22,6 +22,18 @@ namespace BLL
         #endregion
 
         #region Reclamo Ops
+        private static readonly Dictionary<int, string> EstadoMap = new Dictionary<int, string>
+        {
+            { 1, "Pendiente" },
+            { 2, "En Proceso" },
+            { 3, "Resuelto" }
+        };
+
+        public string GetEstadoNombre(int estadoid)
+        {
+            return EstadoMap.TryGetValue(estadoid, out string nombre) ? nombre : "Desconocido";
+        }
+
         public bool Agregar(BE.Reclamo NewReclamo)
         {
             throw new NotImplementedException();
@@ -32,15 +44,26 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public List<BE.Reclamo> Listar()
+        public List<BE.Reclamo> Listar(int skipCount = 0)
         {
-            throw new NotImplementedException();
+            return DAL.DAOs.Reclamo.GetInstancia().RetrieveAll(skipCount);
         }
 
-        public BE.Reclamo RetrieveReclamo(BE.Reclamo Reclamo)
+        public BE.Reclamo RetrieveReclamo(int reclamoid)
         {
-            throw new NotImplementedException();
+            return DAL.DAOs.Reclamo.GetInstancia().Retreive(new BE.Reclamo { ReclamoID = reclamoid });
         }
+
+        public List<BE.Comentario> RetrieveComentario(int reclamoid)
+        {
+            return DAL.DAOs.Reclamo.GetInstancia().RetrieveComentario(new BE.Reclamo { ReclamoID = reclamoid });
+        }
+
+        public bool SaveComentario(BE.Comentario comentario)
+        {
+            return DAL.DAOs.Reclamo.GetInstancia().SaveComentario(comentario);
+        }
+
 
         public bool Modificar(BE.Reclamo Reclamo)
         {
@@ -51,7 +74,7 @@ namespace BLL
         #region Icrud
         public bool Create(BE.Reclamo Reclamo)
         {
-            return DAL.Reclamo.GetInstancia().Create(Reclamo);
+            return DAL.DAOs.Reclamo.GetInstancia().Create(Reclamo);
         }
 
         public bool Delete(BE.Reclamo Reclamo)
@@ -66,7 +89,7 @@ namespace BLL
 
         public bool Update(BE.Reclamo Reclamo)
         {
-            throw new NotImplementedException();
+            return DAL.DAOs.Reclamo.GetInstancia().Update(Reclamo);
         }
         #endregion
     }

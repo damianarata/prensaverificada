@@ -57,6 +57,7 @@
     <Compile Include="MAPPER\Autor.cs" />
     <Compile Include="MAPPER\Bitacora.cs" />
     <Compile Include="MAPPER\Categoria.cs" />
+    <Compile Include="MAPPER\Comentario.cs" />
     <Compile Include="MAPPER\Favorito.cs" />
     <Compile Include="MAPPER\Publicacion.cs" />
     <Compile Include="MAPPER\Reclamo.cs" />

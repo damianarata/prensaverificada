@@ -23,7 +23,7 @@ namespace DAL.MAPPER
         {
             BE.Favorito Favorito = new BE.Favorito();
             Favorito.FavoritoID = Convert.ToInt32(row["Favoritoid"]);
-            Favorito.UsuarioID = 2314; //row["nombre"].ToString();
+            Favorito.UsuarioID = Convert.ToInt32(row["nombre"]);
             return Favorito;
         }
     }

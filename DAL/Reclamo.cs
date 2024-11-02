@@ -27,7 +27,7 @@ namespace DAL
 
         public List<BE.Reclamo> RetreiveAll()
         {
-            return DAOs.Reclamo.GetInstancia().RetreiveAll();
+            throw new NotImplementedException();
         }
 
         public bool Update(BE.Reclamo reclamo)

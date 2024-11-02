@@ -14,44 +14,50 @@
 
     <!-- Header Container -->
     <div id="header"></div>
+    <form runat="server">
 
     <!-- Formulario de contacto -->
     <section class="container mx-auto p-8">
         <h2 class="text-center text-3xl font-semibold mb-6">Contactanos</h2>
-        <form class="bg-white p-8 rounded-lg shadow-md max-w-3xl mx-auto">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2" for="nombre">Nombre*</label>
-                    <input type="text" id="nombre" class="w-full border border-gray-300 p-2 rounded" placeholder="Escribí acá.." required>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2" for="email">E-mail*</label>
-                    <input type="email" id="email" class="w-full border border-gray-300 p-2 rounded" placeholder="Escribí acá.." required>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2" for="telefono">Teléfono</label>
-                    <input type="text" id="telefono" class="w-full border border-gray-300 p-2 rounded" placeholder="Escribí acá..">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2" for="pais">País</label>
-                    <select id="pais" class="w-full border border-gray-300 p-2 rounded">
-                        <option>Selecciona tu país</option>
-                        <!-- Opciones de países -->
-                    </select>
-                </div>
-            </div>
-            <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2" for="motivo">Motivo</label>
-                <textarea id="motivo" class="w-full border border-gray-300 p-2 rounded" rows="4" placeholder="Escribí acá.."></textarea>
-            </div>
-            <div class="flex items-center justify-between">
-                <button id="faq-btn" type="button" class="bg-blue-500 text-white px-4 py-2 rounded">Preguntas frecuentes</button>
-                <button type="submit" class="bg-gray-300 text-gray-700 px-4 py-2 rounded">Enviar</button>
-            </div>
-        </form>
+          <asp:Panel CssClass="bg-white p-8 rounded-lg shadow-md max-w-3xl mx-auto" runat="server">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" for="NombreTextBox">Nombre*</label>
+            <asp:TextBox ID="NombreTextBox" runat="server" CssClass="w-full border border-gray-300 p-2 rounded" Placeholder="Escribí acá.." ValidationGroup="SubmitGroup"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="NombreValidator" runat="server" ControlToValidate="NombreTextBox" ErrorMessage="El nombre es obligatorio" CssClass="text-red-500" Display="Dynamic" ValidationGroup="SubmitGroup" />
+            <asp:RegularExpressionValidator ID="NombreRegexValidator" runat="server" ControlToValidate="NombreTextBox" ErrorMessage="Solo se permiten letras" CssClass="text-red-500" Display="Dynamic" ValidationGroup="SubmitGroup" ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" />
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2" for="EmailTextBox">E-mail*</label>
+            <asp:TextBox ID="EmailTextBox" runat="server" CssClass="w-full border border-gray-300 p-2 rounded" TextMode="Email" Placeholder="Escribí acá.." ValidationGroup="SubmitGroup"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="EmailValidator" runat="server" ControlToValidate="EmailTextBox" ErrorMessage="El correo electrónico es obligatorio" CssClass="text-red-500" Display="Dynamic" ValidationGroup="SubmitGroup" />
+            <asp:RegularExpressionValidator ID="EmailRegexValidator" runat="server" ControlToValidate="EmailTextBox" ErrorMessage="Formato de correo electrónico inválido" CssClass="text-red-500" Display="Dynamic" ValidationGroup="SubmitGroup" ValidationExpression="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" />
+        </div>
+    </div>
+    <div class="mb-6">
+        <label class="block text-sm font-medium text-gray-700 mb-2" for="DescripcionTextBox">Descripcion</label>
+        <asp:TextBox ID="DescripcionTextBox" runat="server" CssClass="w-full border border-gray-300 p-2 rounded" TextMode="MultiLine" Rows="4" Placeholder="Escribí acá.." ValidationGroup="SubmitGroup"></asp:TextBox>
+    </div>
+
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="text-red-500 mb-4" ValidationGroup="SubmitGroup" />
+
+    <div class="flex items-center justify-between">
+        <asp:Button ID="FaqButton" runat="server" Text="Preguntas frecuentes" 
+                    CssClass="bg-blue-500 text-white px-4 py-2 rounded" 
+                    OnClick="FaqButton_Click" CausesValidation="false" />
+
+        <asp:Button ID="SubmitButton" runat="server" Text="Enviar" 
+                    CssClass="bg-gray-300 text-gray-700 px-4 py-2 rounded" 
+                    OnClick="SubmitButton_Click" CausesValidation="true" ValidationGroup="SubmitGroup" />
+        <asp:Literal ID="SuccessMessageLiteral" runat="server"></asp:Literal>
+    </div>
+</asp:Panel>
+
+
+
+
     </section>
+        </form>
 
     <!-- Footer Container -->
     <div id="footer" class="mt-8"></div>
