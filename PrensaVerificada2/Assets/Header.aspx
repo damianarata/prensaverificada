@@ -76,7 +76,7 @@
                     <a href="./Bitacora.aspx" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Bitacora</a>
                     <a href="./Reclamos.aspx" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Reclamos</a>
                     <a href="./Contacto.aspx" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Ayuda</a>
-                    <a href="./Home.aspx" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cerrar sesión</a>
+                    <a href="./Home.aspx?logout=true" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cerrar sesión</a>
                 </div>
             </div>
         </div>

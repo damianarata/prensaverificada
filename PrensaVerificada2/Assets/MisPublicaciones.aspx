@@ -20,6 +20,13 @@
 
     <!-- Tabla -->
     <form id="form1" runat="server">
+                <div id="alertaDiv" runat="server" style="display: block;">
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4" role="alert">
+                <p class="font-bold">Alerta</p>
+                <p>Para poder usar esta pagina tenes que completar tu perfil de autor</p>
+            </div>
+        </div>
+
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">

@@ -44,6 +44,13 @@ namespace BLL
             BE.Autor Autor = DAL.DAOs.Autor.GetInstancia().Retreive(new BE.Autor { AutorID = id });
             return Autor;
         }
+
+        public BE.Autor Retreivebyuser(int id)
+        {
+            BE.Autor Autor = DAL.DAOs.Autor.GetInstancia().Retreivebyuser(new BE.Autor { UsuarioID = id });
+            return Autor;
+        }
+
         public DataTable RetrieveTop()
         {
             return DAL.DAOs.Autor.GetInstancia().RetrieveTop();
