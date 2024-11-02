@@ -65,6 +65,19 @@ namespace DAL.DAOs
 
             return Autor; // Devuelve el objeto o null si no hay filas
         }
+
+        public BE.Autor Retreivebyuser(BE.Autor Autor)
+        {
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(string.Format("SELECT * FROM PrensaVerificada.dbo.autores WHERE usuarioid = '{0}'", Autor.UsuarioID.ToString()));
+
+            if (dt.Rows.Count != 0)
+            {
+                DataRow row = dt.Rows[0];
+                Autor = MAPPER.Autor.GetInstancia().Map(row);
+            }
+
+            return Autor; // Devuelve el objeto o null si no hay filas
+        }
         public bool Update(BE.Autor autor)
         {
             string query = string.Format("UPDATE autores SET nombre = '{0}', biografia = '{1}', twitter = '{2}', instagram = '{3}', foto = '{4}', medio = '{5}', linkedin = '{6}', facebook = '{7}', youtube = '{8}' WHERE autorid = {9}",

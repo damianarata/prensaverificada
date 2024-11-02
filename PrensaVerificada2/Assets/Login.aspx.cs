@@ -25,16 +25,14 @@ namespace PrensaVerificada2.Assets
 
             if ( User.UsuarioID != 0)
             {
-                // Si el UsuarioID es distinto de 0, guardamos el ID en la sesión y redirigimos a Home.aspx
                 Session["usuario"] = User.UsuarioID.ToString();
+                var autor = BLL.Autor.GetInstancia().Retreivebyuser(User.UsuarioID);
+                Session["autorId"] = autor.AutorID.ToString();
                 Response.Redirect("Index.aspx");
             }
             else
             {
-                // Si el UsuarioID es 0 o el objeto User es null, redirigir al login
                 Response.Redirect("Login.aspx");
-                // O bien, puedes mostrar un mensaje de error
-                // Label1.Visible = true;
             }
         }
 

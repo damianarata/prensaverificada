@@ -23,11 +23,15 @@ namespace DAL.MAPPER
         {
             BE.Reclamo reclamo = new BE.Reclamo();
             reclamo.ReclamoID = Convert.ToInt32(row["reclamoid"]);
-            reclamo.UsuarioID = Convert.ToInt32(row["usuarioid"]);
+            reclamo.UsuarioID = row.IsNull("usuarioid") ? (int?)null : Convert.ToInt32(row["usuarioid"]);
             reclamo.Fecha = Convert.ToDateTime(row["fecha"]);
-            reclamo.Estado = row["estado"].ToString();
+            reclamo.EstadoID = Convert.ToInt32(row["estadoid"]);
             reclamo.Descripcion = row["descripcion"].ToString();
+            reclamo.Nombre = row["nombre"].ToString();
+            reclamo.Mail = row["mail"].ToString();
+
             return reclamo;
         }
+
     }
 }

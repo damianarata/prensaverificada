@@ -33,6 +33,10 @@ namespace PrensaVerificada2.Assets
                     Response.Write($"Error: {ex.Message}");
                 }
             }
+            if (Convert.ToInt32(Session["autorId"]) != 0)
+            {
+                alertaDiv.Visible = false;
+            }
             Session["Index_Articles"] = null;
             Session["Autor_Articles"] = null;
             Session["autor_pages"] = null;

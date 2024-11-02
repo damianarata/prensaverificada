@@ -16,5 +16,31 @@ namespace PrensaVerificada2.Assets
             Session["autor_pages"] = null;
             Session["index_pages"] = null;
         }
+
+        protected void FaqButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Faq.aspx");
+        }
+
+        protected void SubmitButton_Click(object sender, EventArgs e)
+        {
+            BE.Reclamo reclamo = new BE.Reclamo
+            {
+                Descripcion = DescripcionTextBox.Text,
+                Nombre = NombreTextBox.Text,
+                Mail = EmailTextBox.Text,
+                EstadoID = 1,
+                Fecha = DateTime.Now,
+                UsuarioID = Convert.ToInt32(Session["usuario"])
+            };
+
+            bool resultado = BLL.Reclamo.GetInstancia().Create(reclamo);
+            if (resultado)
+            {
+                string script = "<script type='text/javascript'>alert('Reclamo enviado exitosamente');" +
+                        "window.location.href = 'Contacto.aspx';</script>";
+                SuccessMessageLiteral.Text = script;
+            }
+        }
     }
 }

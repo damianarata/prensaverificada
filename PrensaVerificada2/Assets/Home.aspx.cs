@@ -15,6 +15,10 @@ namespace PrensaVerificada2.Assets
             Session["Autor_Articles"] = null;
             Session["autor_pages"] = null;
             Session["index_pages"] = null;
+            if (Request.QueryString["logout"] == "true")
+            {
+                Session.Abandon();
+            }
         }
     }
 }
