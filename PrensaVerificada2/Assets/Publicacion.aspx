@@ -20,6 +20,9 @@
     <!-- Main Content -->
     <main class="container mx-auto mt-8">
         <article class="bg-white p-8 rounded-lg shadow-md">
+            <div class="flex justify-end">
+                <asp:Button ID="Button2" runat="server" Text="Favorito" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="Favorito_Click" />
+            </div>
             <h1 id="titulo" runat="server" class="text-3xl font-bold mb-4">No cargo el titulo</h1>
             <h2 id="subtitulo" runat="server" class="text-2xl font-semibold mb-4">No cargo el subtitulo</h2>
             <p id="autor" runat="server" class="text-gray-600 mb-4">No cargo el autor</p>

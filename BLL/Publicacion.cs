@@ -92,6 +92,11 @@ namespace BLL
             return DAL.DAOs.Publicacion.GetInstancia().RetrieveFavs(usuario, skip);
         }
 
+        public bool CheckIfFavorite(BE.Publicacion Publi, int userid) {
+
+            return DAL.DAOs.Publicacion.GetInstancia().CheckIfFavorite(Publi, userid);
+        }
+
 
         public bool Modificar(BE.Publicacion Publicacion)
         {

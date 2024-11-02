@@ -57,12 +57,12 @@ namespace BLL
         #region Icrud
         public bool Create(BE.Favorito Favorito)
         {
-            return DAL.Favorito.GetInstancia().Create(Favorito);
+            return DAL.DAOs.Favorito.GetInstancia().Create(Favorito);
         }
 
         public bool Delete(BE.Favorito Favorito)
         {
-            throw new NotImplementedException();
+            return DAL.DAOs.Favorito.GetInstancia().Delete(Favorito);
         }
 
         public List<BE.Favorito> RetreiveAll()

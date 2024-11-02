@@ -50,7 +50,7 @@ namespace DAL.DAOs
 
         public bool Delete(BE.Favorito favorito)
         {
-            string query = string.Format("DELETE FROM favoritos WHERE favoritoid = {0}", favorito.FavoritoID);
+            string query = string.Format("DELETE FROM favoritos WHERE publicacionid = {0} AND usuarioid = {1}", favorito.PublicacionID, favorito.UsuarioID);
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
 

@@ -11,6 +11,7 @@ namespace PrensaVerificada2.Assets
 {
     public partial class Publicacion : System.Web.UI.Page
     {
+        bool isFavorite;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (BLL.Usuario.GetInstancia().Restriction() == true)
@@ -43,6 +44,8 @@ namespace PrensaVerificada2.Assets
 
                 updateFront(Publi.IdTipoLetra, Publi.IdTipoTamano);
                 DisplayParagraphs(Publi, selectedFontSize, selectedFont);
+                isFavorite = BLL.Publicacion.GetInstancia().CheckIfFavorite(Publi, Convert.ToInt32(Session["usuario"]));
+                Button2.Text = isFavorite ? "Eliminar a fav" : "Agregar a fav";
             }
             catch (Exception ex)
             {
@@ -112,6 +115,22 @@ namespace PrensaVerificada2.Assets
                 paragraphContainer.Controls.Add(paragraphDiv);
             }
             phTextBoxes.Controls.Add(paragraphContainer);
+        }
+
+        protected void Favorito_Click(object sender, EventArgs e)
+        {
+            var fav = new BE.Favorito { PublicacionID = Convert.ToInt32(Request.QueryString["publiID"]), UsuarioID = Convert.ToInt32(Session["usuario"]), FechaAgregado = DateTime.Now };
+            if (isFavorite)
+            {
+                BLL.Favorito.GetInstancia().Delete(fav);
+                isFavorite = false;
+            }
+            else
+            {
+                BLL.Favorito.GetInstancia().Create(fav);
+                isFavorite = true;
+            }
+            Button2.Text = isFavorite ? "Eliminar a fav" : "Agregar a fav";
         }
     }
 }
