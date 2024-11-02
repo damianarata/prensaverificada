@@ -190,6 +190,33 @@ namespace DAL.DAOs
             return publicaciones;
         }
 
+        public List<BE.Publicacion> RetrieveFavs(BE.Usuario usuario, int skipCount = 0)
+        {
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(
+                string.Format(
+                    @"SELECT * 
+                FROM dbo.vw_PublicacionesFavoritasPorUsuario
+                WHERE usuarioid = {0}
+                ORDER BY fecha_favorito DESC 
+                OFFSET {1} ROWS FETCH NEXT 6 ROWS ONLY",
+                    usuario.UsuarioID, skipCount
+                )
+            );
+
+            List<BE.Publicacion> publicaciones = new List<BE.Publicacion>();
+
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    BE.Publicacion publicacion = MAPPER.Publicacion.GetInstancia().Map(row);
+                    publicaciones.Add(publicacion);
+                }
+            }
+
+            return publicaciones;
+        }
+
         public List<BE.Publicacion> RetrievePublicacionesConFiltros(string startDate, string endDate, string author, string category, string title, string content, int skipCount)
         {
             string query = "SELECT * FROM PrensaVerificada.dbo.publicaciones WHERE estadoid = 1 ";
