@@ -80,7 +80,7 @@ namespace PrensaVerificada2.Assets
 
         private void LoadArticles(int skipCount = 0)
         {
-            var publicaciones = BLL.Publicacion.GetInstancia().RetrievePublicacionesPorAutor(autorid, skipCount);
+            var publicaciones = BLL.Publicacion.GetInstancia().RetrievePublicacionesPorAutorPublicadas(autorid, skipCount);
             var articles = new List<dynamic>();
 
             if (Session["Autor_Articles"] != null)

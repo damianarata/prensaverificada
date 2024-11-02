@@ -107,7 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="Assets\API.aspx" />
     <Content Include="Assets\Autor.aspx" />
     <Content Include="Assets\Autores.aspx" />
     <Content Include="Assets\Bitacora.aspx" />
@@ -196,13 +195,6 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Assets\API.aspx.cs">
-      <DependentUpon>API.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Assets\API.aspx.designer.cs">
-      <DependentUpon>API.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Assets\Autor.aspx.cs">
       <DependentUpon>Autor.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
