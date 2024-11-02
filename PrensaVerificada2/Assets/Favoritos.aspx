@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
+    <form id="form1" runat="server">
 
     <!-- Header Container -->
     <div id="header"></div>
@@ -17,12 +18,51 @@
         <!-- Título de la página -->
         <h1 class="text-3xl font-bold text-gray-800 mb-8">Mis Favoritos</h1>
 
-        <!-- Alerta -->
-        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4" role="alert">
-            <p class="font-bold">Alerta</p>
-            <p>Todavía no tenés favoritos o no iniciaste sesión.</p>
-        </div>
+        <div class="w-full max-w-5xl mx-auto mt-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <asp:Repeater ID="ArticlesRepeater" runat="server" EnableViewState="true">
+            <ItemTemplate>
+                <div class="bg-white p-4 rounded-lg shadow-md" onclick="window.location.href='Publicacion.aspx?publiID=<%# Eval("publiID") %>'">
+                    <!-- HiddenField to store publiID -->
+                    <asp:HiddenField ID="HiddenPubliID" runat="server" Value='<%# Eval("publiID") %>' />
+            
+                    <!-- Article Image -->
+                    <img src='<%# Eval("ImageUrl") %>' alt='<%# Eval("Title") %>' class="w-full h-32 object-cover rounded-lg mb-4">
+            
+                    <!-- Category -->
+                    <span class="block text-blue-600 text-sm font-semibold mb-2">
+                        <asp:Literal ID="CategoryControl" runat="server" Text='<%# Eval("Category") %>' />
+                    </span>
+            
+                    <!-- Title -->
+                    <h3 class="text-xl font-semibold mb-2">
+                        <asp:Literal ID="TitleControl" runat="server" Text='<%# Eval("Title") %>' />
+                    </h3>
+            
+                    <!-- Author and Date Section -->
+                    <div class="flex items-center mt-4">
+                        <img src='<%# Eval("AuthorImage") %>' alt="Autor" class="w-8 h-8 rounded-full mr-2">
+                        <div>
+                            <p class="text-sm font-semibold">
+                                <asp:Literal ID="AuthorControl" runat="server" Text='<%# Eval("Author") %>' />
+                            </p>
+                            <p class="text-sm text-gray-600">
+                                <asp:Literal ID="DateControl" runat="server" Text='<%# Eval("Date") %>' />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
+
+            </div>
+           </div> <!-- Botón de cargar más -->
+            <div class="flex justify-center mt-8">
+                <asp:Button ID="ButtonNext" runat="server" Text="Cargas mas" CssClass="px-6 py-2 bg-gray-300 text-gray-600 rounded-full text-lg font-semibold" OnClick="CargarMasButton_Click" />
+            </div>
+        
     </main>
+        </form>
 
    <!-- Footer Container -->
    <div id="footer" class="mt-8"></div>

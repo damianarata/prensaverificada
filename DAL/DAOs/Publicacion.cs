@@ -190,6 +190,33 @@ namespace DAL.DAOs
             return publicaciones;
         }
 
+        public List<BE.Publicacion> RetrieveFavs(BE.Usuario usuario, int skipCount = 0)
+        {
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(
+                string.Format(
+                    @"SELECT * 
+                FROM dbo.vw_PublicacionesFavoritasPorUsuario
+                WHERE usuarioid = {0}
+                ORDER BY fecha_favorito DESC 
+                OFFSET {1} ROWS FETCH NEXT 6 ROWS ONLY",
+                    usuario.UsuarioID, skipCount
+                )
+            );
+
+            List<BE.Publicacion> publicaciones = new List<BE.Publicacion>();
+
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    BE.Publicacion publicacion = MAPPER.Publicacion.GetInstancia().Map(row);
+                    publicaciones.Add(publicacion);
+                }
+            }
+
+            return publicaciones;
+        }
+
         public List<BE.Publicacion> RetrievePublicacionesConFiltros(string startDate, string endDate, string author, string category, string title, string content, int skipCount)
         {
             string query = "SELECT * FROM PrensaVerificada.dbo.publicaciones WHERE estadoid = 1 ";
@@ -237,7 +264,18 @@ namespace DAL.DAOs
             return publicaciones;
         }
 
+        public bool CheckIfFavorite(BE.Publicacion Publi, int userId)
+        {
+            string query = string.Format(
+                @"SELECT 1
+            FROM dbo.vw_PublicacionesFavoritasPorUsuario
+            WHERE usuarioid = {0}
+            AND publicacionid = {1}",
+                    userId, Publi.PublicacionID);
 
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(query);
+            return dt.Rows.Count > 0;
+        }
         public bool Update(BE.Publicacion publicacion)
         {
             string query = string.Format("UPDATE publicaciones SET titulo = '{0}', subtitulo = '{1}', contenido = '{2}', imagen = '{3}', fechapublicacion = '{4}', autorid = {5}, categoriaid = {6}, estadoid = {7}, id_tipo_letra = {8}, id_tipo_tamano = {9}, parrafos = {10}, contador_total = {11}, contador_semanal = {12} WHERE publicacionid = {13}",

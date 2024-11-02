@@ -87,6 +87,16 @@ namespace BLL
             return DAL.DAOs.Publicacion.GetInstancia().RetrievePublicacionesConFiltros(startDate1, endDate1, author, category, title, content, skipCount);
         }
 
+        public List<BE.Publicacion> RetrieveFavs(BE.Usuario usuario, int skip)
+        {
+            return DAL.DAOs.Publicacion.GetInstancia().RetrieveFavs(usuario, skip);
+        }
+
+        public bool CheckIfFavorite(BE.Publicacion Publi, int userid) {
+
+            return DAL.DAOs.Publicacion.GetInstancia().CheckIfFavorite(Publi, userid);
+        }
+
 
         public bool Modificar(BE.Publicacion Publicacion)
         {
