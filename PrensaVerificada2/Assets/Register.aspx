@@ -88,8 +88,6 @@
     <p class="mt-4 text-center text-gray-600">¿Ya tienes cuenta? 
     <a href="login.aspx" class="text-indigo-600 hover:underline">Iniciar sesión</a>
 </p>
-    <asp:Literal ID="ErrorMessageLiteral" runat="server" Visible="false"></asp:Literal>
-<asp:HiddenField ID="SuccessMessageHidden" runat="server" />
 
 
 </asp:Panel>

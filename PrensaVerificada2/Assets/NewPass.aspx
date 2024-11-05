@@ -11,7 +11,7 @@
 </head>
 
 <body class="bg-gray-100 flex flex-col min-h-screen">
-
+    <form runat="server">
     <!-- Contenedor para el Header -->
     <div id="header"></div>
 
@@ -23,38 +23,58 @@
             <p class="text-gray-600 mb-6">Validamos que el enlace sigue activo, ingresa la nueva clave.</p>
 
             <!-- Formulario de Nueva Clave -->
-            <form action="#" method="POST" class="space-y-4">
-                <div>
-                    <label for="password" class="block text-gray-700">Contraseña</label>
-                    <input type="password" id="password" name="password" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                    <p class="text-gray-600 text-sm mt-1">Usar más de 8 caracteres que tengan símbolos, mayúsculas y números</p>
-                </div>
-                <div>
-                    <label for="repeat-password" class="block text-gray-700">Repetir Contraseña</label>
-                    <input type="password" id="repeat-password" name="repeat-password" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                    <p class="text-gray-600 text-sm mt-1">Usar más de 8 caracteres que tengan símbolos, mayúsculas y números</p>
-                </div>
+            <asp:Panel runat="server" CssClass="space-y-4">
+            <div>
+    <label for="PasswordTextBox" class="block text-gray-700">Contraseña</label>
+    <asp:TextBox ID="PasswordTextBox" runat="server" CssClass="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" Placeholder="Contraseña" TextMode="Password"></asp:TextBox>
+    
+    <asp:RequiredFieldValidator ID="rfvPassword" runat="server" 
+        ControlToValidate="PasswordTextBox" 
+        ErrorMessage="La contraseña es requerida" 
+        CssClass="text-red-500 text-sm" 
+        Display="Dynamic">
+    </asp:RequiredFieldValidator>
+    
+    <asp:RegularExpressionValidator ID="revPasswordComplexity" runat="server"
+        ControlToValidate="PasswordTextBox"
+        ErrorMessage="La contraseña debe tener más de 8 caracteres, incluir mayúsculas, números y símbolos."
+        CssClass="text-red-500 text-sm"
+        Display="Dynamic"
+        ValidationExpression="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{8,}$">
+    </asp:RegularExpressionValidator>
+    
+    <p class="text-gray-600 text-sm mt-1">Usar más de 8 caracteres que tengan símbolos, mayúsculas y números</p>
+</div>
 
-                <!-- reCAPTCHA -->
-                <div class="mb-4">
-                    <div class="flex items-center">
-                        <input type="checkbox" id="recaptcha" name="recaptcha" class="mr-2">
-                        <label for="recaptcha" class="text-gray-700">I'm not a robot</label>
-                    </div>
-                    <!-- Simulación del reCAPTCHA -->
-                    <div class="mt-2">
-                        <img src="img/recaptcha-icon.png" alt="reCAPTCHA" class="w-24 h-auto">
-                    </div>
-                </div>
+<div>
+    <label for="RepeatPasswordTextBox" class="block text-gray-700">Repetir Contraseña</label>
+    <asp:TextBox ID="RepeatPasswordTextBox" runat="server" CssClass="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" Placeholder="Repetir contraseña" TextMode="Password"></asp:TextBox>
+    
+    <asp:RequiredFieldValidator ID="rfvRepeatPassword" runat="server" 
+        ControlToValidate="RepeatPasswordTextBox" 
+        ErrorMessage="Debes repetir la contraseña" 
+        CssClass="text-red-500 text-sm" 
+        Display="Dynamic">
+    </asp:RequiredFieldValidator>
+    
+    <asp:CompareValidator ID="cvPasswords" runat="server"
+        ControlToValidate="RepeatPasswordTextBox"
+        ControlToCompare="PasswordTextBox"
+        ErrorMessage="Las contraseñas no coinciden"
+        CssClass="text-red-500 text-sm"
+        Display="Dynamic">
+    </asp:CompareValidator>
+    
+    <p class="text-gray-600 text-sm mt-1">Usar más de 8 caracteres que tengan símbolos, mayúsculas y números</p>
+</div>
 
                 <!-- Botón de Actualizar Contraseña -->
-                <button type="button" class="w-full py-3 mt-4 bg-gray-300 text-gray-600 rounded-full text-lg font-semibold" disabled>
-                    Actualizar contraseña
-                </button>
-            </form>
+                <asp:Button ID="ChangeButton" runat="server" CssClass="w-full py-3 mt-4 bg-gray-300 text-gray-600 rounded-full text-lg font-semibold" Text="Actualizar Contraseña" OnClick="ChangeButton_Click" />
+    <asp:Literal ID="SuccessMessageLiteral" runat="server"></asp:Literal>
+                </asp:Panel>
         </div>
     </div>
-
+        </form>
     <!-- Contenedor para el Footer -->
     <div id="footer" class="mt-8"></div>
 
