@@ -4,8 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BE;
-using BLL;
+using System.Text;
 
 namespace PrensaVerificada2.Assets
 {
@@ -21,7 +20,7 @@ namespace PrensaVerificada2.Assets
 
         protected void btnEnviar(object sender, EventArgs e)
         {
-            BE.Usuario User = BLL.Usuario.Verificar_Usuario(TextBox1.Text.ToString(), TextBox2.Text.ToString());
+            BE.Usuario User = BLL.Usuario.Verificar_Usuario(TextBox1.Text.ToString().ToLower(), EncodeToBase64(TextBox2.Text.ToString()));
 
             if ( User.UsuarioID != 0)
             {
@@ -39,6 +38,12 @@ namespace PrensaVerificada2.Assets
         protected void btnRedes(object sender, EventArgs e)
         {
             Response.Redirect("LoginRedes.aspx");
+        }
+
+        public static string EncodeToBase64(string plainText)
+        {
+            byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+            return Convert.ToBase64String(plainTextBytes);
         }
     }
 }

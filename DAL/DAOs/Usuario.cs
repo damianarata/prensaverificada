@@ -80,5 +80,17 @@ namespace DAL.DAOs
             return Usuario;
         }
 
+        public bool ExisteEmail(string email)
+        {
+            string query = string.Format(
+                @"SELECT 1
+          FROM dbo.usuarios
+          WHERE email = '{0}'", email);
+
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(query);
+            return dt.Rows.Count > 0;
+        }
+
+
     }
 }

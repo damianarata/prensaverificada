@@ -14,6 +14,7 @@
 
     <!-- Contenedor para el Header -->
     <div id="header"></div>
+    <form runat="server">
 
     <!-- Contenido principal -->
     <div class="flex-grow flex items-center justify-center">
@@ -23,60 +24,77 @@
             <p class="text-gray-600 mb-6">Regístrate para tener acceso al portal de noticias</p>
 
             <!-- Formulario de Registro -->
-            <form action="#" method="POST" class="space-y-4">
-                <div>
-                    <label for="email" class="block text-gray-700">Email</label>
-                    <input type="email" id="email" name="email" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                </div>
-                <div>
-                    <label for="password" class="block text-gray-700">Contraseña</label>
-                    <input type="password" id="password" name="password" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                    <p class="text-gray-600 text-sm mt-1">Usar más de 8 caracteres que tengan símbolos, mayúsculas y números</p>
-                </div>
-                <div>
-                    <label for="repeat-password" class="block text-gray-700">Repetir Contraseña</label>
-                    <input type="password" id="repeat-password" name="repeat-password" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                    <p class="text-gray-600 text-sm mt-1">Usar más de 8 caracteres que tengan símbolos, mayúsculas y números</p>
-                </div>
+<asp:Panel runat="server" CssClass="space-y-4">
+    <div>
+        <label for="EmailTextBox" class="block text-gray-700">Email</label>
+        <asp:TextBox ID="EmailTextBox" runat="server" CssClass="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" Placeholder="Correo electrónico" TextMode="Email"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="rfvEmail" runat="server" 
+            ControlToValidate="EmailTextBox" 
+            ErrorMessage="El email es requerido" 
+            CssClass="text-red-500 text-sm" 
+            Display="Dynamic">
+        </asp:RequiredFieldValidator>
+    </div>
 
-                <!-- Checkboxes -->
-                <div class="space-y-2">
-                    <div>
-                        <label class="inline-flex items-center text-gray-700">
-                            <input type="checkbox" class="form-checkbox text-indigo-600" required>
-                            <span class="ml-2">Aceptar nuestros términos y condiciones</span>
-                        </label>
-                    </div>
-                    <div>
-                        <label class="inline-flex items-center text-gray-700">
-                            <input type="checkbox" class="form-checkbox text-indigo-600">
-                            <span class="ml-2">Recibir notificaciones de publicaciones</span>
-                        </label>
-                    </div>
-                </div>
+    <div>
+    <label for="PasswordTextBox" class="block text-gray-700">Contraseña</label>
+    <asp:TextBox ID="PasswordTextBox" runat="server" CssClass="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" Placeholder="Contraseña" TextMode="Password"></asp:TextBox>
+    
+    <asp:RequiredFieldValidator ID="rfvPassword" runat="server" 
+        ControlToValidate="PasswordTextBox" 
+        ErrorMessage="La contraseña es requerida" 
+        CssClass="text-red-500 text-sm" 
+        Display="Dynamic">
+    </asp:RequiredFieldValidator>
+    
+    <asp:RegularExpressionValidator ID="revPasswordComplexity" runat="server"
+        ControlToValidate="PasswordTextBox"
+        ErrorMessage="La contraseña debe tener más de 8 caracteres, incluir mayúsculas, números y símbolos."
+        CssClass="text-red-500 text-sm"
+        Display="Dynamic"
+        ValidationExpression="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{8,}$">
+    </asp:RegularExpressionValidator>
+    
+    <p class="text-gray-600 text-sm mt-1">Usar más de 8 caracteres que tengan símbolos, mayúsculas y números</p>
+</div>
 
-                <!-- reCAPTCHA -->
-                <div class="mb-4">
-                    <div class="flex items-center">
-                        <input type="checkbox" id="recaptcha" name="recaptcha" class="mr-2">
-                        <label for="recaptcha" class="text-gray-700">I'm not a robot</label>
-                    </div>
-                    <!-- Simulación del reCAPTCHA -->
-                    <div class="mt-2">
-                        <img src="img/recaptcha-icon.png" alt="reCAPTCHA" class="w-24 h-auto">
-                    </div>
-                </div>
+<div>
+    <label for="RepeatPasswordTextBox" class="block text-gray-700">Repetir Contraseña</label>
+    <asp:TextBox ID="RepeatPasswordTextBox" runat="server" CssClass="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" Placeholder="Repetir contraseña" TextMode="Password"></asp:TextBox>
+    
+    <asp:RequiredFieldValidator ID="rfvRepeatPassword" runat="server" 
+        ControlToValidate="RepeatPasswordTextBox" 
+        ErrorMessage="Debes repetir la contraseña" 
+        CssClass="text-red-500 text-sm" 
+        Display="Dynamic">
+    </asp:RequiredFieldValidator>
+    
+    <asp:CompareValidator ID="cvPasswords" runat="server"
+        ControlToValidate="RepeatPasswordTextBox"
+        ControlToCompare="PasswordTextBox"
+        ErrorMessage="Las contraseñas no coinciden"
+        CssClass="text-red-500 text-sm"
+        Display="Dynamic">
+    </asp:CompareValidator>
+    
+    <p class="text-gray-600 text-sm mt-1">Usar más de 8 caracteres que tengan símbolos, mayúsculas y números</p>
+</div>
 
-                <!-- Botón de Registrarse -->
-                <button type="submit" class="w-full py-3 mt-4 bg-gray-300 text-gray-600 rounded-full text-lg font-semibold" disabled>
-                    Registrarse
-                </button>
+    <!-- Botón de Registrarse -->
+    <asp:Button ID="RegisterButton" runat="server" CssClass="w-full py-3 mt-4 bg-gray-300 text-gray-600 rounded-full text-lg font-semibold" Text="Registrarse" OnClick="RegisterButton_Click" />
+    <asp:Literal ID="SuccessMessageLiteral" runat="server"></asp:Literal>
+
+    <!-- Enlace de Iniciar Sesión -->
+    <p class="mt-4 text-center text-gray-600">¿Ya tienes cuenta? 
+    <a href="login.aspx" class="text-indigo-600 hover:underline">Iniciar sesión</a>
+</p>
+
+
+</asp:Panel>
+</div>
+        </div>
             </form>
 
-            <!-- Enlace de Iniciar Sesión -->
-            <p class="mt-4 text-center text-gray-600">¿Ya tienes cuenta? <a href="#" class="text-indigo-600 hover:underline">Iniciar sesión</a></p>
-        </div>
-    </div>
 
     <!-- Contenedor para el Footer -->
     <div id="footer" class="mt-8"></div>

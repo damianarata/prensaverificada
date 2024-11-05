@@ -30,7 +30,7 @@ namespace BLL
         #endregion
         
         #region Usuario Ops
-        public bool Agregar(BE.Usuario NewUser)
+        public BE.Usuario Agregar(BE.Usuario NewUser)
         {
             throw new NotImplementedException();
         }
@@ -87,6 +87,12 @@ namespace BLL
         {
             return DAL.Usuario.GetInstancia().Update(User);
         }
+
+        public bool EsEmailDisponible(string email)
+        {
+            return (!DAL.DAOs.Usuario.GetInstancia().ExisteEmail(email));
+        }
+
 
         public static BE.Usuario Verificar_Usuario(string email, string contrasena)
         {
