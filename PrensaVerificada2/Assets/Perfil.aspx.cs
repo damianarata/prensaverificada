@@ -97,5 +97,10 @@ namespace PrensaVerificada2.Assets
         {
             Response.Redirect("Index.aspx");
         }
+
+        protected void btnChange(object sender, EventArgs e)
+        {
+            Response.Redirect("NewPass.aspx");
+        }
     }
 }

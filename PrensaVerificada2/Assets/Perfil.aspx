@@ -136,10 +136,14 @@
                         </div>
                     </div>
                         <div class="flex justify-end space-x-4">
-                            <asp:Button ID="Button1" runat="server" OnClick="btnCancel" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-300" Text="Cancelar" />
+                            <asp:Button ID="Button2" runat="server" OnClick="btnChange" CausesValidation="false" 
+                            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-3000" 
+                            Text="Cambiar contraseña" />
+                            <asp:Button ID="Button1" runat="server" OnClick="btnCancel" CausesValidation="false" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-300" Text="Cancelar" />
                             <asp:Button ID="ButtonGuardar" runat="server" OnClick="btnGuardar" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300" Text="Guardar" />
                       </div>
-                </div>
+
+                    </div>
         </div>
       </div>
       </div>
