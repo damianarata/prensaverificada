@@ -16,5 +16,17 @@ namespace PrensaVerificada2.Assets
             Session["autor_pages"] = null;
             Session["index_pages"] = null;
         }
+
+        protected void SendButton_Click(object sender, EventArgs e)
+        {
+            var email = EmailTextBox.Text.ToLower();
+            var code = BLL.Usuario.GetInstancia().RecuperarPass(email);
+            Session["Code"] = code;
+            Session["Email"] = email;
+            string url = $"EmailConfirmation.aspx"; //?code={code}&email={email}";
+            string script = $"window.open('{url}', '_blank');";
+            ClientScript.RegisterStartupScript(this.GetType(), "AbrirNuevaPestaña", script, true);
+        }
+
     }
 }

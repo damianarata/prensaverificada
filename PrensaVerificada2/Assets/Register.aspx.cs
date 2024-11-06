@@ -28,6 +28,10 @@ namespace PrensaVerificada2.Assets
             if (emailDisponible)
             {
                 nuevoUsuario.FechaRegistro = DateTime.Now;
+                nuevoUsuario.Admin = false;
+                nuevoUsuario.Codigo = "A";
+                nuevoUsuario.Blocked = false;
+                nuevoUsuario.Retry = 0;
                 bool resultado = BLL.Usuario.GetInstancia().Create(nuevoUsuario);
                 if (resultado)
                 {

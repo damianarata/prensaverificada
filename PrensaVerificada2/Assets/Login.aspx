@@ -32,18 +32,6 @@
                     <asp:TextBox ID="TextBox2" TextMode="Password" runat="server" class="w-full p-2 border border-gray-300 rounded mt-1"></asp:TextBox>
                 </div>
 
-                <!-- reCAPTCHA -->
-                <div class="mb-4">
-                    <div class="flex items-center">
-                        <asp:CheckBox ID="CheckBox1" runat="server" />
-&nbsp;<label for="recaptcha" class="text-gray-700">I'm not a robot</label>
-                    </div>
-                    <!-- Simulación del reCAPTCHA -->
-                    <div class="mt-2">
-                        <img src="img/recaptcha-icon.png" alt="reCAPTCHA" class="w-24 h-auto">
-                    </div>
-                </div>
-
                 <!-- Olvidaste la contraseña -->
                 <div class="text-right mb-4">
                     <a href="./RecoverPass.aspx" class="text-purple-600 hover:underline">¿Olvidaste la contraseña?</a>
@@ -58,6 +46,7 @@
                 <div class="text-center mb-4">
                     <asp:Button ID="ButtonRedes" runat="server" OnClick="btnRedes" class="w-full border border-gray-300 py-2 rounded text-gray-700" Text="Redes Sociales" />
                 </div>
+                <asp:Literal ID="SuccessMessageLiteral" runat="server"></asp:Literal>
             </form>
 
             <!-- Crear Cuenta -->

@@ -16,12 +16,35 @@ namespace PrensaVerificada2.Assets
             Session["Autor_Articles"] = null;
             Session["autor_pages"] = null;
             Session["index_pages"] = null;
+
+            if (Request.QueryString["code"] != null && Request.QueryString["email"] != null)
+            {
+                string code = Request.QueryString["code"];
+                string email = Request.QueryString["email"];
+                BE.Usuario User = BLL.Usuario.Verificar_Codigo(email, code);
+
+                if (User.UsuarioID != 0)
+                {
+                    Session["usuario"] = User.UsuarioID.ToString();
+                    var autor = BLL.Autor.GetInstancia().Retreivebyuser(User.UsuarioID);
+                    Session["autorId"] = autor.AutorID.ToString();
+                }
+                else
+                {
+                    string script = "<script type='text/javascript'>alert('Hubo un inconveniente. Por favor comunicate con soporte.');" +
+                                    "window.location.href = 'Contacto.aspx';</script>";
+                    SuccessMessageLiteral.Text = script;
+                }
+            }
         }
 
         protected void ChangeButton_Click(object sender, EventArgs e)
         {
             BE.Usuario user = BLL.Usuario.GetInstancia().RetrieveUser(new BE.Usuario { UsuarioID = Convert.ToInt32(Session["usuario"]) });
             user.Contrasena = EncodeToBase64(PasswordTextBox.Text.Trim());
+            user.Retry = 0;
+            user.Blocked = false;
+            user.Codigo = "A";
             if (user.UsuarioID != 0)
             {
                 bool resultado = BLL.Usuario.GetInstancia().ActualizarUsuario(user);

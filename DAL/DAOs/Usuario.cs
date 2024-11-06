@@ -22,10 +22,49 @@ namespace DAL.DAOs
 
         public bool Create(BE.Usuario usuario)
         {
-            string query = string.Format("INSERT INTO usuarios (nombre, email, contrasena, fecharegistro) VALUES ('{0}', '{1}', '{2}', '{3}');",
-                usuario.Nombre, usuario.Email, usuario.Contrasena, usuario.FechaRegistro.ToString("yyyy-MM-dd"));
+            string adminValue = usuario.Admin.HasValue ? (usuario.Admin.Value ? "1" : "0") : "NULL";
+            string blockedValue = usuario.Blocked.HasValue ? (usuario.Blocked.Value ? "1" : "0") : "NULL";
+            string retryValue = usuario.Retry.HasValue ? usuario.Retry.Value.ToString() : "NULL";
+
+            string query = string.Format(
+                "INSERT INTO usuarios (nombre, email, contrasena, fecharegistro, admin, blocked, codigo, retry) " +
+                "VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, '{6}', {7});",
+                usuario.Nombre,
+                usuario.Email,
+                usuario.Contrasena,
+                usuario.FechaRegistro.ToString("yyyy-MM-dd"),
+                adminValue,
+                blockedValue,
+                usuario.Codigo,
+                retryValue
+            );
+
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
+
+        public bool Update(BE.Usuario usuario)
+        {
+            string adminValue = usuario.Admin.HasValue ? (usuario.Admin.Value ? "1" : "0") : "NULL";
+            string blockedValue = usuario.Blocked.HasValue ? (usuario.Blocked.Value ? "1" : "0") : "NULL";
+            string retryValue = usuario.Retry.HasValue ? usuario.Retry.Value.ToString() : "NULL";
+
+            string query = string.Format(
+                "UPDATE usuarios SET nombre = '{0}', email = '{1}', contrasena = '{2}', fecharegistro = '{3}', " +
+                "admin = {4}, blocked = {5}, codigo = '{6}', retry = {7} WHERE usuarioid = {8};",
+                usuario.Nombre,
+                usuario.Email,
+                usuario.Contrasena,
+                usuario.FechaRegistro.ToString("yyyy-MM-dd"),
+                adminValue,
+                blockedValue,
+                usuario.Codigo,
+                retryValue,
+                usuario.UsuarioID
+            );
+
+            return AccesoDatos.GetInstancia().ExecuteQuery(query);
+        }
+
 
         public List<BE.Usuario> RetreiveAll()
         {
@@ -52,13 +91,6 @@ namespace DAL.DAOs
             }
 
             return user;
-        }
-
-        public bool Update(BE.Usuario usuario)
-        {
-            string query = string.Format("UPDATE usuarios SET nombre = '{0}', email = '{1}', contrasena = '{2}', fecharegistro = '{3}' WHERE usuarioid = {4}",
-                usuario.Nombre, usuario.Email, usuario.Contrasena, usuario.FechaRegistro.ToString("yyyy-MM-dd"), usuario.UsuarioID);
-            return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
 
         public bool Delete(BE.Usuario usuario)
