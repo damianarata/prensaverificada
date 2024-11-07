@@ -36,6 +36,13 @@ namespace PrensaVerificada2.Assets
                     SuccessMessageLiteral.Text = script;
                 }
             }
+            else
+            {
+                if (Session["usuario"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
 
         protected void ChangeButton_Click(object sender, EventArgs e)
