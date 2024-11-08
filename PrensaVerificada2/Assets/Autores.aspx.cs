@@ -29,6 +29,7 @@ namespace PrensaVerificada2.Assets
         {
             var topArticles = new List<dynamic>();
             var autores = BLL.Autor.GetInstancia().RetreiveAll();
+            BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 16);
             foreach (var autor in autores)
             {
                 topArticles.Add(new

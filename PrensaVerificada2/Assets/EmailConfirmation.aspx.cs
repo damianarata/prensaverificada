@@ -18,6 +18,7 @@ namespace PrensaVerificada2.Assets
         {
             string email = Session["Email"] as string;
             string code = Session["Code"] as string;
+            BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 20, email);
             Response.Write($"<script>alert('Email confirmado exitosamente.'); window.location.href = 'NewPass.aspx?Code={code}&Email={email}';</script>");
         }
     }

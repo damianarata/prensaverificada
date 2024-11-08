@@ -23,6 +23,12 @@ namespace PrensaVerificada2.Assets
             var code = BLL.Usuario.GetInstancia().RecuperarPass(email);
             Session["Code"] = code;
             Session["Email"] = email;
+            BE.Usuario User = BLL.Usuario.Verificar_Codigo(email, code);
+            if (User.UsuarioID == 0)
+            {
+                User.UsuarioID = 999999;
+            }
+            BLL.Bitacora.GetInstancia().RegistroBitacora(User.UsuarioID, 24, email);
             string url = $"EmailConfirmation.aspx"; //?code={code}&email={email}";
             string script = $"window.open('{url}', '_blank');";
             ClientScript.RegisterStartupScript(this.GetType(), "AbrirNuevaPestaña", script, true);

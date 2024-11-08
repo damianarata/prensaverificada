@@ -17,7 +17,7 @@
     <form runat="server">
 
     <!-- Contenido principal -->
-    <div class="flex-grow flex items-center justify-center">
+    <div class="flex-grow flex items-center justify-center mt-16">
         <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
             <!-- Título -->
             <h2 class="text-2xl font-semibold text-gray-800 mb-2">Registrarse</h2>

@@ -101,16 +101,27 @@ namespace BLL
             {
                 DBUser.Retry = 0;
                 DBUser.Blocked = false;
+                BLL.Bitacora.GetInstancia().RegistroBitacora(DBUser.UsuarioID, 1);
                 return DBUser;
             }
-            DBUser.Retry += 1;
-            if (DBUser.Retry == 3)
+            else
             {
-                DBUser.Blocked = true;
+                if (DBUser.Blocked == true)
+                {
+                    BLL.Bitacora.GetInstancia().RegistroBitacora(DBUser.UsuarioID, 1);
+                    return new BE.Usuario { UsuarioID = 0, Blocked = true };
+                }
+                DBUser.Retry += 1;
+                BLL.Bitacora.GetInstancia().RegistroBitacora(DBUser.UsuarioID, 4);
+                if (DBUser.Retry == 3)
+                {
+                    DBUser.Blocked = true;
+                    BLL.Bitacora.GetInstancia().RegistroBitacora(DBUser.UsuarioID, 14);
+                    DAL.DAOs.Usuario.GetInstancia().Update(DBUser);
+                    return new BE.Usuario { UsuarioID = 0, Blocked = true };
+                }
                 DAL.DAOs.Usuario.GetInstancia().Update(DBUser);
-                return new BE.Usuario { UsuarioID = 0, Blocked = true };
             }
-            DAL.DAOs.Usuario.GetInstancia().Update(DBUser);
             return new BE.Usuario { UsuarioID = 0};
         }
 
@@ -155,7 +166,7 @@ namespace BLL
 
         // Usar esta funcion para saber si tiene que validarse la sesion o no.
         public bool Restriction () {
-            return false;
+            return true;
         }
 
         #endregion

@@ -14,7 +14,7 @@
     <div id="header"></div>
 
     <!-- Contenido principal -->
-    <div class="flex-grow flex items-center justify-center">
+    <div class="flex-grow flex items-center justify-center mt-16">
         <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
             <h2 class="text-xl font-bold text-center mb-6">Bienvenido</h2>
 

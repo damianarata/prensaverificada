@@ -16,14 +16,14 @@
     <div id="header"></div>
 
     <!-- Contenido principal -->
-    <div class="flex-grow flex items-center justify-center">
+    <div class="flex-grow flex items-center justify-center mt-16">
         <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
             <!-- Título -->
             <h2 class="text-2xl font-semibold text-gray-800 mb-2">Nueva clave</h2>
             <p class="text-gray-600 mb-6">Validamos que el enlace sigue activo, ingresa la nueva clave.</p>
 
             <!-- Formulario de Nueva Clave -->
-            <asp:Panel runat="server" CssClass="space-y-4">
+            <asp:Panel runat="server" CssClass="space-y-4" DefaultButton="ChangeButton">
             <div>
     <label for="PasswordTextBox" class="block text-gray-700">Contraseña</label>
     <asp:TextBox ID="PasswordTextBox" runat="server" CssClass="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" Placeholder="Contraseña" TextMode="Password"></asp:TextBox>
@@ -69,7 +69,7 @@
 </div>
 
                 <!-- Botón de Actualizar Contraseña -->
-                <asp:Button ID="ChangeButton" runat="server" CssClass="w-full py-3 mt-4 bg-gray-300 text-gray-600 rounded-full text-lg font-semibold" Text="Actualizar Contraseña" OnClick="ChangeButton_Click" />
+                <asp:Button ID="ChangeButton" runat="server" CssClass="w-full py-3 mt-4 bg-gray-300 text-gray-600 rounded-full text-lg font-semibold" Text="Actualizar Contraseña" OnClick="ChangeButton_Click" UseSubmitBehavior="false" />
     <asp:Literal ID="SuccessMessageLiteral" runat="server"></asp:Literal>
                 </asp:Panel>
         </div>

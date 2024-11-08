@@ -14,7 +14,7 @@
     <div id="header"></div>
 
     <!-- Contenido principal -->
-    <div class="flex-grow flex items-center justify-center flex-col">
+    <div class="flex-grow flex items-center justify-center mt-16 flex-col">
         <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm text-center">
             <!-- Ícono de usuario -->
             <div class="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-4"></div>

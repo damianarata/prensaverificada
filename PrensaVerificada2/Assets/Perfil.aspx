@@ -141,6 +141,8 @@
                             Text="Cambiar contraseña" />
                             <asp:Button ID="Button1" runat="server" OnClick="btnCancel" CausesValidation="false" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:ring-4 focus:ring-gray-300" Text="Cancelar" />
                             <asp:Button ID="ButtonGuardar" runat="server" OnClick="btnGuardar" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300" Text="Guardar" />
+                            <asp:Label ID="lblMensaje" runat="server" CssClass="text-red-500"></asp:Label>
+                            <asp:Literal ID="SuccessMessageLiteral" runat="server"></asp:Literal>
                       </div>
 
                     </div>

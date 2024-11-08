@@ -55,6 +55,7 @@ namespace PrensaVerificada2.Assets
             if (user.UsuarioID != 0)
             {
                 bool resultado = BLL.Usuario.GetInstancia().ActualizarUsuario(user);
+                BLL.Bitacora.GetInstancia().RegistroBitacora(user.UsuarioID, 5);
                 if (resultado)
                 {
                     string script = "<script type='text/javascript'>alert('Contraseña cambiada con exito');" +

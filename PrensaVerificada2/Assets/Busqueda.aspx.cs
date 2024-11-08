@@ -62,6 +62,7 @@ namespace PrensaVerificada2.Assets
 
         private void LoadArticles(int skipCount = 0)
         {
+            BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 17);
             DateTime? startDateValue = string.IsNullOrEmpty(TextBox1.Text) ? (DateTime?)null : DateTime.Parse(TextBox1.Text);
             DateTime? endDateValue = string.IsNullOrEmpty(TextBox2.Text) ? (DateTime?)null : DateTime.Parse(TextBox2.Text);
             string selectedAuthor = AuthorDropDown.SelectedValue;
