@@ -12,5 +12,6 @@ namespace BE
         public int UsuarioID { get; set; }
         public DateTime Fecha { get; set; }
         public string Accion { get; set; }
+        public string Criticidad { get; set; }
     }
 }
