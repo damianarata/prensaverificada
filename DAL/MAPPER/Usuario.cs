@@ -21,12 +21,19 @@ namespace DAL.MAPPER
 
         public BE.Usuario Map(DataRow row)
         {
-            BE.Usuario usuario = new BE.Usuario();
-            usuario.UsuarioID = Convert.ToInt32(row["usuarioid"]);
-            usuario.Nombre = row["nombre"].ToString();
-            usuario.Email = row["email"].ToString();
-            usuario.Contrasena = row["contrasena"].ToString();
-            usuario.FechaRegistro = Convert.ToDateTime(row["fecharegistro"]);
+            BE.Usuario usuario = new BE.Usuario
+            {
+                UsuarioID = Convert.ToInt32(row["usuarioid"]),
+                Nombre = row["nombre"].ToString(),
+                Email = row["email"].ToString(),
+                Contrasena = row["contrasena"].ToString(),
+                FechaRegistro = Convert.ToDateTime(row["fecharegistro"]),
+                Admin = row["admin"] != DBNull.Value ? (bool?)Convert.ToBoolean(row["admin"]) : null,
+                Blocked = row["blocked"] != DBNull.Value ? (bool?)Convert.ToBoolean(row["blocked"]) : null,
+                Codigo = row["codigo"].ToString(),
+                Retry = row["retry"] != DBNull.Value ? (int?)Convert.ToInt32(row["retry"]) : null
+            };
+
             return usuario;
         }
     }

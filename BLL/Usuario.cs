@@ -96,17 +96,61 @@ namespace BLL
 
         public static BE.Usuario Verificar_Usuario(string email, string contrasena)
         {
-            // Crear un objeto Usuario con los datos ingresados
             BE.Usuario DBUser = DAL.Usuario.Login(new BE.Usuario { Email = email, Contrasena = contrasena });
-
-            // Validar si la contraseña ingresada coincide con la contraseña en la base de datos
             if (DBUser != null && DBUser.Contrasena == contrasena)
             {
-                return DBUser; // Si las contraseñas coinciden, devolver el usuario encontrado
+                DBUser.Retry = 0;
+                DBUser.Blocked = false;
+                return DBUser;
+            }
+            DBUser.Retry += 1;
+            if (DBUser.Retry == 3)
+            {
+                DBUser.Blocked = true;
+                DAL.DAOs.Usuario.GetInstancia().Update(DBUser);
+                return new BE.Usuario { UsuarioID = 0, Blocked = true };
+            }
+            DAL.DAOs.Usuario.GetInstancia().Update(DBUser);
+            return new BE.Usuario { UsuarioID = 0};
+        }
+
+        public static BE.Usuario Verificar_Codigo(string email, string codigo)
+        {
+            BE.Usuario DBUser = DAL.Usuario.Login(new BE.Usuario { Email = email, Codigo = codigo });
+            if (DBUser != null && DBUser.Codigo == codigo)
+            {
+                return DBUser;
             }
 
-            // Si no coincide la contraseña, devolver un usuario con UsuarioID = 0
             return new BE.Usuario { UsuarioID = 0 };
+        }
+
+        public string RecuperarPass(string email)
+        {
+            BE.Usuario DBUser = DAL.Usuario.Login(new BE.Usuario { Email = email });
+
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            var codigo = new StringBuilder();
+
+            for (int i = 0; i < 4; i++)
+            {
+                // Generar una sección de 4 caracteres
+                for (int j = 0; j < 4; j++)
+                {
+                    codigo.Append(chars[random.Next(chars.Length)]);
+                }
+
+                // Agregar el guion entre cada grupo, excepto el último
+                if (i < 3)
+                {
+                    codigo.Append("-");
+                }
+            }
+
+            DBUser.Codigo = codigo.ToString();
+            DAL.DAOs.Usuario.GetInstancia().Update(DBUser);
+            return codigo.ToString();
         }
 
         // Usar esta funcion para saber si tiene que validarse la sesion o no.

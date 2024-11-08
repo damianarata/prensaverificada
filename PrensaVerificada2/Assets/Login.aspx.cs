@@ -31,7 +31,18 @@ namespace PrensaVerificada2.Assets
             }
             else
             {
-                Response.Redirect("Login.aspx");
+                if (User.Blocked == true)
+                {
+                    string script = "<script type='text/javascript'>alert('La cuenta quedo bloqueada, tenes que recuperar la contraseña');" +
+                                    "window.location.href = 'RecoverPass.aspx';</script>";
+                    SuccessMessageLiteral.Text = script;
+                }
+                else
+                {
+                    string script = "<script type='text/javascript'>alert('Contraseña incorrecta, volve a intentarlo');" +
+                                    "window.location.href = 'Login.aspx';</script>";
+                    SuccessMessageLiteral.Text = script;
+                }
             }
         }
 

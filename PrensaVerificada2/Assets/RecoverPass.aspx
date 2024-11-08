@@ -12,6 +12,7 @@
 
     <!-- Contenedor para el Header -->
     <div id="header"></div>
+    <form runat="server">
 
     <!-- Contenido principal -->
     <div class="flex-grow flex items-center justify-center">
@@ -21,36 +22,54 @@
             <p class="text-gray-600 mb-6">Recupera tu contraseña con el siguiente procedimiento</p>
 
             <!-- Formulario de Recupero -->
-            <form action="#" method="POST" class="space-y-4">
+            <asp:Panel runat="server" CssClass="space-y-4">
                 <div>
-                    <label for="email" class="block text-gray-700">Email</label>
-                    <input type="email" id="email" name="email" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                </div>
-                <div>
-                    <label for="repeat-email" class="block text-gray-700">Repetir Email</label>
-                    <input type="email" id="repeat-email" name="repeat-email" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                </div>
+    <label for="EmailTextBox" class="block text-gray-700">Email</label>
+    <asp:TextBox ID="EmailTextBox" runat="server" CssClass="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" Placeholder="Correo electrónico" TextMode="Email"></asp:TextBox>
+    
+    <asp:RequiredFieldValidator ID="rfvEmail" runat="server" 
+        ControlToValidate="EmailTextBox" 
+        ErrorMessage="El email es requerido" 
+        CssClass="text-red-500 text-sm" 
+        Display="Dynamic">
+    </asp:RequiredFieldValidator>
+    
+    <asp:RegularExpressionValidator ID="revEmailFormat" runat="server"
+        ControlToValidate="EmailTextBox"
+        ErrorMessage="Formato de email inválido"
+        CssClass="text-red-500 text-sm"
+        Display="Dynamic"
+        ValidationExpression="^[\w\.-]+@[\w\.-]+\.\w{2,4}$">
+    </asp:RegularExpressionValidator>
+</div>
 
-                 <!-- reCAPTCHA -->
-                 <div class="mb-4">
-                    <div class="flex items-center">
-                        <input type="checkbox" id="recaptcha" name="recaptcha" class="mr-2">
-                        <label for="recaptcha" class="text-gray-700">I'm not a robot</label>
-                    </div>
-                    <!-- Simulación del reCAPTCHA -->
-                    <div class="mt-2">
-                        <img src="img/recaptcha-icon.png" alt="reCAPTCHA" class="w-24 h-auto">
-                    </div>
-                </div>
+<!-- Campo para Confirmar Email -->
+<div>
+    <label for="ConfirmEmailTextBox" class="block text-gray-700">Confirmar Email</label>
+    <asp:TextBox ID="ConfirmEmailTextBox" runat="server" CssClass="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" Placeholder="Confirmar correo electrónico" TextMode="Email"></asp:TextBox>
+    
+    <asp:RequiredFieldValidator ID="rfvConfirmEmail" runat="server" 
+        ControlToValidate="ConfirmEmailTextBox" 
+        ErrorMessage="Confirma el email" 
+        CssClass="text-red-500 text-sm" 
+        Display="Dynamic">
+    </asp:RequiredFieldValidator>
+    
+    <asp:CompareValidator ID="cvEmails" runat="server"
+        ControlToValidate="ConfirmEmailTextBox"
+        ControlToCompare="EmailTextBox"
+        ErrorMessage="Los emails no coinciden"
+        CssClass="text-red-500 text-sm"
+        Display="Dynamic">
+    </asp:CompareValidator>
+</div>
 
-                <!-- Botón de Enviar (deberia ser submit) -->
-                <button id="recover-btn" type="button" class="w-full py-3 mt-4 bg-gray-300 text-gray-600 rounded-full text-lg font-semibold">
-                    Enviar correo
-                </button>
-            </form>
+               <asp:Button ID="EnviarCorreobutton" runat="server" CssClass="w-full py-3 mt-4 bg-gray-300 text-gray-600 rounded-full text-lg font-semibold" Text="Enviar Correo" OnClick="SendButton_Click" />
+                </asp:Panel>
         </div>
     </div>
 
+        </form>
     <!-- Contenedor para el Footer -->
     <div id="footer" class="mt-8"></div>
 
