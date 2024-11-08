@@ -156,7 +156,7 @@ namespace PrensaVerificada2.Assets
                     Contenido = contenido,
                     Imagen = imagenSeleccionada,
                     FechaPublicacion = DateTime.Now,
-                    AutorID = 1,
+                    AutorID = Convert.ToInt32(Session["autorId"]),
                     CategoriaID = categoriaID,
                     EstadoID = status,
                     IdTipoLetra = Convert.ToInt32(ddlFontFamily.SelectedValue),
@@ -175,6 +175,7 @@ namespace PrensaVerificada2.Assets
                     nuevaPublicacion.PublicacionID = Convert.ToInt32(publiID);
                     BLL.Publicacion.GetInstancia().Update(nuevaPublicacion);
                 }
+                BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 19, publiID);
                 lblMensaje.Text = "Publicación creada con éxito.";
                 ClientScript.RegisterStartupScript(this.GetType(), "redirect", "setTimeout(function() { window.location.href = 'MisPublicaciones.aspx'; }, 3000);", true);
             }

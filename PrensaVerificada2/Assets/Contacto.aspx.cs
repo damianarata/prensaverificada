@@ -24,6 +24,12 @@ namespace PrensaVerificada2.Assets
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
+            int usuarioId = Convert.ToInt32(Session["usuario"]);
+            if (usuarioId == 0)
+            {
+                usuarioId = 999999;
+            }
+
             BE.Reclamo reclamo = new BE.Reclamo
             {
                 Descripcion = DescripcionTextBox.Text,
@@ -31,8 +37,10 @@ namespace PrensaVerificada2.Assets
                 Mail = EmailTextBox.Text,
                 EstadoID = 1,
                 Fecha = DateTime.Now,
-                UsuarioID = Convert.ToInt32(Session["usuario"])
+                UsuarioID = usuarioId
             };
+
+            BLL.Bitacora.GetInstancia().RegistroBitacora(usuarioId, 13);
 
             bool resultado = BLL.Reclamo.GetInstancia().Create(reclamo);
             if (resultado)

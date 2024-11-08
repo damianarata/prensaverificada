@@ -39,6 +39,7 @@ namespace PrensaVerificada2.Assets
                     if (User.UsuarioID != 0)
                     {
                         Session["usuario"] = User.UsuarioID.ToString();
+                        BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 12, User.Email);
                     }
                     string script = "<script type='text/javascript'>alert('Usuario creado con éxito');" +
                                     "window.location.href = 'Index.aspx';</script>";
@@ -52,6 +53,7 @@ namespace PrensaVerificada2.Assets
             }
             else
             {
+                BLL.Bitacora.GetInstancia().RegistroBitacora(999999, 26);
                 string script = "<script type='text/javascript'>alert('El email ya existe proba con otro o trata de recuperar tu contraseña'); </script>";
                 SuccessMessageLiteral.Text = script;
             }

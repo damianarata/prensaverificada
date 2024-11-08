@@ -11,6 +11,13 @@ namespace PrensaVerificada2.Assets
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (BLL.Usuario.GetInstancia().Restriction() == true)
+            {
+                if (Session["usuario"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
             LoadCategorias();
             Session["Index_Articles"] = null;
             Session["Autor_Articles"] = null;
@@ -20,6 +27,7 @@ namespace PrensaVerificada2.Assets
 
         private void LoadCategorias()
         {
+            BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 18);
             var categorias = BLL.Categoria.GetInstancia().Listar();
             var topArticles = new List<dynamic>();
 

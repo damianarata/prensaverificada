@@ -30,6 +30,7 @@ namespace PrensaVerificada2.Assets
         {
             try
             {
+                BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 23);
                 List<BE.Reclamo> reclamos = BLL.Reclamo.GetInstancia().Listar();
 
                 var reclamosData = reclamos.Select(reclamo => {

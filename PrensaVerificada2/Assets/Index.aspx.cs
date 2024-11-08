@@ -40,6 +40,7 @@ namespace PrensaVerificada2.Assets
 
         private void LoadArticles(int skipCount = 0)
         {
+            BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 22);
             var articles = Session["Index_Articles"] as List<dynamic> ?? new List<dynamic>();
             List<BE.Publicacion> publicaciones;
             if (!string.IsNullOrEmpty(Request.QueryString["categoriaID"]))

@@ -29,8 +29,11 @@ namespace PrensaVerificada2.Assets
                 {
                     throw new ArgumentException("El parámetro 'publiID' no está presente en la Query String.");
                 }
-
+                BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 8, publiID);
                 BE.Publicacion Publi = BLL.Publicacion.GetInstancia().RetrievePublicacion(publiID);
+                Publi.ContadorTotal += 1;
+                Publi.ContadorSemanal += 1;
+                BLL.Publicacion.GetInstancia().Update(Publi);
                 BE.Autor Autor = BLL.Autor.GetInstancia().RetrieveAutor(Publi.AutorID);
 
                 titulo.InnerText = Publi.Titulo;
@@ -122,11 +125,13 @@ namespace PrensaVerificada2.Assets
             var fav = new BE.Favorito { PublicacionID = Convert.ToInt32(Request.QueryString["publiID"]), UsuarioID = Convert.ToInt32(Session["usuario"]), FechaAgregado = DateTime.Now };
             if (isFavorite)
             {
+                BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 10, fav.PublicacionID.ToString());
                 BLL.Favorito.GetInstancia().Delete(fav);
                 isFavorite = false;
             }
             else
             {
+                BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 9, fav.PublicacionID.ToString());
                 BLL.Favorito.GetInstancia().Create(fav);
                 isFavorite = true;
             }

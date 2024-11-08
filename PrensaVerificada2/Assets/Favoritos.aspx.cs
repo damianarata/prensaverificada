@@ -38,6 +38,7 @@ namespace PrensaVerificada2.Assets
 
         private void LoadArticles(int skipCount = 0)
         {
+            BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 21);
             var publicaciones = BLL.Publicacion.GetInstancia().RetrieveFavs(new BE.Usuario { UsuarioID = Convert.ToInt32(Session["usuario"]) }, skipCount);
             var articles = new List<dynamic>();
 

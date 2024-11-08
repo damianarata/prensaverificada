@@ -142,15 +142,32 @@ namespace PrensaVerificada2.Assets
                 string criticidad = row["criticidad"].ToString();
                 int totalRegistros = Convert.ToInt32(row["TotalRegistros"]);
 
-                Chart1.Series["Series1"].Points.AddXY(criticidad, totalRegistros);
+                // Agregar punto y obtener el índice
+                int pointIndex = Chart1.Series["Series1"].Points.AddXY(criticidad, totalRegistros);
+
+                // Asignar color según criticidad
+                switch (criticidad)
+                {
+                    case "WARN":
+                        Chart1.Series["Series1"].Points[pointIndex].Color = System.Drawing.Color.Orange;
+                        break;
+                    case "INFO":
+                        Chart1.Series["Series1"].Points[pointIndex].Color = System.Drawing.Color.Blue;
+                        break;
+                    case "CRIT":
+                        Chart1.Series["Series1"].Points[pointIndex].Color = System.Drawing.Color.Red;
+                        break;
+                    default:
+                        Chart1.Series["Series1"].Points[pointIndex].Color = System.Drawing.Color.Gray; // Color para valores no especificados
+                        break;
+                }
             }
 
-            Chart1.Series["Series1"].Color = System.Drawing.Color.Blue;
             Chart1.Legends.Add(new Legend("Últimos 7 días"));
+
             // MES
             Chart2.Series["Series2"].Points.Clear();
             Chart2.Series["Series2"].IsValueShownAsLabel = true;
-
             DataTable dtx = BLL.Bitacora.GetInstancia().getReport("Último mes");
 
             foreach (DataRow row in dtx.Rows)
@@ -158,11 +175,30 @@ namespace PrensaVerificada2.Assets
                 string criticidad = row["criticidad"].ToString();
                 int totalRegistros = Convert.ToInt32(row["TotalRegistros"]);
 
-                Chart2.Series["Series2"].Points.AddXY(criticidad, totalRegistros);
+                // Agregar punto y obtener el índice
+                int pointIndex = Chart2.Series["Series2"].Points.AddXY(criticidad, totalRegistros);
+
+                // Asignar color según criticidad
+                switch (criticidad)
+                {
+                    case "WARN":
+                        Chart2.Series["Series2"].Points[pointIndex].Color = System.Drawing.Color.Orange;
+                        break;
+                    case "INFO":
+                        Chart2.Series["Series2"].Points[pointIndex].Color = System.Drawing.Color.Blue;
+                        break;
+                    case "CRIT":
+                        Chart2.Series["Series2"].Points[pointIndex].Color = System.Drawing.Color.Red;
+                        break;
+                    default:
+                        Chart2.Series["Series2"].Points[pointIndex].Color = System.Drawing.Color.Gray; // Color para valores no especificados
+                        break;
+                }
             }
 
-            Chart2.Series["Series2"].Color = System.Drawing.Color.Blue;
             Chart2.Legends.Add(new Legend("Último mes"));
+
+
         }
 
     }

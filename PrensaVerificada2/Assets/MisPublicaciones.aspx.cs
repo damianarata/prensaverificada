@@ -32,7 +32,7 @@ namespace PrensaVerificada2.Assets
         {
             try
             {
-                int autor1 = Convert.ToInt32(Session["usuario"]);
+                int autor1 = Convert.ToInt32(Session["autorId"]);
                 List<BE.Publicacion> publicaciones = BLL.Publicacion.GetInstancia().RetrievePublicacionesPorAutor(autor1);
                 BE.Autor Autor = BLL.Autor.GetInstancia().RetrieveAutor(autor1);
 
@@ -90,10 +90,12 @@ namespace PrensaVerificada2.Assets
             switch (e.CommandName)
             {
                 case "Continuar":
+                    BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 19, string.Format("{0} EN EDITOR", publicacionID.ToString()));
                     EditarPublicacion(publicacionID);
                     break;
 
                 case "Pausar":
+                    BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 19, string.Format("{0} PAUSADA",publicacionID.ToString()));
                     SuspenderPublicacion(publicacionID);
                     break;
 
