@@ -297,10 +297,15 @@ namespace DAL.DAOs
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
 
-
+        public bool DeleteFavs(BE.Publicacion publicacion)
+        {
+            string query = string.Format("DELETE FROM favoritos WHERE publicacionid = {0}", publicacion.PublicacionID);
+            return AccesoDatos.GetInstancia().ExecuteQuery(query);
+        }
 
         public bool Delete(BE.Publicacion publicacion)
         {
+            DeleteFavs(publicacion);
             string query = string.Format("DELETE FROM publicaciones WHERE publicacionid = {0}", publicacion.PublicacionID);
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }

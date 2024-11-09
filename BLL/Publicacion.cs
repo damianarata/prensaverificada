@@ -171,7 +171,7 @@ namespace BLL
 
         public bool Delete(BE.Publicacion Publicacion)
         {
-            throw new NotImplementedException();
+            return DAL.DAOs.Publicacion.GetInstancia().Delete(Publicacion);
         }
 
         public List<BE.Publicacion> RetreiveAll()

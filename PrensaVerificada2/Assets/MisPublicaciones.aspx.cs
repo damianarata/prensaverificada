@@ -100,6 +100,7 @@ namespace PrensaVerificada2.Assets
                     break;
 
                 case "Delete":
+                    BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 19, string.Format("{0} ELIMINADA", publicacionID.ToString()));
                     EliminarPublicacion(publicacionID);
                     break;
             }
@@ -122,8 +123,7 @@ namespace PrensaVerificada2.Assets
         private void EliminarPublicacion(int publicacionID)
         {
             BE.Publicacion Publi = BLL.Publicacion.GetInstancia().RetrievePublicacion(publicacionID.ToString());
-            Publi.EstadoID = 4;
-            BLL.Publicacion.GetInstancia().Update(Publi);
+            BLL.Publicacion.GetInstancia().Delete(Publi);
             Response.Redirect($"MisPublicaciones.aspx");
         }
 
