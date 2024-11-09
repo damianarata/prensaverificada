@@ -27,7 +27,7 @@ namespace DAL.DAOs
                 publicacion.Subtitulo,
                 publicacion.Contenido,
                 publicacion.Imagen,
-                publicacion.FechaPublicacion.ToString("yyyy-MM-dd"),
+                publicacion.FechaPublicacion.ToString(),
                 publicacion.AutorID,
                 publicacion.CategoriaID,
                 publicacion.EstadoID,
@@ -117,8 +117,9 @@ namespace DAL.DAOs
                     @"SELECT * 
               FROM PrensaVerificada.dbo.publicaciones 
               WHERE autorid = {0}
-              ORDER BY fechapublicacion DESC",
-                    autorid
+              ORDER BY fechapublicacion DESC
+              OFFSET {1} ROWS FETCH NEXT 20 ROWS ONLY",
+                    autorid, skipCount
                 )
             );
 
@@ -283,7 +284,7 @@ namespace DAL.DAOs
                 publicacion.Subtitulo,
                 publicacion.Contenido,
                 publicacion.Imagen,
-                publicacion.FechaPublicacion.ToString("yyyy-MM-dd"),
+                publicacion.FechaPublicacion.ToString(),
                 publicacion.AutorID,
                 publicacion.CategoriaID,
                 publicacion.EstadoID,

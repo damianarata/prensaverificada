@@ -23,7 +23,7 @@ namespace DAL.DAOs
         public bool Create(BE.Favorito favorito)
         {
             string query = string.Format("INSERT INTO favoritos (usuarioid, publicacionid, fechaagregado) VALUES ({0}, {1}, '{2}');",
-                favorito.UsuarioID, favorito.PublicacionID, favorito.FechaAgregado.ToString("yyyy-MM-dd"));
+                favorito.UsuarioID, favorito.PublicacionID, favorito.FechaAgregado.ToString());
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
 
@@ -44,7 +44,7 @@ namespace DAL.DAOs
         public bool Update(BE.Favorito favorito)
         {
             string query = string.Format("UPDATE favoritos SET usuarioid = {0}, publicacionid = {1}, fechaagregado = '{2}' WHERE favoritoid = {3}",
-                favorito.UsuarioID, favorito.PublicacionID, favorito.FechaAgregado.ToString("yyyy-MM-dd"), favorito.FavoritoID);
+                favorito.UsuarioID, favorito.PublicacionID, favorito.FechaAgregado.ToString(), favorito.FavoritoID);
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
 
