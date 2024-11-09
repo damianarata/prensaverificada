@@ -9,6 +9,25 @@ namespace PrensaVerificada2.Assets
 {
     public partial class MisPublicaciones : System.Web.UI.Page
     {
+        private int mispublis_page
+        {
+            get
+            {
+                if (Session["mispublis_pages"] is int page)
+                {
+                    return page;
+                }
+                else
+                {
+                    return 0; // Valor predeterminado si no es un int
+                }
+            }
+            set
+            {
+                Session["mispublis_pages"] = value;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (BLL.Usuario.GetInstancia().Restriction() == true)
@@ -22,7 +41,11 @@ namespace PrensaVerificada2.Assets
             {
                 alertaDiv.Visible = false;
             }
-            LoadArticles();
+            if (!IsPostBack)
+            {
+                Session.Remove("mispublis_pages");
+                LoadArticles();
+            }
             Session["Index_Articles"] = null;
             Session["Autor_Articles"] = null;
             Session["autor_pages"] = null;
@@ -33,7 +56,7 @@ namespace PrensaVerificada2.Assets
             try
             {
                 int autor1 = Convert.ToInt32(Session["autorId"]);
-                List<BE.Publicacion> publicaciones = BLL.Publicacion.GetInstancia().RetrievePublicacionesPorAutor(autor1);
+                List<BE.Publicacion> publicaciones = BLL.Publicacion.GetInstancia().RetrievePublicacionesPorAutor(autor1, mispublis_page);
                 BE.Autor Autor = BLL.Autor.GetInstancia().RetrieveAutor(autor1);
 
                 var articles = publicaciones.Select(publi => {
@@ -127,10 +150,21 @@ namespace PrensaVerificada2.Assets
             Response.Redirect($"MisPublicaciones.aspx");
         }
 
-        private void MostrarMenu(RepeaterItem item)
+        protected void SiguienteButton_Click(object sender, EventArgs e)
         {
-            // Aquí puedes manipular el HTML para mostrar/ocultar el menú. Alternativamente,
-            // puedes hacer que el botón "ShowMenu" dispare un evento JavaScript que muestre el menú.
+            mispublis_page += 20;
+            Session["mispublis_pages"] = mispublis_page.ToString();
+            LoadArticles();
+        }
+
+        protected void VolverButton_Click(object sender, EventArgs e)
+        {
+            if (mispublis_page >= 20)
+            {
+                mispublis_page -= 20;
+                Session["mispublis_pages"] = mispublis_page.ToString();
+                LoadArticles();
+            }
         }
     }
 }

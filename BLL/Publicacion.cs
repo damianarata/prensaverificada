@@ -76,12 +76,12 @@ namespace BLL
 
             if (startDate.HasValue)
             {
-                startDate1 = startDate.Value.ToString("dd/MM/yyyy");
+                startDate1 = startDate.Value.ToString();
             }
 
             if (endDate.HasValue)
             {
-                endDate1 = endDate.Value.ToString("dd/MM/yyyy");
+                endDate1 = endDate.Value.ToString();
             }
 
             return DAL.DAOs.Publicacion.GetInstancia().RetrievePublicacionesConFiltros(startDate1, endDate1, author, category, title, content, skipCount);

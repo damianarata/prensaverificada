@@ -86,10 +86,15 @@
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
-
             </tbody>
         </table>
     </div>
+        <asp:Button ID="ButtonPrevious" runat="server" Text="Volver" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="VolverButton_Click" />
+
+        <asp:Label ID="PageCounterLabel" runat="server" CssClass="px-4 py-2 text-sm font-medium text-gray-700"></asp:Label>
+
+        <asp:Button ID="ButtonNext" runat="server" Text="Siguiente" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="SiguienteButton_Click" />
+
         </form>
 </section>
 

@@ -247,7 +247,7 @@ namespace DAL.DAOs
                 query += " AND contenido like '%" + content + "%'";
             }
 
-            query += string.Format(" ORDER BY fechapublicacion DESC OFFSET {0} ROWS FETCH NEXT 20 ROWS ONLY", skipCount.ToString());
+            query += string.Format(" ORDER BY fechapublicacion DESC OFFSET {0} ROWS FETCH NEXT 6 ROWS ONLY", skipCount.ToString());
 
             DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(query);
 
