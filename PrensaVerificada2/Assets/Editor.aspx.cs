@@ -172,7 +172,10 @@ namespace PrensaVerificada2.Assets
                 }
                 else
                 {
-                    nuevaPublicacion.PublicacionID = Convert.ToInt32(publiID);
+                    BE.Publicacion Publi = BLL.Publicacion.GetInstancia().RetrievePublicacion(publiID);
+                    nuevaPublicacion.PublicacionID = Publi.PublicacionID;
+                    nuevaPublicacion.ContadorSemanal = Publi.ContadorSemanal;
+                    nuevaPublicacion.ContadorTotal = Publi.ContadorTotal;
                     BLL.Publicacion.GetInstancia().Update(nuevaPublicacion);
                 }
                 BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 19, publiID);
