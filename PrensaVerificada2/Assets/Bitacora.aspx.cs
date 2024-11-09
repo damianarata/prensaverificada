@@ -40,7 +40,7 @@ namespace PrensaVerificada2.Assets
             {
                 if (Session["usuario"] == null)
                 {
-                    Response.Redirect("Login.aspx");
+                    //Response.Redirect("Login.aspx");
                 }
             }
 
@@ -49,6 +49,7 @@ namespace PrensaVerificada2.Assets
                 Session.Remove("bitacora_pages");
                 Session.Remove("bitacora_filtro");
                 LoadAllLogEntries();
+                UpdatePageCounter();
             }
             CargarDatosGrafico();
             Session["Index_Articles"] = null;
@@ -79,6 +80,7 @@ namespace PrensaVerificada2.Assets
         {
             List<BE.Bitacora> logEntries = BLL.Bitacora.GetInstancia().Listar(bitacora_pages);
             LogRepeater.DataSource = logEntries;
+            ButtonNext.Visible = logEntries.Count >= 20;
             LogRepeater.DataBind();
         }
 
@@ -99,6 +101,7 @@ namespace PrensaVerificada2.Assets
             {
                 logEntries = BLL.Bitacora.GetInstancia().Listar();
             }
+            ButtonNext.Visible = logEntries.Count >= 20;
 
             LogRepeater.DataSource = logEntries;
             LogRepeater.DataBind();
@@ -107,6 +110,7 @@ namespace PrensaVerificada2.Assets
         protected void SiguienteButton_Click(object sender, EventArgs e)
         {
             bitacora_pages += 20;
+            UpdatePageCounter();
             if (bitacora_filtro == true)
             {
                 ApplyFilters();
@@ -119,14 +123,18 @@ namespace PrensaVerificada2.Assets
 
         protected void VolverButton_Click(object sender, EventArgs e)
         {
-            bitacora_pages -= 20;
-            if (bitacora_filtro == true)
+            if (bitacora_pages>= 20)
             {
-                ApplyFilters();
-            }
-            else
-            {
-                LoadAllLogEntries();
+                bitacora_pages -= 20;
+                UpdatePageCounter();
+                if (bitacora_filtro == true)
+                {
+                    ApplyFilters();
+                }
+                else
+                {
+                    LoadAllLogEntries();
+                }
             }
         }
 
@@ -201,5 +209,10 @@ namespace PrensaVerificada2.Assets
 
         }
 
+        private void UpdatePageCounter()
+        {
+            int pageNumber = (bitacora_pages / 20) + 1;
+            PageCounterLabel.Text = "Página: " + pageNumber;
+        }
     }
 }
