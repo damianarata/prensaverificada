@@ -63,7 +63,7 @@ namespace PrensaVerificada2.Assets
                     Date = publi.FechaPublicacion.ToString("dd 'de' MMMM 'de' yyyy")
                 });
             }
-
+            ButtonNext.Visible = publicaciones.Count >= 6;
             Session["Autor_Articles"] = articles;
 
             ArticlesRepeater.DataSource = articles;

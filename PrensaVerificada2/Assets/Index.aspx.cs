@@ -76,6 +76,7 @@ namespace PrensaVerificada2.Assets
                     Date = publi.FechaPublicacion.ToString("dd 'de' MMMM 'de' yyyy")
                 });
             }
+            CargarMasButton.Visible = publicaciones.Count >= 6;
 
             Session["Index_Articles"] = articles;
             ArticlesRepeater.DataSource = articles;
