@@ -22,6 +22,12 @@
         <h1 class="text-2xl font-semibold text-gray-800">Consultar Bitácora</h1>
 
         <form runat="server">
+            <div id="alertaDivAdmin" runat="server" style="display: block;">
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4" role="alert">
+                <p class="font-bold">Alerta</p>
+                <p>Esta pagina es solo para administradores</p>
+            </div>
+        </div>
             <div style="display: flex; justify-content: space-around;">
 
                 <asp:Chart ID="Chart1" runat="server" Width="400px" Height="300px">
@@ -81,8 +87,8 @@
           </div>
 
           <div class="mt-4">
-            <asp:Button ID="searchButton" runat="server" Text="Buscar" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="SearchButton_Click" />
-              <asp:Button ID="Button2" runat="server" Text="Restablecer" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="RestablecerButton_Click" />
+            <asp:Button ID="searchButton" runat="server" Text="Buscar" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="SearchButton_Click" Enabled="false"/>
+              <asp:Button ID="Button2" runat="server" Text="Restablecer" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="RestablecerButton_Click" Enabled="false" />
           </div>
 
           <div class="mt-6">
@@ -111,9 +117,9 @@
             </div>
           </div>
         <div class="mt-4">
-            <asp:Button ID="ButtonPrevious" runat="server" Text="Volver" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="VolverButton_Click" />
+            <asp:Button ID="ButtonPrevious" runat="server" Text="Volver" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="VolverButton_Click" Enabled="false" />
             <asp:Label ID="PageCounterLabel" runat="server" CssClass="px-4 py-2 text-sm font-medium text-gray-700"></asp:Label>
-            <asp:Button ID="ButtonNext" runat="server" Text="Siguiente" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="SiguienteButton_Click" />
+            <asp:Button ID="ButtonNext" runat="server" Text="Siguiente" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="SiguienteButton_Click" Enabled="false"/>
           </div>
         </form>
       </div>

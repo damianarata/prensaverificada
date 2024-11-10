@@ -143,6 +143,10 @@ namespace BLL
                     bitacora.Accion = "Error de usuario o contraseña";
                     bitacora.Criticidad = "WARN";
                     break;
+                case 27:
+                    bitacora.Accion = "Cierre de sesion";
+                    bitacora.Criticidad = "INFO";
+                    break;
                 default:
                     bitacora.Accion = "Accion desconocida";
                     bitacora.Criticidad = "INFO";

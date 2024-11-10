@@ -10,6 +10,13 @@ namespace PrensaVerificada2.Assets
 {
     public partial class Reclamos : System.Web.UI.Page
     {
+        private bool isAdmin
+        {
+            get
+            {
+                return Session["admin"] != null && Convert.ToBoolean(Session["admin"]);
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (BLL.Usuario.GetInstancia().Restriction() == true)
@@ -23,7 +30,11 @@ namespace PrensaVerificada2.Assets
                 Session["autor_pages"] = null;
                 Session["index_pages"] = null;
             }
-            LoadReclamos();
+            if (isAdmin)
+            {
+                alertaDivAdmin.Visible = false;
+                LoadReclamos();
+            }
         }
 
         private void LoadReclamos()

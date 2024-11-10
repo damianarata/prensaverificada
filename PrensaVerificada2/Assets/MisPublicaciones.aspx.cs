@@ -44,7 +44,7 @@ namespace PrensaVerificada2.Assets
                     Response.Redirect("Login.aspx");
                 }
             }
-            if (Convert.ToInt32(Session["autorId"]) != 0)
+            if (!isAdmin && Convert.ToInt32(Session["autorId"]) != 0)
             {
                 alertaDiv.Visible = false;
             }

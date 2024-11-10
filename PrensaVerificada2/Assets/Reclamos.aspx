@@ -18,7 +18,12 @@
     <main class="container mx-auto px-4 py-16">
         <!-- Título de la página -->
         <h1 class="text-3xl font-bold text-gray-800 mb-8">Gestión de Reclamos</h1>
-
+        <div id="alertaDivAdmin" runat="server" style="display: block;">
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4" role="alert">
+                <p class="font-bold">Alerta</p>
+                <p>Esta pagina es solo para administradores</p>
+            </div>
+            </div>
        <table class="min-w-full divide-y divide-gray-200">
     <thead class="bg-gray-50">
         <tr>

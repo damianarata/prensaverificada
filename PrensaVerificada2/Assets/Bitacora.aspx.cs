@@ -34,6 +34,13 @@ namespace PrensaVerificada2.Assets
                 Session["bitacora_filtro"] = value;
             }
         }
+        private bool isAdmin
+        {
+            get
+            {
+                return Session["admin"] != null && Convert.ToBoolean(Session["admin"]);
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (BLL.Usuario.GetInstancia().Restriction() == true)
@@ -43,15 +50,24 @@ namespace PrensaVerificada2.Assets
                     Response.Redirect("Login.aspx");
                 }
             }
-
-            if (!IsPostBack)
+            if (isAdmin)
             {
-                Session.Remove("bitacora_pages");
-                Session.Remove("bitacora_filtro");
-                LoadAllLogEntries();
-                UpdatePageCounter();
+                alertaDivAdmin.Visible = false;
+                searchButton.Enabled = true;
+                Button2.Enabled = true;
+                ButtonPrevious.Enabled = true;
+                ButtonNext.Enabled = true;
+                if (!IsPostBack)
+                {
+                    Session.Remove("bitacora_pages");
+                    Session.Remove("bitacora_filtro");
+
+                    LoadAllLogEntries();
+                    UpdatePageCounter();
+                }
+                CargarDatosGrafico();
             }
-            CargarDatosGrafico();
+            UpdatePageCounter();
             Session["Index_Articles"] = null;
             Session["Autor_Articles"] = null;
             Session["autor_pages"] = null;
