@@ -17,7 +17,8 @@ namespace PrensaVerificada2.Assets
             Session["index_pages"] = null;
             if (Request.QueryString["logout"] == "true")
             {
-                Session.Abandon();
+                BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 27);
+               Session.Abandon();
             }
         }
     }
