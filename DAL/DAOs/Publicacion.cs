@@ -137,6 +137,32 @@ namespace DAL.DAOs
             return publicaciones;
         }
 
+        public List<BE.Publicacion> RetrievePublicacionesPorAdmin(int skipCount = 0)
+        {
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(
+                string.Format(
+                    @"SELECT * 
+              FROM PrensaVerificada.dbo.publicaciones 
+              ORDER BY fechapublicacion DESC
+              OFFSET {0} ROWS FETCH NEXT 20 ROWS ONLY",
+                    skipCount
+                )
+            );
+
+            List<BE.Publicacion> publicaciones = new List<BE.Publicacion>();
+
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    BE.Publicacion publicacion = MAPPER.Publicacion.GetInstancia().Map(row);
+                    publicaciones.Add(publicacion);
+                }
+            }
+
+            return publicaciones;
+        }
+
         public List<BE.Publicacion> RetrievePublicacionesPorAutorPublicadas(int autorid, int skipCount = 0)
         {
             DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(

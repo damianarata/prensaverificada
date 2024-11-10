@@ -27,6 +27,10 @@ namespace PrensaVerificada2.Assets
                 Session["usuario"] = User.UsuarioID.ToString();
                 var autor = BLL.Autor.GetInstancia().Retreivebyuser(User.UsuarioID);
                 Session["autorId"] = autor.AutorID.ToString();
+                if (User.Admin == true)
+                {
+                    Session["admin"] = "True";
+                }
                 Response.Redirect("Index.aspx");
             }
             else

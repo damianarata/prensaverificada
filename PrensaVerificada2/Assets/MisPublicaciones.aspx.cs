@@ -27,6 +27,13 @@ namespace PrensaVerificada2.Assets
                 Session["mispublis_pages"] = value;
             }
         }
+        private bool isAdmin
+        {
+            get
+            {
+                return Session["admin"] != null && Convert.ToBoolean(Session["admin"]);
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -57,9 +64,16 @@ namespace PrensaVerificada2.Assets
             try
             {
                 int autor1 = Convert.ToInt32(Session["autorId"]);
-                List<BE.Publicacion> publicaciones = BLL.Publicacion.GetInstancia().RetrievePublicacionesPorAutor(autor1, mispublis_page);
-                BE.Autor Autor = BLL.Autor.GetInstancia().RetrieveAutor(autor1);
-
+                List<BE.Publicacion> publicaciones;
+                if (isAdmin)
+                {
+                    publicaciones = BLL.Publicacion.GetInstancia().RetrievePublicacionesPorAdmin(mispublis_page);
+                }
+                else
+                {
+                    publicaciones = BLL.Publicacion.GetInstancia().RetrievePublicacionesPorAutor(autor1, mispublis_page);
+                }
+                
                 var articles = publicaciones.Select(publi => {
                     string estadoColor;
 
@@ -81,11 +95,12 @@ namespace PrensaVerificada2.Assets
                             estadoColor = "bg-gray-100 text-gray-800";    // Predeterminado: Gris
                             break;
                     }
+                    BE.Autor autor = isAdmin ? BLL.Autor.GetInstancia().RetrieveAutor(publi.AutorID) : BLL.Autor.GetInstancia().RetrieveAutor(autor1);
 
                     return new
                     {
-                        AutorNombre = Autor.Nombre,
-                        AutorImagen = Autor.Foto,
+                        AutorNombre = autor.Nombre,
+                        AutorImagen = autor.Foto,
                         Titulo = publi.Titulo,
                         FechaPublicacion = publi.FechaPublicacion,
                         CategoriaNombre = BLL.Categoria.GetInstancia().GetCategoriaNombre(publi.CategoriaID),
