@@ -45,6 +45,7 @@ namespace PrensaVerificada2.Assets
             {
                 Session.Remove("mispublis_pages");
                 LoadArticles();
+                UpdatePageCounter();
             }
             Session["Index_Articles"] = null;
             Session["Autor_Articles"] = null;
@@ -93,7 +94,7 @@ namespace PrensaVerificada2.Assets
                         PublicacionID = publi.PublicacionID
                     };
                 }).ToList();
-
+                ButtonNext.Visible = publicaciones.Count >= 20;
                 ArticlesRepeater.DataSource = articles;
                 ArticlesRepeater.DataBind();
             }
@@ -153,7 +154,6 @@ namespace PrensaVerificada2.Assets
         protected void SiguienteButton_Click(object sender, EventArgs e)
         {
             mispublis_page += 20;
-            Session["mispublis_pages"] = mispublis_page.ToString();
             LoadArticles();
         }
 
@@ -162,9 +162,14 @@ namespace PrensaVerificada2.Assets
             if (mispublis_page >= 20)
             {
                 mispublis_page -= 20;
-                Session["mispublis_pages"] = mispublis_page.ToString();
                 LoadArticles();
             }
+        }
+
+        private void UpdatePageCounter()
+        {
+            int pageNumber = (mispublis_page / 20) + 1;
+            PageCounterLabel.Text = "Página: " + pageNumber;
         }
     }
 }
