@@ -47,7 +47,7 @@ namespace PrensaVerificada2.Assets
             {
                 if (Session["usuario"] == null)
                 {
-                    Response.Redirect("Login.aspx");
+                    Response.Redirect("Login.aspx?redirect=true");
                 }
             }
             if (isAdmin)

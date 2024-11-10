@@ -12,6 +12,14 @@ namespace PrensaVerificada2.Assets
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.QueryString["redirect"] != null && Request.QueryString["redirect"] == "true")
+            {
+                alertaDivAdmin.Visible = true;
+            }
+            else
+            {
+                alertaDivAdmin.Visible = false;
+            }
             Session["Index_Articles"] = null;
             Session["Autor_Articles"] = null;
             Session["autor_pages"] = null;
