@@ -92,6 +92,7 @@
     <div class="bg-white p-6 rounded shadow-lg w-96">
         <h2 class="text-lg font-semibold mb-4">Detalles del Reclamo</h2>
         <input type="hidden" id="hiddenReclamoId" value="" />
+        <p><strong>Reclamo:</strong> <span id="modalId"></span></p>
         <p><strong>Nombre:</strong> <span id="modalNombre"></span></p>
         <p><strong>Descripción:</strong> <span id="modalDescripcion"></span></p>
         <p><strong>Email:</strong> <span id="modalMail"></span></p>
@@ -171,7 +172,8 @@
             }
         }
 
-        function showReclamoModal(nombre, descripcion, mail, fecha, estadoNombre, estadoColor) {
+        function showReclamoModal(Id, nombre, descripcion, mail, fecha, estadoNombre, estadoColor) {
+            document.getElementById('modalId').textContent = Id;
             document.getElementById('modalNombre').textContent = nombre;
             document.getElementById('modalDescripcion').textContent = descripcion;
             document.getElementById('modalMail').textContent = mail;

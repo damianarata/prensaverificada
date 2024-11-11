@@ -20,7 +20,7 @@ namespace PrensaVerificada2.Assets
                 }
                 else
                 {
-                    return 0; // Valor predeterminado si no es un int
+                    return 0;
                 }
             }
             set
@@ -111,11 +111,14 @@ namespace PrensaVerificada2.Assets
                 var reclamo = BLL.Reclamo.GetInstancia().RetrieveReclamo(reclamoId);
                 if (reclamo != null)
                 {
+                    reclamo.EstadoID = 2;
+                    BLL.Reclamo.GetInstancia().Update(reclamo);
                     string estadoColor = GetEstadoColor(reclamo.EstadoID);
 
                     // Primero registra la función si no existe
                     string functionScript = @"
-                function showReclamoModal(nombre, descripcion, mail, fecha, estadoNombre, estadoColor) {
+                function showReclamoModal(Id, nombre, descripcion, mail, fecha, estadoNombre, estadoColor) {
+                    document.getElementById('modalId').textContent = Id;
                     document.getElementById('modalNombre').textContent = nombre;
                     document.getElementById('modalDescripcion').textContent = descripcion;
                     document.getElementById('modalMail').textContent = mail;
@@ -129,7 +132,8 @@ namespace PrensaVerificada2.Assets
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "ShowModalFunction", functionScript, true);
 
                     // Luego llama a la función
-                    string callScript = $"showReclamoModal('{HttpUtility.JavaScriptStringEncode(reclamo.Nombre)}', " +
+                    string callScript = $"showReclamoModal('{HttpUtility.JavaScriptStringEncode(reclamo.ReclamoID.ToString())}', " +
+                                      $"'{HttpUtility.JavaScriptStringEncode(reclamo.Nombre)}', " +
                                       $"'{HttpUtility.JavaScriptStringEncode(reclamo.Descripcion)}', " +
                                       $"'{HttpUtility.JavaScriptStringEncode(reclamo.Mail)}', " +
                                       $"'{reclamo.Fecha:dd/MM/yyyy}', " +
