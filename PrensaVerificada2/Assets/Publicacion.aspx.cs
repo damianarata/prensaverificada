@@ -18,7 +18,7 @@ namespace PrensaVerificada2.Assets
             {
                 if (Session["usuario"] == null)
                 {
-                    Response.Redirect("Login.aspx");
+                    Response.Redirect("Login.aspx?redirect=true");
                 }
             }
 
@@ -64,14 +64,7 @@ namespace PrensaVerificada2.Assets
 
         protected void VolverBtn_Click(object sender, EventArgs e)
         {
-            if (Request.UrlReferrer != null)
-            {
-                Response.Redirect(Request.UrlReferrer.ToString());
-            }
-            else
-            {
-                Response.Redirect("Index.aspx");
-            }
+            Response.Redirect("Index.aspx");
         }
 
         protected void updateFront(int letra, int tam)

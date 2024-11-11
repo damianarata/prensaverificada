@@ -16,7 +16,7 @@ namespace PrensaVerificada2.Assets
             {
                 if (Session["usuario"] == null)
                 {
-                    Response.Redirect("Login.aspx");
+                    Response.Redirect("Login.aspx?redirect=true");
                 }
             }
 
@@ -172,7 +172,11 @@ namespace PrensaVerificada2.Assets
                 }
                 else
                 {
-                    nuevaPublicacion.PublicacionID = Convert.ToInt32(publiID);
+                    BE.Publicacion Publi = BLL.Publicacion.GetInstancia().RetrievePublicacion(publiID);
+                    nuevaPublicacion.PublicacionID = Publi.PublicacionID;
+                    nuevaPublicacion.ContadorSemanal = Publi.ContadorSemanal;
+                    nuevaPublicacion.ContadorTotal = Publi.ContadorTotal;
+                    nuevaPublicacion.AutorID = Publi.AutorID;
                     BLL.Publicacion.GetInstancia().Update(nuevaPublicacion);
                 }
                 BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 19, publiID);

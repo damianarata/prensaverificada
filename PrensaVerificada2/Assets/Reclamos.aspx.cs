@@ -10,20 +10,50 @@ namespace PrensaVerificada2.Assets
 {
     public partial class Reclamos : System.Web.UI.Page
     {
+        private int reclamos_page
+        {
+            get
+            {
+                if (Session["reclamos_pages"] is int page)
+                {
+                    return page;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                Session["reclamos_pages"] = value;
+            }
+        }
+        private bool isAdmin
+        {
+            get
+            {
+                return Session["admin"] != null && Convert.ToBoolean(Session["admin"]);
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (BLL.Usuario.GetInstancia().Restriction() == true)
             {
                 if (Session["usuario"] == null)
                 {
-                    Response.Redirect("Login.aspx");
+                    Response.Redirect("Login.aspx?redirect=true");
                 }
                 Session["Index_Articles"] = null;
                 Session["Autor_Articles"] = null;
                 Session["autor_pages"] = null;
                 Session["index_pages"] = null;
             }
-            LoadReclamos();
+            if (isAdmin)
+            {
+                alertaDivAdmin.Visible = false;
+                LoadReclamos();
+                UpdatePageCounter();
+            }
         }
 
         private void LoadReclamos()
@@ -31,7 +61,7 @@ namespace PrensaVerificada2.Assets
             try
             {
                 BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 23);
-                List<BE.Reclamo> reclamos = BLL.Reclamo.GetInstancia().Listar();
+                List<BE.Reclamo> reclamos = BLL.Reclamo.GetInstancia().Listar(reclamos_page);
 
                 var reclamosData = reclamos.Select(reclamo => {
                     string estadoColor;
@@ -64,7 +94,7 @@ namespace PrensaVerificada2.Assets
                         ReclamoID = reclamo.ReclamoID
                     };
                 }).ToList();
-
+                ButtonNext.Visible = reclamos.Count >= 20;
                 ReclamosRepeater.DataSource = reclamosData;
                 ReclamosRepeater.DataBind();
             }
@@ -81,11 +111,14 @@ namespace PrensaVerificada2.Assets
                 var reclamo = BLL.Reclamo.GetInstancia().RetrieveReclamo(reclamoId);
                 if (reclamo != null)
                 {
+                    reclamo.EstadoID = 2;
+                    BLL.Reclamo.GetInstancia().Update(reclamo);
                     string estadoColor = GetEstadoColor(reclamo.EstadoID);
 
                     // Primero registra la función si no existe
                     string functionScript = @"
-                function showReclamoModal(nombre, descripcion, mail, fecha, estadoNombre, estadoColor) {
+                function showReclamoModal(Id, nombre, descripcion, mail, fecha, estadoNombre, estadoColor) {
+                    document.getElementById('modalId').textContent = Id;
                     document.getElementById('modalNombre').textContent = nombre;
                     document.getElementById('modalDescripcion').textContent = descripcion;
                     document.getElementById('modalMail').textContent = mail;
@@ -99,7 +132,8 @@ namespace PrensaVerificada2.Assets
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "ShowModalFunction", functionScript, true);
 
                     // Luego llama a la función
-                    string callScript = $"showReclamoModal('{HttpUtility.JavaScriptStringEncode(reclamo.Nombre)}', " +
+                    string callScript = $"showReclamoModal('{HttpUtility.JavaScriptStringEncode(reclamo.ReclamoID.ToString())}', " +
+                                      $"'{HttpUtility.JavaScriptStringEncode(reclamo.Nombre)}', " +
                                       $"'{HttpUtility.JavaScriptStringEncode(reclamo.Descripcion)}', " +
                                       $"'{HttpUtility.JavaScriptStringEncode(reclamo.Mail)}', " +
                                       $"'{reclamo.Fecha:dd/MM/yyyy}', " +
@@ -163,5 +197,28 @@ namespace PrensaVerificada2.Assets
             }).ToList<object>();
         }
 
+        private void UpdatePageCounter()
+        {
+            int pageNumber = (reclamos_page / 20) + 1;
+            PageCounterLabel.Text = "Página: " + pageNumber;
+        }
+
+        protected void SiguienteButton_Click(object sender, EventArgs e)
+        {
+            reclamos_page += 20;
+            LoadReclamos();
+            UpdatePageCounter();
+        }
+
+        protected void VolverButton_Click(object sender, EventArgs e)
+        {
+            if (reclamos_page >= 20)
+            {
+                reclamos_page -= 20;
+                LoadReclamos();
+            }
+            UpdatePageCounter();
+        }
     }
+
 }

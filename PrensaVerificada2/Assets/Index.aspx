@@ -23,26 +23,6 @@
         <div class="container mx-auto p-8">
             <h1 class="text-3xl font-semibold text-center text-gray-800 mb-8">Últimas publicaciones</h1>
 
-            <!-- Publicación destacada -->
-            <div class="mb-8" onclick="window.location.href='./Publicacion.aspx?publiID=1'">
-                <div class="relative">
-                    <img src="./img/diputados.jpg" alt="Imagen Principal" class="w-full h-64 object-cover rounded-lg shadow-md">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-end rounded-lg">
-                        <div class="p-6 text-white">
-                            <span class="bg-blue-600 px-3 py-1 text-xs uppercase rounded-full">Política</span>
-                            <h2 class="text-2xl font-semibold mt-2">Diputados se suben el sueldo y pasarán a cobrar más de $2,2 millones</h2>
-                            <div class="flex items-center mt-4">
-                                <img src="img/alconada.jpg" alt="Autor" class="w-10 h-10 rounded-full mr-4">
-                                <div>
-                                    <p class="font-semibold">Hugo Alconada</p>
-                                    <p class="text-sm">4 de junio 2024</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Grid de publicaciones -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Repite el bloque de publicación para cada artículo según sea necesario -->

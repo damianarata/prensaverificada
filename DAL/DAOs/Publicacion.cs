@@ -27,7 +27,7 @@ namespace DAL.DAOs
                 publicacion.Subtitulo,
                 publicacion.Contenido,
                 publicacion.Imagen,
-                publicacion.FechaPublicacion.ToString("yyyy-MM-dd"),
+                publicacion.FechaPublicacion.ToString(),
                 publicacion.AutorID,
                 publicacion.CategoriaID,
                 publicacion.EstadoID,
@@ -117,8 +117,35 @@ namespace DAL.DAOs
                     @"SELECT * 
               FROM PrensaVerificada.dbo.publicaciones 
               WHERE autorid = {0}
-              ORDER BY fechapublicacion DESC",
-                    autorid
+              ORDER BY fechapublicacion DESC
+              OFFSET {1} ROWS FETCH NEXT 20 ROWS ONLY",
+                    autorid, skipCount
+                )
+            );
+
+            List<BE.Publicacion> publicaciones = new List<BE.Publicacion>();
+
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    BE.Publicacion publicacion = MAPPER.Publicacion.GetInstancia().Map(row);
+                    publicaciones.Add(publicacion);
+                }
+            }
+
+            return publicaciones;
+        }
+
+        public List<BE.Publicacion> RetrievePublicacionesPorAdmin(int skipCount = 0)
+        {
+            DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(
+                string.Format(
+                    @"SELECT * 
+              FROM PrensaVerificada.dbo.publicaciones 
+              ORDER BY fechapublicacion DESC
+              OFFSET {0} ROWS FETCH NEXT 20 ROWS ONLY",
+                    skipCount
                 )
             );
 
@@ -246,7 +273,7 @@ namespace DAL.DAOs
                 query += " AND contenido like '%" + content + "%'";
             }
 
-            query += string.Format(" ORDER BY fechapublicacion DESC OFFSET {0} ROWS FETCH NEXT 20 ROWS ONLY", skipCount.ToString());
+            query += string.Format(" ORDER BY fechapublicacion DESC OFFSET {0} ROWS FETCH NEXT 6 ROWS ONLY", skipCount.ToString());
 
             DataTable dt = AccesoDatos.GetInstancia().ExecuteReader(query);
 
@@ -283,7 +310,7 @@ namespace DAL.DAOs
                 publicacion.Subtitulo,
                 publicacion.Contenido,
                 publicacion.Imagen,
-                publicacion.FechaPublicacion.ToString("yyyy-MM-dd"),
+                publicacion.FechaPublicacion.ToString(),
                 publicacion.AutorID,
                 publicacion.CategoriaID,
                 publicacion.EstadoID,
@@ -297,10 +324,15 @@ namespace DAL.DAOs
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
 
-
+        public bool DeleteFavs(BE.Publicacion publicacion)
+        {
+            string query = string.Format("DELETE FROM favoritos WHERE publicacionid = {0}", publicacion.PublicacionID);
+            return AccesoDatos.GetInstancia().ExecuteQuery(query);
+        }
 
         public bool Delete(BE.Publicacion publicacion)
         {
+            DeleteFavs(publicacion);
             string query = string.Format("DELETE FROM publicaciones WHERE publicacionid = {0}", publicacion.PublicacionID);
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }

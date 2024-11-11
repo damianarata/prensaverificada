@@ -27,7 +27,7 @@ namespace PrensaVerificada2.Assets
             {
                 if (Session["usuario"] == null)
                 {
-                    Response.Redirect("Login.aspx");
+                    Response.Redirect("Login.aspx?redirect=true");
                 }
             }
             if (!IsPostBack)
@@ -76,6 +76,7 @@ namespace PrensaVerificada2.Assets
                     Date = publi.FechaPublicacion.ToString("dd 'de' MMMM 'de' yyyy")
                 });
             }
+            CargarMasButton.Visible = publicaciones.Count >= 6;
 
             Session["Index_Articles"] = articles;
             ArticlesRepeater.DataSource = articles;

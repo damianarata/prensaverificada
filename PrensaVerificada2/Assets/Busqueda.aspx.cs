@@ -26,7 +26,7 @@ namespace PrensaVerificada2.Assets
             {
                 if (Session["usuario"] == null)
                 {
-                    Response.Redirect("Login.aspx");
+                    Response.Redirect("Login.aspx?redirect=true");
                 }
             }
             if (!IsPostBack)
@@ -42,7 +42,6 @@ namespace PrensaVerificada2.Assets
 
         private void CargarAutores()
         {
-            // Ejemplo de autores - podrías reemplazar esto con una consulta a tu base de datos
             var autores = BLL.Autor.GetInstancia().RetreiveAll();
             foreach (var autor in autores)
             {
@@ -52,7 +51,6 @@ namespace PrensaVerificada2.Assets
 
         private void CargarCategoria()
         {
-            // Ejemplo de autores - podrías reemplazar esto con una consulta a tu base de datos
             var categorias = BLL.Categoria.GetInstancia().RetreiveAll();
             foreach (var cat in categorias)
             {
@@ -90,6 +88,7 @@ namespace PrensaVerificada2.Assets
                     Date = publi.FechaPublicacion.ToString("dd 'de' MMMM 'de' yyyy")
                 });
             }
+            CargarButton.Visible = publicaciones.Count >= 6;
 
             // Guardar en sesión y actualizar el Repeater
             Session["Busqueda_Articles"] = articles;
@@ -115,13 +114,14 @@ namespace PrensaVerificada2.Assets
             Session.Remove("Busqueda_Articles");
             Session.Remove("index_pages");
             index_pages = 0;
-            TextBox1.Text = null;
-            TextBox2.Text = null;
-            AuthorDropDown.SelectedValue = "";
-            CategoriasDropDown.SelectedValue = "";
-            TitFilterTextBox.Text = null;
-            CamFilterTextBox.Text = null;
-            LoadArticles(index_pages);
+            TextBox1.Text = string.Empty;
+            TextBox2.Text = string.Empty;
+            AuthorDropDown.SelectedIndex = 0;
+            CategoriasDropDown.SelectedIndex = 0;
+            TitFilterTextBox.Text = string.Empty;
+            CamFilterTextBox.Text = string.Empty;
+            ArticlesRepeater.DataSource = null;
+            ArticlesRepeater.DataBind();
         }
     }
 

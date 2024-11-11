@@ -9,20 +9,51 @@ namespace PrensaVerificada2.Assets
 {
     public partial class MisPublicaciones : System.Web.UI.Page
     {
+        private int mispublis_page
+        {
+            get
+            {
+                if (Session["mispublis_pages"] is int page)
+                {
+                    return page;
+                }
+                else
+                {
+                    return 0; // Valor predeterminado si no es un int
+                }
+            }
+            set
+            {
+                Session["mispublis_pages"] = value;
+            }
+        }
+        private bool isAdmin
+        {
+            get
+            {
+                return Session["admin"] != null && Convert.ToBoolean(Session["admin"]);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (BLL.Usuario.GetInstancia().Restriction() == true)
             {
                 if (Session["usuario"] == null)
                 {
-                    Response.Redirect("Login.aspx");
+                    Response.Redirect("Login.aspx?redirect=true");
                 }
             }
-            if (Convert.ToInt32(Session["autorId"]) != 0)
+            if (!isAdmin && Convert.ToInt32(Session["autorId"]) != 0)
             {
                 alertaDiv.Visible = false;
             }
-            LoadArticles();
+            if (!IsPostBack)
+            {
+                Session.Remove("mispublis_pages");
+                LoadArticles();
+                UpdatePageCounter();
+            }
             Session["Index_Articles"] = null;
             Session["Autor_Articles"] = null;
             Session["autor_pages"] = null;
@@ -33,9 +64,16 @@ namespace PrensaVerificada2.Assets
             try
             {
                 int autor1 = Convert.ToInt32(Session["autorId"]);
-                List<BE.Publicacion> publicaciones = BLL.Publicacion.GetInstancia().RetrievePublicacionesPorAutor(autor1);
-                BE.Autor Autor = BLL.Autor.GetInstancia().RetrieveAutor(autor1);
-
+                List<BE.Publicacion> publicaciones;
+                if (isAdmin)
+                {
+                    publicaciones = BLL.Publicacion.GetInstancia().RetrievePublicacionesPorAdmin(mispublis_page);
+                }
+                else
+                {
+                    publicaciones = BLL.Publicacion.GetInstancia().RetrievePublicacionesPorAutor(autor1, mispublis_page);
+                }
+                
                 var articles = publicaciones.Select(publi => {
                     string estadoColor;
 
@@ -57,11 +95,12 @@ namespace PrensaVerificada2.Assets
                             estadoColor = "bg-gray-100 text-gray-800";    // Predeterminado: Gris
                             break;
                     }
+                    BE.Autor autor = isAdmin ? BLL.Autor.GetInstancia().RetrieveAutor(publi.AutorID) : BLL.Autor.GetInstancia().RetrieveAutor(autor1);
 
                     return new
                     {
-                        AutorNombre = Autor.Nombre,
-                        AutorImagen = Autor.Foto,
+                        AutorNombre = autor.Nombre,
+                        AutorImagen = autor.Foto,
                         Titulo = publi.Titulo,
                         FechaPublicacion = publi.FechaPublicacion,
                         CategoriaNombre = BLL.Categoria.GetInstancia().GetCategoriaNombre(publi.CategoriaID),
@@ -70,7 +109,7 @@ namespace PrensaVerificada2.Assets
                         PublicacionID = publi.PublicacionID
                     };
                 }).ToList();
-
+                ButtonNext.Visible = publicaciones.Count >= 20;
                 ArticlesRepeater.DataSource = articles;
                 ArticlesRepeater.DataBind();
             }
@@ -100,6 +139,7 @@ namespace PrensaVerificada2.Assets
                     break;
 
                 case "Delete":
+                    BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 19, string.Format("{0} ELIMINADA", publicacionID.ToString()));
                     EliminarPublicacion(publicacionID);
                     break;
             }
@@ -122,15 +162,31 @@ namespace PrensaVerificada2.Assets
         private void EliminarPublicacion(int publicacionID)
         {
             BE.Publicacion Publi = BLL.Publicacion.GetInstancia().RetrievePublicacion(publicacionID.ToString());
-            Publi.EstadoID = 4;
-            BLL.Publicacion.GetInstancia().Update(Publi);
+            BLL.Publicacion.GetInstancia().Delete(Publi);
             Response.Redirect($"MisPublicaciones.aspx");
         }
 
-        private void MostrarMenu(RepeaterItem item)
+        protected void SiguienteButton_Click(object sender, EventArgs e)
         {
-            // Aquí puedes manipular el HTML para mostrar/ocultar el menú. Alternativamente,
-            // puedes hacer que el botón "ShowMenu" dispare un evento JavaScript que muestre el menú.
+            mispublis_page += 20;
+            LoadArticles();
+            UpdatePageCounter();
+        }
+
+        protected void VolverButton_Click(object sender, EventArgs e)
+        {
+            if (mispublis_page >= 20)
+            {
+                mispublis_page -= 20;
+                LoadArticles();
+                UpdatePageCounter();
+            }
+        }
+
+        private void UpdatePageCounter()
+        {
+            int pageNumber = (mispublis_page / 20) + 1;
+            PageCounterLabel.Text = "Página: " + pageNumber;
         }
     }
 }

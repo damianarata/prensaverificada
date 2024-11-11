@@ -18,7 +18,12 @@
     <main class="container mx-auto px-4 py-16">
         <!-- Título de la página -->
         <h1 class="text-3xl font-bold text-gray-800 mb-8">Gestión de Reclamos</h1>
-
+        <div id="alertaDivAdmin" runat="server" style="display: block;">
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4" role="alert">
+                <p class="font-bold">Alerta</p>
+                <p>Esta pagina es solo para administradores</p>
+            </div>
+            </div>
        <table class="min-w-full divide-y divide-gray-200">
     <thead class="bg-gray-50">
         <tr>
@@ -75,10 +80,19 @@
         </asp:Repeater>
     </tbody>
 </table>
+
+        <div class="mt-4">
+        <asp:Button ID="ButtonPrevious" runat="server" Text="Volver" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="VolverButton_Click" />
+
+        <asp:Label ID="PageCounterLabel" runat="server" CssClass="px-4 py-2 text-sm font-medium text-gray-700"></asp:Label>
+
+        <asp:Button ID="ButtonNext" runat="server" Text="Siguiente" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="SiguienteButton_Click" />
+            </div>
         <div id="reclamoModal" class="fixed inset-0 hidden bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
     <div class="bg-white p-6 rounded shadow-lg w-96">
         <h2 class="text-lg font-semibold mb-4">Detalles del Reclamo</h2>
         <input type="hidden" id="hiddenReclamoId" value="" />
+        <p><strong>Reclamo:</strong> <span id="modalId"></span></p>
         <p><strong>Nombre:</strong> <span id="modalNombre"></span></p>
         <p><strong>Descripción:</strong> <span id="modalDescripcion"></span></p>
         <p><strong>Email:</strong> <span id="modalMail"></span></p>
@@ -158,7 +172,8 @@
             }
         }
 
-        function showReclamoModal(nombre, descripcion, mail, fecha, estadoNombre, estadoColor) {
+        function showReclamoModal(Id, nombre, descripcion, mail, fecha, estadoNombre, estadoColor) {
+            document.getElementById('modalId').textContent = Id;
             document.getElementById('modalNombre').textContent = nombre;
             document.getElementById('modalDescripcion').textContent = descripcion;
             document.getElementById('modalMail').textContent = mail;

@@ -27,7 +27,7 @@
             </div>
         </div>
 
-    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div class="bg-white shadow overflow-visible sm:rounded-lg">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
@@ -86,10 +86,16 @@
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
-
             </tbody>
         </table>
     </div>
+        <div class="mt-4">
+        <asp:Button ID="ButtonPrevious" runat="server" Text="Volver" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="VolverButton_Click" />
+
+        <asp:Label ID="PageCounterLabel" runat="server" CssClass="px-4 py-2 text-sm font-medium text-gray-700"></asp:Label>
+
+        <asp:Button ID="ButtonNext" runat="server" Text="Siguiente" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="SiguienteButton_Click" />
+            </div>
         </form>
 </section>
 

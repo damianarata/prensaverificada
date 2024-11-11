@@ -17,6 +17,13 @@
     <div class="flex-grow flex items-center justify-center mt-16">
         <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
             <h2 class="text-xl font-bold text-center mb-6">Bienvenido</h2>
+            <!-- Mensaje de autenticación -->
+        <div id="alertaDivAdmin" runat="server" style="display: block;">
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4" role="alert">
+                <p class="font-bold">Alerta</p>
+                <p>Para acceder a este contenido tenes que estar autenticado</p>
+            </div>
+            </div>
 
             <!-- Formulario de Inicio de Sesión -->
             <form id="form1" runat="server">

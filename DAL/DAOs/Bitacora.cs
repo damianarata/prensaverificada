@@ -25,7 +25,7 @@ namespace DAL.DAOs
         public bool Create(BE.Bitacora bitacora)
         {
             string query = string.Format("INSERT INTO PrensaVerificada.dbo.bitacora (usuarioid, fecha, accion, criticidad) VALUES ({0}, '{1}', '{2}', '{3}');",
-                bitacora.UsuarioID, bitacora.Fecha.ToString("yyyy-MM-dd"), bitacora.Accion, bitacora.Criticidad);
+                bitacora.UsuarioID, bitacora.Fecha.ToString(), bitacora.Accion, bitacora.Criticidad);
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
 
@@ -98,7 +98,7 @@ namespace DAL.DAOs
         public bool Update(BE.Bitacora bitacora)
         {
             string query = string.Format("UPDATE PrensaVerificada.dbo.bitacora SET usuarioid = {0}, fecha = '{1}', accion = '{2}' WHERE bitacoraid = {3}",
-                bitacora.UsuarioID, bitacora.Fecha.ToString("yyyy-MM-dd"), bitacora.Accion, bitacora.BitacoraID);
+                bitacora.UsuarioID, bitacora.Fecha.ToString(), bitacora.Accion, bitacora.BitacoraID);
             return AccesoDatos.GetInstancia().ExecuteQuery(query);
         }
 

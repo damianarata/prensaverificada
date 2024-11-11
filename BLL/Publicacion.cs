@@ -54,6 +54,11 @@ namespace BLL
             return DAL.DAOs.Publicacion.GetInstancia().RetrievePublicacionesPorAutor(autorid, skipCount);
         }
 
+        public List<BE.Publicacion> RetrievePublicacionesPorAdmin(int skipCount = 0)
+        {
+            return DAL.DAOs.Publicacion.GetInstancia().RetrievePublicacionesPorAdmin(skipCount);
+        }
+
         public List<BE.Publicacion> RetrievePublicacionesPorAutorPublicadas(int autorid, int skipCount = 0)
         {
             return DAL.DAOs.Publicacion.GetInstancia().RetrievePublicacionesPorAutorPublicadas(autorid, skipCount);
@@ -76,12 +81,12 @@ namespace BLL
 
             if (startDate.HasValue)
             {
-                startDate1 = startDate.Value.ToString("dd/MM/yyyy");
+                startDate1 = startDate.Value.ToString();
             }
 
             if (endDate.HasValue)
             {
-                endDate1 = endDate.Value.ToString("dd/MM/yyyy");
+                endDate1 = endDate.Value.ToString();
             }
 
             return DAL.DAOs.Publicacion.GetInstancia().RetrievePublicacionesConFiltros(startDate1, endDate1, author, category, title, content, skipCount);
@@ -171,7 +176,7 @@ namespace BLL
 
         public bool Delete(BE.Publicacion Publicacion)
         {
-            throw new NotImplementedException();
+            return DAL.DAOs.Publicacion.GetInstancia().Delete(Publicacion);
         }
 
         public List<BE.Publicacion> RetreiveAll()

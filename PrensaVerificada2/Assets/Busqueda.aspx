@@ -68,7 +68,7 @@
 
         <!-- Botón de retorno -->
         <div class="flex justify-center mt-8">
-            <asp:Button ID="CargarButton" runat="server" Text="Cargar mas" CssClass="bg-gray-200 text-gray-600 px-6 py-2 rounded" OnClick="CargarMasButton_Click" />
+            <asp:Button ID="CargarButton" runat="server" Text="Cargar mas" CssClass="bg-gray-200 text-gray-600 px-6 py-2 rounded" OnClick="CargarMasButton_Click" Visible="false" />
         </div>
     </section>
         </form>

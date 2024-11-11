@@ -101,6 +101,7 @@ namespace BLL
             {
                 DBUser.Retry = 0;
                 DBUser.Blocked = false;
+                DAL.DAOs.Usuario.GetInstancia().Update(DBUser);
                 BLL.Bitacora.GetInstancia().RegistroBitacora(DBUser.UsuarioID, 1);
                 return DBUser;
             }

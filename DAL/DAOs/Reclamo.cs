@@ -25,7 +25,7 @@ namespace DAL.DAOs
             string query = string.Format(
                 "INSERT INTO reclamos (usuarioid, fecha, estadoid, descripcion, nombre, mail) VALUES ({0}, '{1}', {2}, '{3}', '{4}', '{5}');",
                 reclamo.UsuarioID.HasValue ? reclamo.UsuarioID.ToString() : "NULL",
-                reclamo.Fecha.ToString("yyyy-MM-dd"),
+                reclamo.Fecha.ToString(),
                 reclamo.EstadoID,
                 reclamo.Descripcion.Replace("'", "''"),
                 reclamo.Nombre.Replace("'", "''"),
@@ -92,7 +92,7 @@ namespace DAL.DAOs
             string query = string.Format(
                 "INSERT INTO comentarios (reclamoid, fecha, descripcion) VALUES ({0}, '{1}', '{2}');",
                 comentario.ReclamoID,
-                comentario.Fecha.ToString("yyyy-MM-dd"),
+                comentario.Fecha.ToString(),
                 comentario.Descripcion.Replace("'", "''")
             );
 
@@ -103,7 +103,7 @@ namespace DAL.DAOs
             string query = string.Format(
                 "UPDATE reclamos SET usuarioid = {0}, fecha = '{1}', estadoid = {2}, descripcion = '{3}', nombre = '{4}', mail = '{5}' WHERE reclamoid = {6}",
                 reclamo.UsuarioID.HasValue ? reclamo.UsuarioID.ToString() : "NULL",
-                reclamo.Fecha.ToString("yyyy-MM-dd"),
+                reclamo.Fecha.ToString(),
                 reclamo.EstadoID,
                 reclamo.Descripcion.Replace("'", "''"),
                 reclamo.Nombre.Replace("'", "''"),
