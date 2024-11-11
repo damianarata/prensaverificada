@@ -80,6 +80,14 @@
         </asp:Repeater>
     </tbody>
 </table>
+
+        <div class="mt-4">
+        <asp:Button ID="ButtonPrevious" runat="server" Text="Volver" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="VolverButton_Click" />
+
+        <asp:Label ID="PageCounterLabel" runat="server" CssClass="px-4 py-2 text-sm font-medium text-gray-700"></asp:Label>
+
+        <asp:Button ID="ButtonNext" runat="server" Text="Siguiente" CssClass="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-500" OnClick="SiguienteButton_Click" />
+            </div>
         <div id="reclamoModal" class="fixed inset-0 hidden bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
     <div class="bg-white p-6 rounded shadow-lg w-96">
         <h2 class="text-lg font-semibold mb-4">Detalles del Reclamo</h2>

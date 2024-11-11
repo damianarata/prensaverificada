@@ -170,6 +170,7 @@ namespace PrensaVerificada2.Assets
         {
             mispublis_page += 20;
             LoadArticles();
+            UpdatePageCounter();
         }
 
         protected void VolverButton_Click(object sender, EventArgs e)
@@ -178,6 +179,7 @@ namespace PrensaVerificada2.Assets
             {
                 mispublis_page -= 20;
                 LoadArticles();
+                UpdatePageCounter();
             }
         }
 

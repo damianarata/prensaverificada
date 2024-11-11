@@ -10,6 +10,24 @@ namespace PrensaVerificada2.Assets
 {
     public partial class Reclamos : System.Web.UI.Page
     {
+        private int reclamos_page
+        {
+            get
+            {
+                if (Session["reclamos_pages"] is int page)
+                {
+                    return page;
+                }
+                else
+                {
+                    return 0; // Valor predeterminado si no es un int
+                }
+            }
+            set
+            {
+                Session["reclamos_pages"] = value;
+            }
+        }
         private bool isAdmin
         {
             get
@@ -34,6 +52,7 @@ namespace PrensaVerificada2.Assets
             {
                 alertaDivAdmin.Visible = false;
                 LoadReclamos();
+                UpdatePageCounter();
             }
         }
 
@@ -42,7 +61,7 @@ namespace PrensaVerificada2.Assets
             try
             {
                 BLL.Bitacora.GetInstancia().RegistroBitacora(Convert.ToInt32(Session["usuario"]), 23);
-                List<BE.Reclamo> reclamos = BLL.Reclamo.GetInstancia().Listar();
+                List<BE.Reclamo> reclamos = BLL.Reclamo.GetInstancia().Listar(reclamos_page);
 
                 var reclamosData = reclamos.Select(reclamo => {
                     string estadoColor;
@@ -75,7 +94,7 @@ namespace PrensaVerificada2.Assets
                         ReclamoID = reclamo.ReclamoID
                     };
                 }).ToList();
-
+                ButtonNext.Visible = reclamos.Count >= 20;
                 ReclamosRepeater.DataSource = reclamosData;
                 ReclamosRepeater.DataBind();
             }
@@ -174,5 +193,28 @@ namespace PrensaVerificada2.Assets
             }).ToList<object>();
         }
 
+        private void UpdatePageCounter()
+        {
+            int pageNumber = (reclamos_page / 20) + 1;
+            PageCounterLabel.Text = "Página: " + pageNumber;
+        }
+
+        protected void SiguienteButton_Click(object sender, EventArgs e)
+        {
+            reclamos_page += 20;
+            LoadReclamos();
+            UpdatePageCounter();
+        }
+
+        protected void VolverButton_Click(object sender, EventArgs e)
+        {
+            if (reclamos_page >= 20)
+            {
+                reclamos_page -= 20;
+                LoadReclamos();
+            }
+            UpdatePageCounter();
+        }
     }
+
 }
