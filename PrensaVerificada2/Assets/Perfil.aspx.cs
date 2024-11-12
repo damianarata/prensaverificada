@@ -134,6 +134,8 @@ namespace PrensaVerificada2.Assets
             {
                 autor.UsuarioID = usuario;
                 BLL.Autor.GetInstancia().Create(autor);
+                var autor1 = BLL.Autor.GetInstancia().Retreivebyuser(autor.UsuarioID);
+                Session["autorId"] = autor1.AutorID.ToString();
                 string script = "<script type='text/javascript'>alert('Nuevo perfil creado');" +
                                     "window.location.href = 'Autores.aspx';</script>";
                 SuccessMessageLiteral.Text = script;
