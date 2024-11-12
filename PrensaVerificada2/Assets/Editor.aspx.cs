@@ -10,6 +10,13 @@ namespace PrensaVerificada2.Assets
 {
     public partial class Editor : System.Web.UI.Page
     {
+        private bool isAdmin
+        {
+            get
+            {
+                return Session["admin"] != null && Convert.ToBoolean(Session["admin"]);
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (BLL.Usuario.GetInstancia().Restriction() == true)
@@ -33,9 +40,15 @@ namespace PrensaVerificada2.Assets
                     Response.Write($"Error: {ex.Message}");
                 }
             }
-            if (Convert.ToInt32(Session["autorId"]) != 0)
+            if (isAdmin || Convert.ToInt32(Session["autorId"]) != 0)
             {
                 alertaDiv.Visible = false;
+            }
+            if (!isAdmin && Convert.ToInt32(Session["autorId"]) == 0)
+            {
+                btnGuardar.Enabled = false;
+                btnPublicar.Enabled = false;
+                btnUpload.Enabled = false;
             }
             Session["Index_Articles"] = null;
             Session["Autor_Articles"] = null;

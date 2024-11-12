@@ -34,7 +34,7 @@
     </main>
 
     <div class="flex justify-center mt-8">
-            <asp:Button ID="VolverBtn" class="bg-gray-200 text-gray-600 px-6 py-2 rounded" runat="server" OnClick="VolverBtn_Click" Text="Volver" />
+            <button type="button" class="bg-gray-200 text-gray-600 px-6 py-2 rounded" OnClick="goBack()">Volver</button>
     </div>
 
     <!-- Footer Container -->
@@ -80,6 +80,10 @@
         document.getElementById('appleButton').addEventListener('click', function() {
             window.location.href = 'https://www.apple.com'; // URL para redirigir al iniciar sesión con Apple
         });
+
+        function goBack() {
+            window.history.back();
+        }
     </script>
 
 
